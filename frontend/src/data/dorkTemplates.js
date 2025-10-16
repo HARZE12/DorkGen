@@ -329,21 +329,21 @@ export const dorkTemplates = [
     category: 'API',
     title: 'API Endpoints',
     description: 'Finds API endpoints',
-    generateDork: (domain) => `site:${domain} inurl:"/api/" OR inurl:"/v1/" OR inurl:"/rest/"`
+    generateDork: (domain) => `site:${domain} inurl:"/api/" | inurl:"/v1/" | inurl:"/v2/" | inurl:"/rest/" | inurl:"/api/v" | inurl:"/graphql" | inurl:"/swagger"`
   },
   {
     id: 'api-json',
     category: 'API',
     title: 'JSON API Responses',
     description: 'Finds JSON API endpoints',
-    generateDork: (domain) => `site:${domain} filetype:json inurl:api`
+    generateDork: (domain) => `site:${domain} (ext:json | filetype:json) (inurl:"api" | inurl:"v1" | inurl:"v2" | inurl:"rest")`
   },
   {
     id: 'api-swagger',
     category: 'API',
     title: 'Swagger/OpenAPI Docs',
     description: 'Finds API documentation pages',
-    generateDork: (domain) => `site:${domain} inurl:swagger OR inurl:api-docs OR inurl:openapi`
+    generateDork: (domain) => `site:${domain} intitle:"swagger" | intitle:"api docs" | intitle:"api documentation" | inurl:"swagger-ui" | inurl:"api-docs" | inurl:"openapi" | inurl:"redoc"`
   },
   
   // Error Pages & Debug Info
@@ -352,21 +352,21 @@ export const dorkTemplates = [
     category: 'Error Messages',
     title: 'SQL Error Messages',
     description: 'Finds pages with SQL errors',
-    generateDork: (domain) => `site:${domain} "mysql_fetch" OR "SQL syntax" OR "mysqli_"`
+    generateDork: (domain) => `site:${domain} "mysql_fetch" | "SQL syntax" | "mysqli error" | "mysql error" | "ORA-" | "Microsoft OLE DB" | "ODBC SQL"`
   },
   {
     id: 'error-php',
     category: 'Error Messages',
     title: 'PHP Error Messages',
     description: 'Finds pages with PHP errors',
-    generateDork: (domain) => `site:${domain} "Warning: include" OR "Fatal error" OR "Parse error"`
+    generateDork: (domain) => `site:${domain} "Warning: include" | "Fatal error" | "Parse error" | "Warning: require" | "Notice: Undefined" | "Call to undefined"`
   },
   {
     id: 'error-stack',
     category: 'Error Messages',
     title: 'Stack Traces',
     description: 'Finds pages with stack traces',
-    generateDork: (domain) => `site:${domain} "Stack trace" OR "Traceback" OR "Exception"`
+    generateDork: (domain) => `site:${domain} "Stack trace:" | "Traceback" | "Exception in thread" | "at line" | "error_reporting" | "display_errors"`
   },
   
   // Shopping & E-commerce
@@ -375,20 +375,20 @@ export const dorkTemplates = [
     category: 'E-commerce',
     title: 'Shopping Cart',
     description: 'Finds shopping cart pages',
-    generateDork: (domain) => `site:${domain} inurl:cart OR inurl:basket OR inurl:checkout`
+    generateDork: (domain) => `site:${domain} intitle:"shopping cart" | intitle:"cart" | intitle:"basket" | inurl:"cart" | inurl:"basket" | inurl:"checkout" | inurl:"shopping-cart" | inurl:"view-cart"`
   },
   {
     id: 'ecom-payment',
     category: 'E-commerce',
     title: 'Payment Pages',
     description: 'Finds payment processing pages',
-    generateDork: (domain) => `site:${domain} inurl:payment OR inurl:billing OR inurl:pay`
+    generateDork: (domain) => `site:${domain} intitle:"payment" | intitle:"billing" | intitle:"checkout" | inurl:"payment" | inurl:"billing" | inurl:"pay" | inurl:"checkout" | inurl:"payment-info"`
   },
   {
     id: 'ecom-product',
     category: 'E-commerce',
     title: 'Product Pages',
     description: 'Finds product detail pages',
-    generateDork: (domain) => `site:${domain} inurl:product OR inurl:item OR inurl:".php?product="`
+    generateDork: (domain) => `site:${domain} intitle:"product" | intitle:"item details" | inurl:"product" | inurl:"item" | inurl:"prod=" | inurl:"product_id=" | inurl:"viewproduct"`
   }
 ];
