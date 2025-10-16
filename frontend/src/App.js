@@ -3,6 +3,7 @@ import './App.css';
 import { Header } from './components/Header';
 import { Footer } from './components/Footer';
 import { DorkCard } from './components/DorkCard';
+import { InfoBanner } from './components/InfoBanner';
 import { Input } from './components/ui/input';
 import { Button } from './components/ui/button';
 import { Badge } from './components/ui/badge';
