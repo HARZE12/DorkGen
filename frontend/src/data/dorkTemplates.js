@@ -188,56 +188,56 @@ export const dorkTemplates = [
     category: 'Forms',
     title: 'Contact Forms',
     description: 'Finds contact forms',
-    generateDork: (domain) => `site:${domain} inurl:contact.php OR inurl:contactus.php OR "contact form"`
+    generateDork: (domain) => `site:${domain} intitle:"contact" | intitle:"contact us" | intitle:"contact.php" | intitle:"contactus" | inurl:"contact.php" | inurl:"contactus.php" | inurl:"contact.asp" | inurl:"contact.html" | inurl:"contact-us" | inurl:"contact_form"`
   },
   {
     id: 'form-inquiry',
     category: 'Forms',
     title: 'Inquiry Forms',
     description: 'Finds inquiry submission forms',
-    generateDork: (domain) => `site:${domain} inurl:inquiry OR inurl:enquiry OR "inquiry form"`
+    generateDork: (domain) => `site:${domain} intitle:"inquiry" | intitle:"enquiry" | intitle:"make inquiry" | inurl:"inquiry.php" | inurl:"enquiry" | inurl:"inquiry-form" | inurl:"enquiry_form"`
   },
   {
     id: 'form-quote',
     category: 'Forms',
     title: 'Quote Request Forms',
     description: 'Finds quote request forms',
-    generateDork: (domain) => `site:${domain} inurl:quote OR inurl:getquote OR "request quote"`
+    generateDork: (domain) => `site:${domain} intitle:"get quote" | intitle:"request quote" | intitle:"quote form" | inurl:"quote" | inurl:"getquote" | inurl:"request-quote" | inurl:"quotation"`
   },
   {
     id: 'form-order',
     category: 'Forms',
     title: 'Order Forms',
     description: 'Finds order submission forms',
-    generateDork: (domain) => `site:${domain} inurl:order.php OR inurl:orderform OR "order form"`
+    generateDork: (domain) => `site:${domain} intitle:"order" | intitle:"place order" | intitle:"order form" | inurl:"order.php" | inurl:"orderform" | inurl:"order-now" | inurl:"placeorder"`
   },
   {
     id: 'form-booking',
     category: 'Forms',
     title: 'Booking Forms',
     description: 'Finds booking and reservation forms',
-    generateDork: (domain) => `site:${domain} inurl:booking OR inurl:reservation OR "book now"`
+    generateDork: (domain) => `site:${domain} intitle:"booking" | intitle:"reservation" | intitle:"book now" | inurl:"booking" | inurl:"reservation" | inurl:"book-now" | inurl:"make-reservation"`
   },
   {
     id: 'form-application',
     category: 'Forms',
     title: 'Application Forms',
     description: 'Finds application submission forms',
-    generateDork: (domain) => `site:${domain} inurl:apply OR inurl:application OR "application form"`
+    generateDork: (domain) => `site:${domain} intitle:"apply" | intitle:"application" | intitle:"application form" | inurl:"apply" | inurl:"application" | inurl:"submit-application" | inurl:"apply-now"`
   },
   {
     id: 'form-survey',
     category: 'Forms',
     title: 'Survey Forms',
     description: 'Finds survey and poll forms',
-    generateDork: (domain) => `site:${domain} inurl:survey OR inurl:poll OR "take survey"`
+    generateDork: (domain) => `site:${domain} intitle:"survey" | intitle:"poll" | intitle:"questionnaire" | inurl:"survey" | inurl:"poll" | inurl:"take-survey" | inurl:"feedback-survey"`
   },
   {
     id: 'form-newsletter',
     category: 'Forms',
     title: 'Newsletter Signup',
     description: 'Finds newsletter subscription forms',
-    generateDork: (domain) => `site:${domain} inurl:newsletter OR inurl:subscribe OR "newsletter signup"`
+    generateDork: (domain) => `site:${domain} intitle:"newsletter" | intitle:"subscribe" | intitle:"subscription" | inurl:"newsletter" | inurl:"subscribe" | inurl:"signup" | inurl:"email-signup"`
   },
   
   // LFI/RFI (Local/Remote File Inclusion)
@@ -246,28 +246,28 @@ export const dorkTemplates = [
     category: 'File Inclusion',
     title: 'Include Parameter',
     description: 'Finds pages with include parameter (LFI/RFI)',
-    generateDork: (domain) => `site:${domain} inurl:".php?include=" OR inurl:".php?inc="`
+    generateDork: (domain) => `site:${domain} inurl:"include=" | inurl:"inc=" | inurl:"incl=" | inurl:"include_file=" ext:php | ext:asp | ext:aspx`
   },
   {
     id: 'lfi-file',
     category: 'File Inclusion',
     title: 'File Parameter',
     description: 'Finds pages with file parameter',
-    generateDork: (domain) => `site:${domain} inurl:".php?file=" OR inurl:".php?filename="`
+    generateDork: (domain) => `site:${domain} inurl:"file=" | inurl:"filename=" | inurl:"filepath=" | inurl:"doc=" | inurl:"document=" ext:php | ext:asp | ext:aspx`
   },
   {
     id: 'lfi-path',
     category: 'File Inclusion',
     title: 'Path Parameter',
     description: 'Finds pages with path parameter',
-    generateDork: (domain) => `site:${domain} inurl:".php?path=" OR inurl:".php?filepath="`
+    generateDork: (domain) => `site:${domain} inurl:"path=" | inurl:"filepath=" | inurl:"dir=" | inurl:"directory=" | inurl:"folder=" ext:php | ext:asp`
   },
   {
     id: 'lfi-page',
     category: 'File Inclusion',
     title: 'Page Include Parameter',
     description: 'Finds pages with page include parameter',
-    generateDork: (domain) => `site:${domain} inurl:".php?pg=" OR inurl:".php?page=" OR inurl:".php?p="`
+    generateDork: (domain) => `site:${domain} inurl:"pg=" | inurl:"page=" | inurl:"p=" | inurl:"content=" | inurl:"load=" ext:php | ext:asp | ext:jsp`
   },
   
   // Open Redirect
@@ -276,21 +276,21 @@ export const dorkTemplates = [
     category: 'Open Redirect',
     title: 'URL Redirect Parameter',
     description: 'Finds pages with URL redirect parameter',
-    generateDork: (domain) => `site:${domain} inurl:".php?url=" OR inurl:".php?redirect="`
+    generateDork: (domain) => `site:${domain} inurl:"url=" | inurl:"redirect=" | inurl:"redir=" | inurl:"link=" | inurl:"goto=" | inurl:"out=" ext:php | ext:asp | ext:aspx`
   },
   {
     id: 'redirect-return',
     category: 'Open Redirect',
     title: 'Return URL Parameter',
     description: 'Finds pages with return URL parameter',
-    generateDork: (domain) => `site:${domain} inurl:".php?return=" OR inurl:".php?returnurl="`
+    generateDork: (domain) => `site:${domain} inurl:"return=" | inurl:"returnurl=" | inurl:"ret=" | inurl:"return_url=" | inurl:"returnto=" ext:php | ext:asp`
   },
   {
     id: 'redirect-next',
     category: 'Open Redirect',
     title: 'Next/Continue Parameter',
     description: 'Finds pages with next/continue parameters',
-    generateDork: (domain) => `site:${domain} inurl:".php?next=" OR inurl:".php?continue="`
+    generateDork: (domain) => `site:${domain} inurl:"next=" | inurl:"continue=" | inurl:"forward=" | inurl:"dest=" | inurl:"destination=" ext:php | ext:asp | ext:jsp`
   },
   
   // IDOR (Insecure Direct Object Reference)
@@ -299,28 +299,28 @@ export const dorkTemplates = [
     category: 'IDOR',
     title: 'Invoice Pages',
     description: 'Finds invoice pages with IDs',
-    generateDork: (domain) => `site:${domain} inurl:invoice OR inurl:receipt OR inurl:".php?invoice_id="`
+    generateDork: (domain) => `site:${domain} intitle:"invoice" | intitle:"receipt" | inurl:"invoice" | inurl:"receipt" | inurl:"invoice_id=" | inurl:"invoiceid=" ext:php | ext:asp`
   },
   {
     id: 'idor-order',
     category: 'IDOR',
     title: 'Order Details',
     description: 'Finds order detail pages',
-    generateDork: (domain) => `site:${domain} inurl:".php?order_id=" OR inurl:orderdetails`
+    generateDork: (domain) => `site:${domain} intitle:"order details" | intitle:"my orders" | inurl:"order_id=" | inurl:"orderid=" | inurl:"orderdetails" | inurl:"vieworder=" ext:php | ext:asp`
   },
   {
     id: 'idor-document',
     category: 'IDOR',
     title: 'Document Access',
     description: 'Finds document access pages',
-    generateDork: (domain) => `site:${domain} inurl:".php?doc=" OR inurl:".php?document="`
+    generateDork: (domain) => `site:${domain} inurl:"doc=" | inurl:"document=" | inurl:"docid=" | inurl:"documentid=" | inurl:"viewdoc=" | inurl:"download=" ext:php | ext:asp`
   },
   {
     id: 'idor-profile',
     category: 'IDOR',
     title: 'User Profile Access',
     description: 'Finds user profile pages by ID',
-    generateDork: (domain) => `site:${domain} inurl:".php?profile=" OR inurl:".php?user_id="`
+    generateDork: (domain) => `site:${domain} intitle:"profile" | intitle:"user profile" | inurl:"profile=" | inurl:"user_id=" | inurl:"userid=" | inurl:"viewprofile=" ext:php | ext:asp`
   },
   
   // API Endpoints
