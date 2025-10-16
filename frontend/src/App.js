@@ -112,6 +112,8 @@ function App() {
       
       {/* Filters Section */}
       <section className="container mx-auto px-4 py-8">
+        <InfoBanner />
+        
         <div className="flex flex-col lg:flex-row gap-4 items-start lg:items-center justify-between">
           <div className="flex flex-wrap gap-2">
             {categories.map(cat => (
