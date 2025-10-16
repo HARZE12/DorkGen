@@ -63,42 +63,42 @@ export const dorkTemplates = [
     category: 'XSS',
     title: 'Search Pages',
     description: 'Finds search pages (XSS target)',
-    generateDork: (domain) => `site:${domain} inurl:search.php OR inurl:search.asp OR inurl:search?q=`
+    generateDork: (domain) => `site:${domain} intitle:"search" | intitle:"search.php" | intitle:"search.asp" | intitle:"search.aspx" | inurl:"search=" | inurl:"q=" | inurl:"query="`
   },
   {
     id: 'xss-comment',
     category: 'XSS',
     title: 'Comment Forms',
     description: 'Finds comment submission forms',
-    generateDork: (domain) => `site:${domain} inurl:comment OR inurl:addcomment OR "post comment"`
+    generateDork: (domain) => `site:${domain} inurl:"comment" | inurl:"addcomment" | inurl:"postcomment" | inurl:"comments.php" | inurl:"add_comment" | intitle:"post comment"`
   },
   {
     id: 'xss-feedback',
     category: 'XSS',
     title: 'Feedback Forms',
     description: 'Finds feedback forms for XSS testing',
-    generateDork: (domain) => `site:${domain} inurl:feedback.php OR inurl:feedback.asp`
+    generateDork: (domain) => `site:${domain} intitle:"feedback" | intitle:"feedback.php" | intitle:"feedback.asp" | inurl:"feedback" | inurl:"send-feedback" | inurl:"submit-feedback"`
   },
   {
     id: 'xss-message',
     category: 'XSS',
     title: 'Message/Contact Forms',
     description: 'Finds message and contact forms',
-    generateDork: (domain) => `site:${domain} inurl:message OR inurl:contact.php OR inurl:sendmessage`
+    generateDork: (domain) => `site:${domain} intitle:"message" | intitle:"send message" | inurl:"message.php" | inurl:"sendmessage" | inurl:"contactform" ext:php | ext:asp | ext:aspx`
   },
   {
     id: 'xss-guestbook',
     category: 'XSS',
     title: 'Guestbook Pages',
     description: 'Finds guestbook pages',
-    generateDork: (domain) => `site:${domain} inurl:guestbook OR inurl:guest.php`
+    generateDork: (domain) => `site:${domain} intitle:"guestbook" | intitle:"guest book" | inurl:"guestbook.php" | inurl:"guest.php" | inurl:"addguest" | inurl:"sign-guestbook"`
   },
   {
     id: 'xss-profile',
     category: 'XSS',
     title: 'Profile Edit Pages',
     description: 'Finds profile editing pages',
-    generateDork: (domain) => `site:${domain} inurl:profile.php OR inurl:editprofile OR inurl:account.php`
+    generateDork: (domain) => `site:${domain} intitle:"edit profile" | inurl:"editprofile" | inurl:"profile.php" | inurl:"account.php" | inurl:"myprofile" | inurl:"updateprofile"`
   },
   
   // File Upload Vulnerabilities
@@ -107,35 +107,35 @@ export const dorkTemplates = [
     category: 'File Upload',
     title: 'File Upload Forms',
     description: 'Finds file upload functionality',
-    generateDork: (domain) => `site:${domain} inurl:upload.php OR inurl:fileupload OR inurl:upload.asp`
+    generateDork: (domain) => `site:${domain} intitle:"upload" | intitle:"file upload" | inurl:"upload.php" | inurl:"fileupload" | inurl:"upload.asp" | inurl:"upload.aspx" | inurl:"uploader"`
   },
   {
     id: 'upload-image',
     category: 'File Upload',
     title: 'Image Upload Forms',
     description: 'Finds image upload pages',
-    generateDork: (domain) => `site:${domain} inurl:uploadimage OR inurl:imageupload OR "upload image"`
+    generateDork: (domain) => `site:${domain} intitle:"upload image" | intitle:"image upload" | inurl:"uploadimage" | inurl:"imageupload" | inurl:"uploadphoto" | inurl:"photoupload"`
   },
   {
     id: 'upload-avatar',
     category: 'File Upload',
     title: 'Avatar/Photo Upload',
     description: 'Finds avatar and photo upload pages',
-    generateDork: (domain) => `site:${domain} inurl:avatar OR inurl:uploadphoto OR "upload avatar"`
+    generateDork: (domain) => `site:${domain} inurl:"avatar" | inurl:"uploadavatar" | inurl:"changeavatar" | inurl:"profile-picture" | inurl:"profilepic" | intitle:"upload avatar"`
   },
   {
     id: 'upload-document',
     category: 'File Upload',
     title: 'Document Upload',
     description: 'Finds document upload forms',
-    generateDork: (domain) => `site:${domain} inurl:uploaddoc OR inurl:documentupload OR "upload document"`
+    generateDork: (domain) => `site:${domain} intitle:"upload document" | inurl:"uploaddoc" | inurl:"documentupload" | inurl:"uploadfile" | inurl:"doc-upload" | inurl:"file_upload"`
   },
   {
     id: 'upload-resume',
     category: 'File Upload',
     title: 'Resume/CV Upload',
     description: 'Finds resume upload forms',
-    generateDork: (domain) => `site:${domain} inurl:uploadresume OR inurl:cvupload OR "upload resume"`
+    generateDork: (domain) => `site:${domain} intitle:"upload resume" | intitle:"upload cv" | inurl:"uploadresume" | inurl:"cvupload" | inurl:"resume-upload" | inurl:"career-application"`
   },
   
   // Authentication & Login Forms
@@ -144,42 +144,42 @@ export const dorkTemplates = [
     category: 'Authentication',
     title: 'Login Pages',
     description: 'Finds login pages',
-    generateDork: (domain) => `site:${domain} inurl:login.php OR inurl:signin.php OR inurl:login.asp`
+    generateDork: (domain) => `site:${domain} intitle:"login" | intitle:"sign in" | intitle:"member login" | inurl:"login.php" | inurl:"signin.php" | inurl:"login.asp" | inurl:"auth" | inurl:"authenticate"`
   },
   {
     id: 'auth-admin',
     category: 'Authentication',
     title: 'Admin Login',
     description: 'Finds admin login pages',
-    generateDork: (domain) => `site:${domain} inurl:admin/login OR inurl:adminlogin OR inurl:admin.php`
+    generateDork: (domain) => `site:${domain} intitle:"admin login" | intitle:"administrator" | inurl:"admin/login" | inurl:"adminlogin" | inurl:"admin.php" | inurl:"administrator.php" | inurl:"wp-admin"`
   },
   {
     id: 'auth-panel',
     category: 'Authentication',
     title: 'Admin Panels',
     description: 'Finds admin panel pages',
-    generateDork: (domain) => `site:${domain} inurl:admin OR inurl:administrator OR inurl:cpanel`
+    generateDork: (domain) => `site:${domain} intitle:"admin panel" | intitle:"control panel" | inurl:"admin" | inurl:"administrator" | inurl:"cpanel" | inurl:"admincp" | inurl:"modcp" | inurl:"admin_area"`
   },
   {
     id: 'auth-register',
     category: 'Authentication',
     title: 'Registration Pages',
     description: 'Finds registration forms',
-    generateDork: (domain) => `site:${domain} inurl:register.php OR inurl:signup.php OR inurl:registration`
+    generateDork: (domain) => `site:${domain} intitle:"register" | intitle:"sign up" | intitle:"registration" | inurl:"register.php" | inurl:"signup.php" | inurl:"registration" | inurl:"create-account"`
   },
   {
     id: 'auth-forgot',
     category: 'Authentication',
     title: 'Password Reset Pages',
     description: 'Finds password reset forms',
-    generateDork: (domain) => `site:${domain} inurl:forgot OR inurl:reset-password OR inurl:forgotpassword`
+    generateDork: (domain) => `site:${domain} intitle:"forgot password" | intitle:"reset password" | inurl:"forgot" | inurl:"reset-password" | inurl:"forgotpassword" | inurl:"lostpassword" | inurl:"recover"`
   },
   {
     id: 'auth-dashboard',
     category: 'Authentication',
     title: 'User Dashboard',
     description: 'Finds user dashboard pages',
-    generateDork: (domain) => `site:${domain} inurl:dashboard OR inurl:user/home OR inurl:myaccount`
+    generateDork: (domain) => `site:${domain} intitle:"dashboard" | intitle:"user home" | intitle:"my account" | inurl:"dashboard" | inurl:"user/home" | inurl:"myaccount" | inurl:"member-area"`
   },
   
   // Contact & Form Pages
