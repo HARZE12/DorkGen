@@ -1,184 +1,394 @@
 export const dorkTemplates = [
+  // SQL Injection Targets
   {
-    id: 'contact-form',
+    id: 'sql-php-id',
+    category: 'SQL Injection',
+    title: 'PHP Pages with ID Parameter',
+    description: 'Finds PHP pages with id parameter (SQL injection target)',
+    generateDork: (domain) => `site:${domain} inurl:".php?id="`
+  },
+  {
+    id: 'sql-product-id',
+    category: 'SQL Injection',
+    title: 'Product/Item ID Parameters',
+    description: 'Finds pages with product/item parameters',
+    generateDork: (domain) => `site:${domain} inurl:".php?product_id=" OR inurl:".php?item_id=" OR inurl:".php?pid="`
+  },
+  {
+    id: 'sql-category',
+    category: 'SQL Injection',
+    title: 'Category Parameter Pages',
+    description: 'Finds pages with category parameters',
+    generateDork: (domain) => `site:${domain} inurl:".php?cat=" OR inurl:".php?category=" OR inurl:".php?catid="`
+  },
+  {
+    id: 'sql-user-pages',
+    category: 'SQL Injection',
+    title: 'User Profile Pages',
+    description: 'Finds user profile pages with parameters',
+    generateDork: (domain) => `site:${domain} inurl:".php?user=" OR inurl:".php?userid=" OR inurl:".php?uid="`
+  },
+  {
+    id: 'sql-news-article',
+    category: 'SQL Injection',
+    title: 'News/Article Pages',
+    description: 'Finds news and article pages with parameters',
+    generateDork: (domain) => `site:${domain} inurl:".php?news_id=" OR inurl:".php?article=" OR inurl:".php?newsid="`
+  },
+  {
+    id: 'sql-page-param',
+    category: 'SQL Injection',
+    title: 'Page Parameter',
+    description: 'Finds pages with page parameter',
+    generateDork: (domain) => `site:${domain} inurl:".php?page=" OR inurl:".php?p="`
+  },
+  {
+    id: 'sql-view-param',
+    category: 'SQL Injection',
+    title: 'View Parameter Pages',
+    description: 'Finds pages with view parameter',
+    generateDork: (domain) => `site:${domain} inurl:".php?view=" OR inurl:".asp?view="`
+  },
+  {
+    id: 'sql-query-param',
+    category: 'SQL Injection',
+    title: 'Query Parameter Pages',
+    description: 'Finds pages with query parameters',
+    generateDork: (domain) => `site:${domain} inurl:".php?q=" OR inurl:".php?query="`
+  },
+  
+  // XSS (Cross-Site Scripting) Targets
+  {
+    id: 'xss-search',
+    category: 'XSS',
+    title: 'Search Pages',
+    description: 'Finds search pages (XSS target)',
+    generateDork: (domain) => `site:${domain} inurl:search.php OR inurl:search.asp OR inurl:search?q=`
+  },
+  {
+    id: 'xss-comment',
+    category: 'XSS',
+    title: 'Comment Forms',
+    description: 'Finds comment submission forms',
+    generateDork: (domain) => `site:${domain} inurl:comment OR inurl:addcomment OR "post comment"`
+  },
+  {
+    id: 'xss-feedback',
+    category: 'XSS',
+    title: 'Feedback Forms',
+    description: 'Finds feedback forms for XSS testing',
+    generateDork: (domain) => `site:${domain} inurl:feedback.php OR inurl:feedback.asp`
+  },
+  {
+    id: 'xss-message',
+    category: 'XSS',
+    title: 'Message/Contact Forms',
+    description: 'Finds message and contact forms',
+    generateDork: (domain) => `site:${domain} inurl:message OR inurl:contact.php OR inurl:sendmessage`
+  },
+  {
+    id: 'xss-guestbook',
+    category: 'XSS',
+    title: 'Guestbook Pages',
+    description: 'Finds guestbook pages',
+    generateDork: (domain) => `site:${domain} inurl:guestbook OR inurl:guest.php`
+  },
+  {
+    id: 'xss-profile',
+    category: 'XSS',
+    title: 'Profile Edit Pages',
+    description: 'Finds profile editing pages',
+    generateDork: (domain) => `site:${domain} inurl:profile.php OR inurl:editprofile OR inurl:account.php`
+  },
+  
+  // File Upload Vulnerabilities
+  {
+    id: 'upload-general',
+    category: 'File Upload',
+    title: 'File Upload Forms',
+    description: 'Finds file upload functionality',
+    generateDork: (domain) => `site:${domain} inurl:upload.php OR inurl:fileupload OR inurl:upload.asp`
+  },
+  {
+    id: 'upload-image',
+    category: 'File Upload',
+    title: 'Image Upload Forms',
+    description: 'Finds image upload pages',
+    generateDork: (domain) => `site:${domain} inurl:uploadimage OR inurl:imageupload OR "upload image"`
+  },
+  {
+    id: 'upload-avatar',
+    category: 'File Upload',
+    title: 'Avatar/Photo Upload',
+    description: 'Finds avatar and photo upload pages',
+    generateDork: (domain) => `site:${domain} inurl:avatar OR inurl:uploadphoto OR "upload avatar"`
+  },
+  {
+    id: 'upload-document',
+    category: 'File Upload',
+    title: 'Document Upload',
+    description: 'Finds document upload forms',
+    generateDork: (domain) => `site:${domain} inurl:uploaddoc OR inurl:documentupload OR "upload document"`
+  },
+  {
+    id: 'upload-resume',
+    category: 'File Upload',
+    title: 'Resume/CV Upload',
+    description: 'Finds resume upload forms',
+    generateDork: (domain) => `site:${domain} inurl:uploadresume OR inurl:cvupload OR "upload resume"`
+  },
+  
+  // Authentication & Login Forms
+  {
+    id: 'auth-login',
+    category: 'Authentication',
+    title: 'Login Pages',
+    description: 'Finds login pages',
+    generateDork: (domain) => `site:${domain} inurl:login.php OR inurl:signin.php OR inurl:login.asp`
+  },
+  {
+    id: 'auth-admin',
+    category: 'Authentication',
+    title: 'Admin Login',
+    description: 'Finds admin login pages',
+    generateDork: (domain) => `site:${domain} inurl:admin/login OR inurl:adminlogin OR inurl:admin.php`
+  },
+  {
+    id: 'auth-panel',
+    category: 'Authentication',
+    title: 'Admin Panels',
+    description: 'Finds admin panel pages',
+    generateDork: (domain) => `site:${domain} inurl:admin OR inurl:administrator OR inurl:cpanel`
+  },
+  {
+    id: 'auth-register',
+    category: 'Authentication',
+    title: 'Registration Pages',
+    description: 'Finds registration forms',
+    generateDork: (domain) => `site:${domain} inurl:register.php OR inurl:signup.php OR inurl:registration`
+  },
+  {
+    id: 'auth-forgot',
+    category: 'Authentication',
+    title: 'Password Reset Pages',
+    description: 'Finds password reset forms',
+    generateDork: (domain) => `site:${domain} inurl:forgot OR inurl:reset-password OR inurl:forgotpassword`
+  },
+  {
+    id: 'auth-dashboard',
+    category: 'Authentication',
+    title: 'User Dashboard',
+    description: 'Finds user dashboard pages',
+    generateDork: (domain) => `site:${domain} inurl:dashboard OR inurl:user/home OR inurl:myaccount`
+  },
+  
+  // Contact & Form Pages
+  {
+    id: 'form-contact',
     category: 'Forms',
-    title: 'Contact Us Form',
-    description: 'Finds contact forms with specific file names',
-    generateDork: (domain) => `site:${domain} inurl:contact.php OR inurl:contact.asp OR inurl:contactus.php`
+    title: 'Contact Forms',
+    description: 'Finds contact forms',
+    generateDork: (domain) => `site:${domain} inurl:contact.php OR inurl:contactus.php OR "contact form"`
   },
   {
-    id: 'contact-page',
+    id: 'form-inquiry',
     category: 'Forms',
-    title: 'Contact Us Page',
-    description: 'Finds contact pages with specific URLs',
-    generateDork: (domain) => `site:${domain} inurl:contact OR inurl:contactus OR "contact us"`
+    title: 'Inquiry Forms',
+    description: 'Finds inquiry submission forms',
+    generateDork: (domain) => `site:${domain} inurl:inquiry OR inurl:enquiry OR "inquiry form"`
   },
   {
-    id: 'feedback-form',
-    category: 'Forms',
-    title: 'Feedback Form',
-    description: 'Finds feedback forms and submission pages',
-    generateDork: (domain) => `site:${domain} inurl:feedback OR inurl:submit-feedback OR "feedback form"`
-  },
-  {
-    id: 'submit-request',
-    category: 'Forms',
-    title: 'Submit a Request Page',
-    description: 'Finds pages for submitting requests',
-    generateDork: (domain) => `site:${domain} inurl:submit-request OR inurl:request OR "submit a request"`
-  },
-  {
-    id: 'contact-support',
-    category: 'Support',
-    title: 'Contact Support',
-    description: 'Finds support contact pages',
-    generateDork: (domain) => `site:${domain} inurl:support OR inurl:contact-support OR "contact support"`
-  },
-  {
-    id: 'submit-pages',
-    category: 'Forms',
-    title: 'Submit Pages',
-    description: 'Finds pages for submitting information',
-    generateDork: (domain) => `site:${domain} inurl:submit OR inurl:submission OR "submit information"`
-  },
-  {
-    id: 'support-center',
-    category: 'Support',
-    title: 'Support Center',
-    description: 'Finds support center pages',
-    generateDork: (domain) => `site:${domain} inurl:support-center OR inurl:help-center OR "support center"`
-  },
-  {
-    id: 'submit-forms',
-    category: 'Forms',
-    title: 'Submit Forms',
-    description: 'Finds various submission forms',
-    generateDork: (domain) => `site:${domain} inurl:form OR inurl:submitform OR "submit form"`
-  },
-  {
-    id: 'request-submit',
-    category: 'Forms',
-    title: 'Request a Submit',
-    description: 'Finds pages for submitting requests',
-    generateDork: (domain) => `site:${domain} inurl:request-submit OR "request submission" OR inurl:send-request`
-  },
-  {
-    id: 'report-pages',
-    category: 'Forms',
-    title: 'Report Pages',
-    description: 'Finds pages for submitting reports',
-    generateDork: (domain) => `site:${domain} inurl:report OR inurl:submit-report OR "report issue"`
-  },
-  {
-    id: 'form-pages',
-    category: 'Forms',
-    title: 'Form Pages',
-    description: 'Finds pages with specific form text',
-    generateDork: (domain) => `site:${domain} intext:"form" inurl:form OR inurl:contact-form`
-  },
-  {
-    id: 'request-type',
-    category: 'Forms',
-    title: 'Request Type Forms',
-    description: 'Finds request forms with specific URLs',
-    generateDork: (domain) => `site:${domain} inurl:request-type OR inurl:inquiry OR "type of request"`
-  },
-  {
-    id: 'job-application',
-    category: 'Career',
-    title: 'Job Application Forms',
-    description: 'Finds forms for job applications',
-    generateDork: (domain) => `site:${domain} inurl:apply OR inurl:career OR inurl:job-application OR "apply now"`
-  },
-  {
-    id: 'newsletter',
-    category: 'Marketing',
-    title: 'Newsletter Subscription',
-    description: 'Finds newsletter signup forms',
-    generateDork: (domain) => `site:${domain} inurl:newsletter OR inurl:subscribe OR "subscribe to newsletter"`
-  },
-  {
-    id: 'support-tickets',
-    category: 'Support',
-    title: 'Support Tickets',
-    description: 'Finds support ticket submission forms',
-    generateDork: (domain) => `site:${domain} inurl:ticket OR inurl:support-ticket OR "create ticket" OR "submit ticket"`
-  },
-  {
-    id: 'report-abuse',
-    category: 'Forms',
-    title: 'Report Abuse',
-    description: 'Finds forms for reporting abuse',
-    generateDork: (domain) => `site:${domain} inurl:report-abuse OR inurl:abuse OR "report abuse"`
-  },
-  {
-    id: 'testimonial',
-    category: 'Marketing',
-    title: 'Testimonial Submission',
-    description: 'Finds forms for submitting testimonials',
-    generateDork: (domain) => `site:${domain} inurl:testimonial OR inurl:review OR "submit testimonial" OR "leave a review"`
-  },
-  {
-    id: 'ask-question',
-    category: 'Support',
-    title: 'Ask a Question',
-    description: 'Finds forms for asking questions',
-    generateDork: (domain) => `site:${domain} inurl:ask OR inurl:question OR "ask a question" OR inurl:faq-submit`
-  },
-  {
-    id: 'callback',
-    category: 'Forms',
-    title: 'Request a Callback',
-    description: 'Finds forms for requesting callbacks',
-    generateDork: (domain) => `site:${domain} inurl:callback OR inurl:call-back OR "request a callback" OR "call me back"`
-  },
-  {
-    id: 'bug-report',
-    category: 'Support',
-    title: 'Bug Report Forms',
-    description: 'Finds forms for reporting bugs',
-    generateDork: (domain) => `site:${domain} inurl:bug-report OR inurl:report-bug OR "report a bug" OR inurl:bug-tracker`
-  },
-  {
-    id: 'suggestion',
-    category: 'Forms',
-    title: 'Suggestion Box',
-    description: 'Finds forms for submitting suggestions',
-    generateDork: (domain) => `site:${domain} inurl:suggestion OR inurl:suggest OR "suggestion box" OR "submit suggestion"`
-  },
-  {
-    id: 'registration',
-    category: 'Forms',
-    title: 'Registration Forms',
-    description: 'Finds user registration forms',
-    generateDork: (domain) => `site:${domain} inurl:register OR inurl:signup OR inurl:registration OR "create account"`
-  },
-  {
-    id: 'quote-request',
+    id: 'form-quote',
     category: 'Forms',
     title: 'Quote Request Forms',
-    description: 'Finds forms for requesting quotes',
-    generateDork: (domain) => `site:${domain} inurl:quote OR inurl:get-quote OR "request a quote" OR "get a quote"`
+    description: 'Finds quote request forms',
+    generateDork: (domain) => `site:${domain} inurl:quote OR inurl:getquote OR "request quote"`
   },
   {
-    id: 'upload-form',
-    category: 'Upload',
-    title: 'File Upload Forms',
-    description: 'Finds pages with file upload functionality',
-    generateDork: (domain) => `site:${domain} inurl:upload OR inurl:file-upload OR "upload file" OR "choose file"`
+    id: 'form-order',
+    category: 'Forms',
+    title: 'Order Forms',
+    description: 'Finds order submission forms',
+    generateDork: (domain) => `site:${domain} inurl:order.php OR inurl:orderform OR "order form"`
   },
   {
-    id: 'login-page',
-    category: 'Auth',
-    title: 'Login Pages',
-    description: 'Finds login and authentication pages',
-    generateDork: (domain) => `site:${domain} inurl:login OR inurl:signin OR inurl:auth OR "log in"`
+    id: 'form-booking',
+    category: 'Forms',
+    title: 'Booking Forms',
+    description: 'Finds booking and reservation forms',
+    generateDork: (domain) => `site:${domain} inurl:booking OR inurl:reservation OR "book now"`
   },
   {
-    id: 'admin-panel',
-    category: 'Admin',
-    title: 'Admin Panels',
-    description: 'Finds potential admin panel pages',
-    generateDork: (domain) => `site:${domain} inurl:admin OR inurl:administrator OR inurl:cpanel OR "admin panel"`
+    id: 'form-application',
+    category: 'Forms',
+    title: 'Application Forms',
+    description: 'Finds application submission forms',
+    generateDork: (domain) => `site:${domain} inurl:apply OR inurl:application OR "application form"`
+  },
+  {
+    id: 'form-survey',
+    category: 'Forms',
+    title: 'Survey Forms',
+    description: 'Finds survey and poll forms',
+    generateDork: (domain) => `site:${domain} inurl:survey OR inurl:poll OR "take survey"`
+  },
+  {
+    id: 'form-newsletter',
+    category: 'Forms',
+    title: 'Newsletter Signup',
+    description: 'Finds newsletter subscription forms',
+    generateDork: (domain) => `site:${domain} inurl:newsletter OR inurl:subscribe OR "newsletter signup"`
+  },
+  
+  // LFI/RFI (Local/Remote File Inclusion)
+  {
+    id: 'lfi-include',
+    category: 'File Inclusion',
+    title: 'Include Parameter',
+    description: 'Finds pages with include parameter (LFI/RFI)',
+    generateDork: (domain) => `site:${domain} inurl:".php?include=" OR inurl:".php?inc="`
+  },
+  {
+    id: 'lfi-file',
+    category: 'File Inclusion',
+    title: 'File Parameter',
+    description: 'Finds pages with file parameter',
+    generateDork: (domain) => `site:${domain} inurl:".php?file=" OR inurl:".php?filename="`
+  },
+  {
+    id: 'lfi-path',
+    category: 'File Inclusion',
+    title: 'Path Parameter',
+    description: 'Finds pages with path parameter',
+    generateDork: (domain) => `site:${domain} inurl:".php?path=" OR inurl:".php?filepath="`
+  },
+  {
+    id: 'lfi-page',
+    category: 'File Inclusion',
+    title: 'Page Include Parameter',
+    description: 'Finds pages with page include parameter',
+    generateDork: (domain) => `site:${domain} inurl:".php?pg=" OR inurl:".php?page=" OR inurl:".php?p="`
+  },
+  
+  // Open Redirect
+  {
+    id: 'redirect-url',
+    category: 'Open Redirect',
+    title: 'URL Redirect Parameter',
+    description: 'Finds pages with URL redirect parameter',
+    generateDork: (domain) => `site:${domain} inurl:".php?url=" OR inurl:".php?redirect="`
+  },
+  {
+    id: 'redirect-return',
+    category: 'Open Redirect',
+    title: 'Return URL Parameter',
+    description: 'Finds pages with return URL parameter',
+    generateDork: (domain) => `site:${domain} inurl:".php?return=" OR inurl:".php?returnurl="`
+  },
+  {
+    id: 'redirect-next',
+    category: 'Open Redirect',
+    title: 'Next/Continue Parameter',
+    description: 'Finds pages with next/continue parameters',
+    generateDork: (domain) => `site:${domain} inurl:".php?next=" OR inurl:".php?continue="`
+  },
+  
+  // IDOR (Insecure Direct Object Reference)
+  {
+    id: 'idor-invoice',
+    category: 'IDOR',
+    title: 'Invoice Pages',
+    description: 'Finds invoice pages with IDs',
+    generateDork: (domain) => `site:${domain} inurl:invoice OR inurl:receipt OR inurl:".php?invoice_id="`
+  },
+  {
+    id: 'idor-order',
+    category: 'IDOR',
+    title: 'Order Details',
+    description: 'Finds order detail pages',
+    generateDork: (domain) => `site:${domain} inurl:".php?order_id=" OR inurl:orderdetails`
+  },
+  {
+    id: 'idor-document',
+    category: 'IDOR',
+    title: 'Document Access',
+    description: 'Finds document access pages',
+    generateDork: (domain) => `site:${domain} inurl:".php?doc=" OR inurl:".php?document="`
+  },
+  {
+    id: 'idor-profile',
+    category: 'IDOR',
+    title: 'User Profile Access',
+    description: 'Finds user profile pages by ID',
+    generateDork: (domain) => `site:${domain} inurl:".php?profile=" OR inurl:".php?user_id="`
+  },
+  
+  // API Endpoints
+  {
+    id: 'api-endpoint',
+    category: 'API',
+    title: 'API Endpoints',
+    description: 'Finds API endpoints',
+    generateDork: (domain) => `site:${domain} inurl:"/api/" OR inurl:"/v1/" OR inurl:"/rest/"`
+  },
+  {
+    id: 'api-json',
+    category: 'API',
+    title: 'JSON API Responses',
+    description: 'Finds JSON API endpoints',
+    generateDork: (domain) => `site:${domain} filetype:json inurl:api`
+  },
+  {
+    id: 'api-swagger',
+    category: 'API',
+    title: 'Swagger/OpenAPI Docs',
+    description: 'Finds API documentation pages',
+    generateDork: (domain) => `site:${domain} inurl:swagger OR inurl:api-docs OR inurl:openapi`
+  },
+  
+  // Error Pages & Debug Info
+  {
+    id: 'error-sql',
+    category: 'Error Messages',
+    title: 'SQL Error Messages',
+    description: 'Finds pages with SQL errors',
+    generateDork: (domain) => `site:${domain} "mysql_fetch" OR "SQL syntax" OR "mysqli_"`
+  },
+  {
+    id: 'error-php',
+    category: 'Error Messages',
+    title: 'PHP Error Messages',
+    description: 'Finds pages with PHP errors',
+    generateDork: (domain) => `site:${domain} "Warning: include" OR "Fatal error" OR "Parse error"`
+  },
+  {
+    id: 'error-stack',
+    category: 'Error Messages',
+    title: 'Stack Traces',
+    description: 'Finds pages with stack traces',
+    generateDork: (domain) => `site:${domain} "Stack trace" OR "Traceback" OR "Exception"`
+  },
+  
+  // Shopping & E-commerce
+  {
+    id: 'ecom-cart',
+    category: 'E-commerce',
+    title: 'Shopping Cart',
+    description: 'Finds shopping cart pages',
+    generateDork: (domain) => `site:${domain} inurl:cart OR inurl:basket OR inurl:checkout`
+  },
+  {
+    id: 'ecom-payment',
+    category: 'E-commerce',
+    title: 'Payment Pages',
+    description: 'Finds payment processing pages',
+    generateDork: (domain) => `site:${domain} inurl:payment OR inurl:billing OR inurl:pay`
+  },
+  {
+    id: 'ecom-product',
+    category: 'E-commerce',
+    title: 'Product Pages',
+    description: 'Finds product detail pages',
+    generateDork: (domain) => `site:${domain} inurl:product OR inurl:item OR inurl:".php?product="`
   }
 ];
