@@ -14,9 +14,46 @@ export const DorkCard = ({ title, description, generateDork, domain, category })
 
   const handleCopy = () => {
     if (dorkQuery) {
-      navigator.clipboard.writeText(dorkQuery);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
+      // Try modern Clipboard API first
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(dorkQuery)
+          .then(() => {
+            setCopied(true);
+            setTimeout(() => setCopied(false), 2000);
+          })
+          .catch(() => {
+            // Fallback to older method
+            copyTextFallback(dorkQuery);
+          });
+      } else {
+        // Use fallback method directly
+        copyTextFallback(dorkQuery);
+      }
+    }
+  };
+
+  const copyTextFallback = (text) => {
+    // Create a temporary textarea element
+    const textArea = document.createElement('textarea');
+    textArea.value = text;
+    textArea.style.position = 'fixed';
+    textArea.style.left = '-999999px';
+    textArea.style.top = '-999999px';
+    document.body.appendChild(textArea);
+    textArea.focus();
+    textArea.select();
+    
+    try {
+      // Use the older execCommand method
+      const successful = document.execCommand('copy');
+      if (successful) {
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2000);
+      }
+    } catch (err) {
+      console.error('Failed to copy text: ', err);
+    } finally {
+      document.body.removeChild(textArea);
     }
   };
 
