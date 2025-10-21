@@ -2,56 +2,56 @@ export const dorkTemplates = [
   // SQL Injection Targets
   {
     id: 'sql-php-id',
-    category: 'SQL Injection',
+    category: '💉 SQL Injection',
     title: 'PHP Pages with ID Parameter',
     description: 'Finds PHP pages with id parameter (SQL injection target)',
     generateDork: (domain) => `site:${domain} inurl:"id=" | inurl:"productid=" | inurl:"product_id=" | inurl:"itemid=" | inurl:"item_id=" | inurl:"pid=" ext:php | ext:asp | ext:aspx`
   },
   {
     id: 'sql-product-id',
-    category: 'SQL Injection',
+    category: '💉 SQL Injection',
     title: 'Product/Item ID Parameters',
     description: 'Finds pages with product/item parameters',
     generateDork: (domain) => `site:${domain} inurl:"product=" | inurl:"prod=" | inurl:"item=" | inurl:"sku=" | inurl:"p=" ext:php | ext:asp | ext:aspx | ext:jsp`
   },
   {
     id: 'sql-category',
-    category: 'SQL Injection',
+    category: '💉 SQL Injection',
     title: 'Category Parameter Pages',
     description: 'Finds pages with category parameters',
     generateDork: (domain) => `site:${domain} inurl:"cat=" | inurl:"category=" | inurl:"categoryid=" | inurl:"catid=" | inurl:"cid=" ext:php | ext:asp | ext:aspx`
   },
   {
     id: 'sql-user-pages',
-    category: 'SQL Injection',
+    category: '💉 SQL Injection',
     title: 'User Profile Pages',
     description: 'Finds user profile pages with parameters',
     generateDork: (domain) => `site:${domain} inurl:"user=" | inurl:"userid=" | inurl:"uid=" | inurl:"member=" | inurl:"profile=" ext:php | ext:asp | ext:aspx`
   },
   {
     id: 'sql-news-article',
-    category: 'SQL Injection',
+    category: '💉 SQL Injection',
     title: 'News/Article Pages',
     description: 'Finds news and article pages with parameters',
     generateDork: (domain) => `site:${domain} inurl:"news=" | inurl:"newsid=" | inurl:"article=" | inurl:"articleid=" | inurl:"post=" ext:php | ext:asp | ext:aspx`
   },
   {
     id: 'sql-page-param',
-    category: 'SQL Injection',
+    category: '💉 SQL Injection',
     title: 'Page Parameter',
     description: 'Finds pages with page parameter',
     generateDork: (domain) => `site:${domain} inurl:"page=" | inurl:"p=" | inurl:"pg=" | inurl:"pageid=" | inurl:"content=" ext:php | ext:asp | ext:aspx | ext:jsp`
   },
   {
     id: 'sql-view-param',
-    category: 'SQL Injection',
+    category: '💉 SQL Injection',
     title: 'View Parameter Pages',
     description: 'Finds pages with view parameter',
     generateDork: (domain) => `site:${domain} inurl:"view=" | inurl:"display=" | inurl:"show=" | inurl:"detail=" ext:php | ext:asp | ext:aspx`
   },
   {
     id: 'sql-query-param',
-    category: 'SQL Injection',
+    category: '💉 SQL Injection',
     title: 'Query Parameter Pages',
     description: 'Finds pages with query parameters',
     generateDork: (domain) => `site:${domain} inurl:"q=" | inurl:"query=" | inurl:"search=" | inurl:"s=" | inurl:"keyword=" ext:php | ext:asp | ext:aspx`
