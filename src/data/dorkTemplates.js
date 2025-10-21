@@ -56,6 +56,48 @@ export const dorkTemplates = [
     description: 'Finds pages with query parameters',
     generateDork: (domain) => `site:${domain} (inurl:"q=" OR inurl:"query=" OR inurl:"search=" OR inurl:"s=" OR inurl:"keyword=") (ext:php OR ext:asp OR ext:aspx)`
   },
+  {
+    id: 'sql-basic-injection',
+    category: '💉 SQL Injection',
+    title: 'SQL Injection - Basic',
+    description: 'Common SQL injection entry points',
+    generateDork: (domain) => `site:${domain} (inurl:"id=" OR inurl:"pid=" OR inurl:"cid=" OR inurl:"uid=")`
+  },
+  {
+    id: 'sql-advanced-injection',
+    category: '💉 SQL Injection',
+    title: 'SQL Injection - Advanced',
+    description: 'Advanced SQLi parameter patterns',
+    generateDork: (domain) => `site:${domain} (inurl:"page=" OR inurl:"query=" OR inurl:"search=" OR inurl:"keyword=")`
+  },
+  {
+    id: 'sql-errors-mysql',
+    category: '💉 SQL Injection',
+    title: 'SQL Errors - MySQL',
+    description: 'MySQL error messages',
+    generateDork: (domain) => `site:${domain} (intext:"MySQL" OR intext:"mysql_fetch" OR intext:"mysql_num_rows" OR intext:"SQL syntax")`
+  },
+  {
+    id: 'sql-errors-mssql',
+    category: '💉 SQL Injection',
+    title: 'SQL Errors - MSSQL',
+    description: 'MS SQL Server errors',
+    generateDork: (domain) => `site:${domain} (intext:"ODBC SQL Server Driver" OR intext:"Microsoft OLE DB Provider" OR intext:"SQLServer JDBC Driver")`
+  },
+  {
+    id: 'sql-errors-postgresql',
+    category: '💉 SQL Injection',
+    title: 'SQL Errors - PostgreSQL',
+    description: 'PostgreSQL error messages',
+    generateDork: (domain) => `site:${domain} (intext:"PostgreSQL" OR intext:"pg_query" OR intext:"pg_exec")`
+  },
+  {
+    id: 'sql-errors-oracle',
+    category: '💉 SQL Injection',
+    title: 'SQL Errors - Oracle',
+    description: 'Oracle database errors',
+    generateDork: (domain) => `site:${domain} (intext:"ORA-" OR intext:"Oracle error" OR intext:"Oracle JDBC")`
+  },
   
   // XSS (Cross-Site Scripting) Targets
   {
@@ -100,6 +142,13 @@ export const dorkTemplates = [
     description: 'Finds profile editing pages',
     generateDork: (domain) => `site:${domain} (intitle:"edit profile" OR inurl:"editprofile" OR inurl:"profile.php" OR inurl:"account.php" OR inurl:"myprofile" OR inurl:"updateprofile")`
   },
+  {
+    id: 'xss-vulnerable-params',
+    category: '⚡ XSS',
+    title: 'XSS Vulnerable Parameters',
+    description: 'Potential XSS injection points',
+    generateDork: (domain) => `site:${domain} (inurl:"search=" OR inurl:"q=" OR inurl:"keyword=" OR inurl:"query=")`
+  },
   
   // File Upload Vulnerabilities
   {
@@ -136,6 +185,20 @@ export const dorkTemplates = [
     title: 'Resume/CV Upload',
     description: 'Finds resume upload forms',
     generateDork: (domain) => `site:${domain} (intitle:"upload resume" OR intitle:"upload cv" OR inurl:"uploadresume" OR inurl:"cvupload" OR inurl:"resume-upload" OR inurl:"career-application")`
+  },
+  {
+    id: 'upload-form-advanced',
+    category: '📤 File Upload',
+    title: 'File Upload',
+    description: 'File upload functionality',
+    generateDork: (domain) => `site:${domain} (inurl:"upload" OR intitle:"upload" OR intext:"choose file")`
+  },
+  {
+    id: 'upload-unrestricted',
+    category: '📤 File Upload',
+    title: 'Unrestricted Upload',
+    description: 'Unrestricted file upload',
+    generateDork: (domain) => `site:${domain} inurl:upload (ext:php OR ext:asp OR ext:aspx OR ext:jsp)`
   },
   
   // Authentication & Login Forms
@@ -181,762 +244,171 @@ export const dorkTemplates = [
     description: 'Finds user dashboard pages',
     generateDork: (domain) => `site:${domain} (intitle:"dashboard" OR intitle:"user home" OR intitle:"my account" OR inurl:"dashboard" OR inurl:"user/home" OR inurl:"myaccount" OR inurl:"member-area")`
   },
-  
-  // Contact & Form Pages
+
+  // Admin Portals (from admin-portals.json)
   {
-    id: 'form-contact',
-    category: '📝 Forms',
-    title: 'Contact Forms',
-    description: 'Finds contact forms',
-    generateDork: (domain) => `site:${domain} (intitle:"contact" OR intitle:"contact us" OR intitle:"contact.php" OR intitle:"contactus" OR inurl:"contact.php" OR inurl:"contactus.php" OR inurl:"contact.asp" OR inurl:"contact.html" OR inurl:"contact-us" OR inurl:"contact_form")`
+    id: 'admin-basic',
+    category: '👤 Admin Portals',
+    title: 'Admin Login Basic',
+    description: 'Basic admin login pages',
+    generateDork: (domain) => `site:${domain} intitle:"admin login"`
   },
   {
-    id: 'form-inquiry',
-    category: '📝 Forms',
-    title: 'Inquiry Forms',
-    description: 'Finds inquiry submission forms',
-    generateDork: (domain) => `site:${domain} (intitle:"inquiry" OR intitle:"enquiry" OR intitle:"make inquiry" OR inurl:"inquiry.php" OR inurl:"enquiry" OR inurl:"inquiry-form" OR inurl:"enquiry_form")`
+    id: 'admin-console',
+    category: '👤 Admin Portals',
+    title: 'Admin Console',
+    description: 'Admin console login',
+    generateDork: (domain) => `intitle:"admin console" inurl:login site:${domain}`
   },
   {
-    id: 'form-quote',
-    category: '📝 Forms',
-    title: 'Quote Request Forms',
-    description: 'Finds quote request forms',
-    generateDork: (domain) => `site:${domain} (intitle:"get quote" OR intitle:"request quote" OR intitle:"quote form" OR inurl:"quote" OR inurl:"getquote" OR inurl:"request-quote" OR inurl:"quotation")`
+    id: 'admin-django',
+    category: '👤 Admin Portals',
+    title: 'Django Admin',
+    description: 'Django framework admin',
+    generateDork: (domain) => `intitle:"Django site admin" inurl:admin site:${domain}`
   },
-  {
-    id: 'form-order',
-    category: '📝 Forms',
-    title: 'Order Forms',
-    description: 'Finds order submission forms',
-    generateDork: (domain) => `site:${domain} (intitle:"order" OR intitle:"place order" OR intitle:"order form" OR inurl:"order.php" OR inurl:"orderform" OR inurl:"order-now" OR inurl:"placeorder")`
-  },
-  {
-    id: 'form-booking',
-    category: '📝 Forms',
-    title: 'Booking Forms',
-    description: 'Finds booking and reservation forms',
-    generateDork: (domain) => `site:${domain} (intitle:"booking" OR intitle:"reservation" OR intitle:"book now" OR inurl:"booking" OR inurl:"reservation" OR inurl:"book-now" OR inurl:"make-reservation")`
-  },
-  {
-    id: 'form-application',
-    category: '📝 Forms',
-    title: 'Application Forms',
-    description: 'Finds application submission forms',
-    generateDork: (domain) => `site:${domain} (intitle:"apply" OR intitle:"application" OR intitle:"application form" OR inurl:"apply" OR inurl:"application" OR inurl:"submit-application" OR inurl:"apply-now")`
-  },
-  {
-    id: 'form-survey',
-    category: '📝 Forms',
-    title: 'Survey Forms',
-    description: 'Finds survey and poll forms',
-    generateDork: (domain) => `site:${domain} (intitle:"survey" OR intitle:"poll" OR intitle:"questionnaire" OR inurl:"survey" OR inurl:"poll" OR inurl:"take-survey" OR inurl:"feedback-survey")`
-  },
-  {
-    id: 'form-newsletter',
-    category: '📝 Forms',
-    title: 'Newsletter Signup',
-    description: 'Finds newsletter subscription forms',
-    generateDork: (domain) => `site:${domain} (intitle:"newsletter" OR intitle:"subscribe" OR intitle:"subscription" OR inurl:"newsletter" OR inurl:"subscribe" OR inurl:"signup" OR inurl:"email-signup")`
-  },
-  
-  // LFI/RFI (Local/Remote File Inclusion)
-  {
-    id: 'lfi-include',
-    category: '📂 File Inclusion',
-    title: 'Include Parameter',
-    description: 'Finds pages with include parameter (LFI/RFI)',
-    generateDork: (domain) => `site:${domain} (inurl:"include=" OR inurl:"inc=" OR inurl:"incl=" OR inurl:"include_file=") (ext:php OR ext:asp OR ext:aspx)`
-  },
-  {
-    id: 'lfi-file',
-    category: '📂 File Inclusion',
-    title: 'File Parameter',
-    description: 'Finds pages with file parameter',
-    generateDork: (domain) => `site:${domain} (inurl:"file=" OR inurl:"filename=" OR inurl:"filepath=" OR inurl:"doc=" OR inurl:"document=") (ext:php OR ext:asp OR ext:aspx)`
-  },
-  {
-    id: 'lfi-path',
-    category: '📂 File Inclusion',
-    title: 'Path Parameter',
-    description: 'Finds pages with path parameter',
-    generateDork: (domain) => `site:${domain} (inurl:"path=" OR inurl:"filepath=" OR inurl:"dir=" OR inurl:"directory=" OR inurl:"folder=") (ext:php OR ext:asp)`
-  },
-  {
-    id: 'lfi-page',
-    category: '📂 File Inclusion',
-    title: 'Page Include Parameter',
-    description: 'Finds pages with page include parameter',
-    generateDork: (domain) => `site:${domain} (inurl:"pg=" OR inurl:"page=" OR inurl:"p=" OR inurl:"content=" OR inurl:"load=") (ext:php OR ext:asp OR ext:jsp)`
-  },
-  
-  // Open Redirect
-  {
-    id: 'redirect-url',
-    category: '↗️ Open Redirect',
-    title: 'URL Redirect Parameter',
-    description: 'Finds pages with URL redirect parameter',
-    generateDork: (domain) => `site:${domain} (inurl:"url=" OR inurl:"redirect=" OR inurl:"redir=" OR inurl:"link=" OR inurl:"goto=" OR inurl:"out=") (ext:php OR ext:asp OR ext:aspx)`
-  },
-  {
-    id: 'redirect-return',
-    category: '↗️ Open Redirect',
-    title: 'Return URL Parameter',
-    description: 'Finds pages with return URL parameter',
-    generateDork: (domain) => `site:${domain} (inurl:"return=" OR inurl:"returnurl=" OR inurl:"ret=" OR inurl:"return_url=" OR inurl:"returnto=") (ext:php OR ext:asp)`
-  },
-  {
-    id: 'redirect-next',
-    category: '↗️ Open Redirect',
-    title: 'Next/Continue Parameter',
-    description: 'Finds pages with next/continue parameters',
-    generateDork: (domain) => `site:${domain} (inurl:"next=" OR inurl:"continue=" OR inurl:"forward=" OR inurl:"dest=" OR inurl:"destination=") (ext:php OR ext:asp OR ext:jsp)`
-  },
-  
-  // IDOR (Insecure Direct Object Reference)
-  {
-    id: 'idor-invoice',
-    category: '🔓 IDOR',
-    title: 'Invoice Pages',
-    description: 'Finds invoice pages with IDs',
-    generateDork: (domain) => `site:${domain} (intitle:"invoice" OR intitle:"receipt" OR inurl:"invoice" OR inurl:"receipt" OR inurl:"invoice_id=" OR inurl:"invoiceid=") (ext:php OR ext:asp)`
-  },
-  {
-    id: 'idor-order',
-    category: '🔓 IDOR',
-    title: 'Order Details',
-    description: 'Finds order detail pages',
-    generateDork: (domain) => `site:${domain} (intitle:"order details" OR intitle:"my orders" OR inurl:"order_id=" OR inurl:"orderid=" OR inurl:"orderdetails" OR inurl:"vieworder=") (ext:php OR ext:asp)`
-  },
-  {
-    id: 'idor-document',
-    category: '🔓 IDOR',
-    title: 'Document Access',
-    description: 'Finds document access pages',
-    generateDork: (domain) => `site:${domain} (inurl:"doc=" OR inurl:"document=" OR inurl:"docid=" OR inurl:"documentid=" OR inurl:"viewdoc=" OR inurl:"download=") (ext:php OR ext:asp)`
-  },
-  {
-    id: 'idor-profile',
-    category: '🔓 IDOR',
-    title: 'User Profile Access',
-    description: 'Finds user profile pages by ID',
-    generateDork: (domain) => `site:${domain} (intitle:"profile" OR intitle:"user profile" OR inurl:"profile=" OR inurl:"user_id=" OR inurl:"userid=" OR inurl:"viewprofile=") (ext:php OR ext:asp)`
-  },
-  
-  // API Endpoints
-  {
-    id: 'api-endpoint',
-    category: '🔌 API',
-    title: 'API Endpoints',
-    description: 'Finds API endpoints',
-    generateDork: (domain) => `site:${domain} (inurl:"/api/" OR inurl:"/v1/" OR inurl:"/v2/" OR inurl:"/rest/" OR inurl:"/api/v" OR inurl:"/graphql" OR inurl:"/swagger")`
-  },
-  {
-    id: 'api-json',
-    category: '🔌 API',
-    title: 'JSON API Responses',
-    description: 'Finds JSON API endpoints',
-    generateDork: (domain) => `site:${domain} (ext:json OR filetype:json) (inurl:"api" OR inurl:"v1" OR inurl:"v2" OR inurl:"rest")`
-  },
-  {
-    id: 'api-swagger',
-    category: '🔌 API',
-    title: 'Swagger/OpenAPI Docs',
-    description: 'Finds API documentation pages',
-    generateDork: (domain) => `site:${domain} (intitle:"swagger" OR intitle:"api docs" OR intitle:"api documentation" OR inurl:"swagger-ui" OR inurl:"api-docs" OR inurl:"openapi" OR inurl:"redoc")`
-  },
-  
-  // Error Pages & Debug Info
-  {
-    id: 'error-sql',
-    category: '⚠️ Error Messages',
-    title: 'SQL Error Messages',
-    description: 'Finds pages with SQL errors',
-    generateDork: (domain) => `site:${domain} ("mysql_fetch" OR "SQL syntax" OR "mysqli error" OR "mysql error" OR "ORA-" OR "Microsoft OLE DB" OR "ODBC SQL")`
-  },
-  {
-    id: 'error-php',
-    category: '⚠️ Error Messages',
-    title: 'PHP Error Messages',
-    description: 'Finds pages with PHP errors',
-    generateDork: (domain) => `site:${domain} ("Warning: include" OR "Fatal error" OR "Parse error" OR "Warning: require" OR "Notice: Undefined" OR "Call to undefined")`
-  },
-  {
-    id: 'error-stack',
-    category: '⚠️ Error Messages',
-    title: 'Stack Traces',
-    description: 'Finds pages with stack traces',
-    generateDork: (domain) => `site:${domain} ("Stack trace:" OR "Traceback" OR "Exception in thread" OR "at line" OR "error_reporting" OR "display_errors")`
-  },
-  
-  // Shopping & E-commerce
-  {
-    id: 'ecom-cart',
-    category: '🛒 E-commerce',
-    title: 'Shopping Cart',
-    description: 'Finds shopping cart pages',
-    generateDork: (domain) => `site:${domain} (intitle:"shopping cart" OR intitle:"cart" OR intitle:"basket" OR inurl:"cart" OR inurl:"basket" OR inurl:"checkout" OR inurl:"shopping-cart" OR inurl:"view-cart")`
-  },
-  {
-    id: 'ecom-payment',
-    category: '🛒 E-commerce',
-    title: 'Payment Pages',
-    description: 'Finds payment processing pages',
-    generateDork: (domain) => `site:${domain} (intitle:"payment" OR intitle:"billing" OR intitle:"checkout" OR inurl:"payment" OR inurl:"billing" OR inurl:"pay" OR inurl:"checkout" OR inurl:"payment-info")`
-  },
-  {
-    id: 'ecom-product',
-    category: '🛒 E-commerce',
-    title: 'Product Pages',
-    description: 'Finds product detail pages',
-    generateDork: (domain) => `site:${domain} (intitle:"product" OR intitle:"item details" OR inurl:"product" OR inurl:"item" OR inurl:"prod=" OR inurl:"product_id=" OR inurl:"viewproduct")`
-  },
-  
-  // People & Username (domain parameter = username/person name)
-  {
-    id: 'people-basic',
-    category: '👤 People & Username',
-    title: 'Basic Search',
-    description: 'Simple exact search for name/username',
-    generateDork: (domain) => `"${domain}"`
-  },
-  {
-    id: 'people-wildcard',
-    category: '👤 People & Username',
-    title: 'Wildcard All Sites',
-    description: 'Search all domains',
-    generateDork: (domain) => `site:*.* "${domain}"`
-  },
-  {
-    id: 'people-linkedin-profile',
-    category: '👤 People & Username',
-    title: 'LinkedIn Profile',
-    description: 'LinkedIn profile page',
-    generateDork: (domain) => `site:linkedin.com/in/ "${domain}"`
-  },
-  {
-    id: 'people-linkedin-all',
-    category: '👤 People & Username',
-    title: 'LinkedIn All Pages',
-    description: 'All LinkedIn results',
-    generateDork: (domain) => `site:linkedin.com "${domain}"`
-  },
-  {
-    id: 'people-linkedin-posts',
-    category: '👤 People & Username',
-    title: 'LinkedIn Posts',
-    description: 'LinkedIn activity',
-    generateDork: (domain) => `site:linkedin.com/posts "${domain}"`
-  },
-  {
-    id: 'people-instagram-profile',
-    category: '👤 People & Username',
-    title: 'Instagram Profile',
-    description: 'Instagram account',
-    generateDork: (domain) => `site:instagram.com "${domain}" -inurl:user`
-  },
-  {
-    id: 'people-instagram-photos',
-    category: '👤 People & Username',
-    title: 'Instagram Photos',
-    description: 'Instagram posts',
-    generateDork: (domain) => `site:instagram.com/p "${domain}"`
-  },
-  {
-    id: 'people-facebook-profile',
-    category: '👤 People & Username',
-    title: 'Facebook Profile',
-    description: 'Facebook page',
-    generateDork: (domain) => `site:facebook.com "${domain}"`
-  },
-  {
-    id: 'people-facebook-photos',
-    category: '👤 People & Username',
-    title: 'Facebook Photos',
-    description: 'Facebook images',
-    generateDork: (domain) => `site:facebook.com/photo "${domain}"`
-  },
-  {
-    id: 'people-twitter-profile',
-    category: '👤 People & Username',
-    title: 'Twitter/X Profile',
-    description: 'Twitter account',
-    generateDork: (domain) => `site:twitter.com "${domain}"`
-  },
-  {
-    id: 'people-twitter-tweets',
-    category: '👤 People & Username',
-    title: 'Twitter Tweets',
-    description: 'Tweet history',
-    generateDork: (domain) => `site:twitter.com/status "${domain}"`
-  },
-  {
-    id: 'people-github-profile',
-    category: '👤 People & Username',
-    title: 'GitHub Profile',
-    description: 'GitHub account',
-    generateDork: (domain) => `site:github.com "${domain}"`
-  },
-  {
-    id: 'people-github-repos',
-    category: '👤 People & Username',
-    title: 'GitHub Repos',
-    description: 'GitHub projects',
-    generateDork: (domain) => `site:github.com/${domain}`
-  },
-  {
-    id: 'people-github-commits',
-    category: '👤 People & Username',
-    title: 'GitHub Commits',
-    description: 'Code contributions',
-    generateDork: (domain) => `site:github.com author:"${domain}"`
-  },
-  {
-    id: 'people-reddit-user',
-    category: '👤 People & Username',
-    title: 'Reddit User',
-    description: 'Reddit profile',
-    generateDork: (domain) => `site:reddit.com/user/ "${domain}"`
-  },
-  {
-    id: 'people-reddit-posts',
-    category: '👤 People & Username',
-    title: 'Reddit Posts',
-    description: 'Reddit activity',
-    generateDork: (domain) => `site:reddit.com "${domain}"`
-  },
-  {
-    id: 'people-stackoverflow-profile',
-    category: '👤 People & Username',
-    title: 'Stack Overflow',
-    description: 'Stack Overflow profile',
-    generateDork: (domain) => `site:stackoverflow.com/users "${domain}"`
-  },
-  {
-    id: 'people-stackoverflow-posts',
-    category: '👤 People & Username',
-    title: 'Stack Overflow Posts',
-    description: 'SO contributions',
-    generateDork: (domain) => `site:stackoverflow.com "${domain}"`
-  },
-  {
-    id: 'people-youtube-channel',
-    category: '👤 People & Username',
-    title: 'YouTube Channel',
-    description: 'YouTube channel',
-    generateDork: (domain) => `site:youtube.com/c/ "${domain}"`
-  },
-  {
-    id: 'people-youtube-videos',
-    category: '👤 People & Username',
-    title: 'YouTube Videos',
-    description: 'Video content',
-    generateDork: (domain) => `site:youtube.com "${domain}"`
-  },
-  {
-    id: 'people-tiktok',
-    category: '👤 People & Username',
-    title: 'TikTok Profile',
-    description: 'TikTok account',
-    generateDork: (domain) => `site:tiktok.com/@"${domain}"`
-  },
-  {
-    id: 'people-medium-profile',
-    category: '👤 People & Username',
-    title: 'Medium Articles',
-    description: 'Medium blog',
-    generateDork: (domain) => `site:medium.com/@"${domain}"`
-  },
-  {
-    id: 'people-medium-posts',
-    category: '👤 People & Username',
-    title: 'Medium Posts',
-    description: 'Medium articles',
-    generateDork: (domain) => `site:medium.com "${domain}"`
-  },
-  {
-    id: 'people-devto',
-    category: '👤 People & Username',
-    title: 'Dev.to Profile',
-    description: 'Dev.to account',
-    generateDork: (domain) => `site:dev.to "${domain}"`
-  },
-  {
-    id: 'people-behance',
-    category: '👤 People & Username',
-    title: 'Behance Profile',
-    description: 'Behance portfolio',
-    generateDork: (domain) => `site:behance.net "${domain}"`
-  },
-  {
-    id: 'people-dribbble',
-    category: '👤 People & Username',
-    title: 'Dribbble Profile',
-    description: 'Dribbble designs',
-    generateDork: (domain) => `site:dribbble.com "${domain}"`
-  },
-  {
-    id: 'people-pinterest',
-    category: '👤 People & Username',
-    title: 'Pinterest Profile',
-    description: 'Pinterest boards',
-    generateDork: (domain) => `site:pinterest.com/${domain}`
-  },
-  {
-    id: 'people-tumblr',
-    category: '👤 People & Username',
-    title: 'Tumblr Blog',
-    description: 'Tumblr blog',
-    generateDork: (domain) => `site:tumblr.com "${domain}"`
-  },
-  {
-    id: 'people-quora-profile',
-    category: '👤 People & Username',
-    title: 'Quora Profile',
-    description: 'Quora account',
-    generateDork: (domain) => `site:quora.com/profile/ "${domain}"`
-  },
-  {
-    id: 'people-quora-answers',
-    category: '👤 People & Username',
-    title: 'Quora Answers',
-    description: 'Quora responses',
-    generateDork: (domain) => `site:quora.com "${domain}"`
-  },
-  {
-    id: 'people-telegram',
-    category: '👤 People & Username',
-    title: 'Telegram',
-    description: 'Telegram username',
-    generateDork: (domain) => `site:t.me "${domain}"`
-  },
-  {
-    id: 'people-discord',
-    category: '👤 People & Username',
-    title: 'Discord',
-    description: 'Discord servers',
-    generateDork: (domain) => `site:discord.com "${domain}"`
-  },
-  {
-    id: 'people-twitch',
-    category: '👤 People & Username',
-    title: 'Twitch Profile',
-    description: 'Twitch channel',
-    generateDork: (domain) => `site:twitch.tv/${domain}`
-  },
-  {
-    id: 'people-soundcloud',
-    category: '👤 People & Username',
-    title: 'SoundCloud',
-    description: 'SoundCloud music',
-    generateDork: (domain) => `site:soundcloud.com/${domain}`
-  },
-  {
-    id: 'people-spotify',
-    category: '👤 People & Username',
-    title: 'Spotify',
-    description: 'Spotify profile',
-    generateDork: (domain) => `site:open.spotify.com "${domain}"`
-  },
-  {
-    id: 'people-vimeo',
-    category: '👤 People & Username',
-    title: 'Vimeo',
-    description: 'Vimeo videos',
-    generateDork: (domain) => `site:vimeo.com/${domain}`
-  },
-  {
-    id: 'people-flickr',
-    category: '👤 People & Username',
-    title: 'Flickr',
-    description: 'Flickr photos',
-    generateDork: (domain) => `site:flickr.com/photos/ "${domain}"`
-  },
-  {
-    id: 'people-contact-phone',
-    category: '👤 People & Username',
-    title: 'Contact Info',
-    description: 'Phone numbers',
-    generateDork: (domain) => `"${domain}" (phone OR contact OR mobile OR cell)`
-  },
-  {
-    id: 'people-email',
-    category: '👤 People & Username',
-    title: 'Email Address',
-    description: 'Email addresses',
-    generateDork: (domain) => `"${domain}" (email OR @)`
-  },
-  {
-    id: 'people-address',
-    category: '👤 People & Username',
-    title: 'Address Info',
-    description: 'Physical address',
-    generateDork: (domain) => `"${domain}" (address OR location OR city OR state)`
-  },
-  {
-    id: 'people-resume-pdf',
-    category: '👤 People & Username',
-    title: 'Resume PDF',
-    description: 'Resume documents',
-    generateDork: (domain) => `"${domain}" filetype:pdf resume`
-  },
-  {
-    id: 'people-cv',
-    category: '👤 People & Username',
-    title: 'CV Documents',
-    description: 'CV files',
-    generateDork: (domain) => `"${domain}" filetype:pdf cv`
-  },
-  {
-    id: 'people-portfolio-pdf',
-    category: '👤 People & Username',
-    title: 'Portfolio PDF',
-    description: 'Portfolio docs',
-    generateDork: (domain) => `"${domain}" filetype:pdf portfolio`
-  },
-  {
-    id: 'people-biography',
-    category: '👤 People & Username',
-    title: 'Biography',
-    description: 'Bio information',
-    generateDork: (domain) => `"${domain}" (bio OR biography OR about)`
-  },
-  {
-    id: 'people-professional',
-    category: '👤 People & Username',
-    title: 'Professional Info',
-    description: 'Work history',
-    generateDork: (domain) => `"${domain}" (work OR job OR career OR position)`
-  },
-  {
-    id: 'people-education',
-    category: '👤 People & Username',
-    title: 'Education',
-    description: 'Educational background',
-    generateDork: (domain) => `"${domain}" (education OR university OR college OR school)`
-  },
-  {
-    id: 'people-inurl',
-    category: '👤 People & Username',
-    title: 'In URL',
-    description: 'Username in URL',
-    generateDork: (domain) => `inurl:"${domain}"`
-  },
-  {
-    id: 'people-intext',
-    category: '👤 People & Username',
-    title: 'In Text',
-    description: 'Name in text',
-    generateDork: (domain) => `intext:"${domain}"`
-  },
-  {
-    id: 'people-intitle',
-    category: '👤 People & Username',
-    title: 'In Title',
-    description: 'Name in title',
-    generateDork: (domain) => `intitle:"${domain}"`
-  },
-  {
-    id: 'people-related',
-    category: '👤 People & Username',
-    title: 'Related Sites',
-    description: 'Similar profiles',
-    generateDork: (domain) => `related:"${domain}"`
-  },
-  {
-    id: 'people-news',
-    category: '👤 People & Username',
-    title: 'News Articles',
-    description: 'News mentions',
-    generateDork: (domain) => `"${domain}" (site:news OR site:*.news)`
-  },
-  
-  // Social Media
-  {
-    id: 'social-links',
-    category: '📱 Social Media',
-    title: 'Social Media Links',
-    description: 'Finds social media profiles and links',
-    generateDork: (domain) => `site:${domain} ("facebook.com" OR "twitter.com" OR "linkedin.com" OR "instagram.com" OR "youtube.com" OR "tiktok.com")`
-  },
-  {
-    id: 'social-feeds',
-    category: '📱 Social Media',
-    title: 'Social Media Feeds',
-    description: 'Finds embedded social media feeds',
-    generateDork: (domain) => `site:${domain} (intitle:"social" OR intitle:"follow us" OR inurl:"social-feed" OR inurl:"twitter-feed" OR "social media")`
-  },
-  {
-    id: 'social-mentions',
-    category: '📱 Social Media',
-    title: 'Social Mentions',
-    description: 'Finds mentions across social platforms',
-    generateDork: (domain) => `"${domain}" (site:facebook.com OR site:twitter.com OR site:linkedin.com OR site:instagram.com)`
-  },
-  {
-    id: 'social-share',
-    category: '📱 Social Media',
-    title: 'Share Buttons & Pages',
-    description: 'Finds social sharing functionality',
-    generateDork: (domain) => `site:${domain} (intitle:"share" OR "share this" OR "social sharing" OR inurl:"share" OR "share on facebook")`
-  },
-  
-  // Websites
-  {
-    id: 'web-subdomains',
-    category: '🌐 Websites',
-    title: 'Subdomain Discovery',
-    description: 'Finds subdomains of target',
-    generateDork: (domain) => `site:*.${domain} -www`
-  },
-  {
-    id: 'web-related',
-    category: '🌐 Websites',
-    title: 'Related Websites',
-    description: 'Finds related websites',
-    generateDork: (domain) => `related:${domain}`
-  },
-  {
-    id: 'web-cached',
-    category: '🌐 Websites',
-    title: 'Cached Pages',
-    description: 'Finds cached versions of pages',
-    generateDork: (domain) => `cache:${domain}`
-  },
-  {
-    id: 'web-sitemap',
-    category: '🌐 Websites',
-    title: 'Sitemap Files',
-    description: 'Finds XML sitemaps',
-    generateDork: (domain) => `site:${domain} (inurl:"sitemap.xml" OR inurl:"sitemap_index.xml" OR inurl:"sitemap" OR (filetype:xml "sitemap"))`
-  },
-  {
-    id: 'web-robots',
-    category: '🌐 Websites',
-    title: 'Robots.txt Files',
-    description: 'Finds robots.txt files',
-    generateDork: (domain) => `site:${domain} inurl:"robots.txt"`
-  },
-  
-  // Admin Portals (Extended)
   {
     id: 'admin-phpmyadmin',
-    category: '🔐 Admin Portals',
-    title: 'phpMyAdmin',
-    description: 'Finds phpMyAdmin installations',
-    generateDork: (domain) => `site:${domain} (intitle:"phpMyAdmin" OR inurl:"phpmyadmin" OR inurl:"pma" OR inurl:"myadmin")`
+    category: '👤 Admin Portals',
+    title: 'PHPMyAdmin',
+    description: 'PHPMyAdmin interface',
+    generateDork: (domain) => `site:${domain} inurl:"/phpmyadmin/" intext:"Create new database"`
+  },
+  {
+    id: 'admin-area',
+    category: '👤 Admin Portals',
+    title: 'Admin Area',
+    description: 'Admin area control panel',
+    generateDork: (domain) => `site:${domain} inurl:"/admin_area/" intitle:"Control Panel"`
+  },
+  {
+    id: 'admin-panel-generic',
+    category: '👤 Admin Portals',
+    title: 'Admin Panel',
+    description: 'General admin panel',
+    generateDork: (domain) => `site:${domain} inurl:"/admin_panel/" -github`
+  },
+  {
+    id: 'admin-dashboard-generic',
+    category: '👤 Admin Portals',
+    title: 'Admin Dashboard',
+    description: 'Admin dashboard interface',
+    generateDork: (domain) => `site:${domain} inurl:"/admin" "Dashboard"`
+  },
+  {
+    id: 'admin-database',
+    category: '👤 Admin Portals',
+    title: 'Database Admin',
+    description: 'Database administration',
+    generateDork: (domain) => `site:${domain} inurl:"/dbadmin/" "Database Administration"`
   },
   {
     id: 'admin-wordpress',
-    category: '🔐 Admin Portals',
+    category: '👤 Admin Portals',
     title: 'WordPress Admin',
-    description: 'Finds WordPress admin panels',
-    generateDork: (domain) => `site:${domain} (inurl:"wp-admin" OR inurl:"wp-login.php" OR intitle:"wordpress" OR inurl:"wp-content")`
+    description: 'WordPress admin panel',
+    generateDork: (domain) => `site:${domain} inurl:wp-admin`
   },
   {
-    id: 'admin-cms',
-    category: '🔐 Admin Portals',
-    title: 'CMS Admin Panels',
-    description: 'Finds various CMS admin panels',
-    generateDork: (domain) => `site:${domain} (inurl:"admin" OR inurl:"administrator" OR inurl:"moderator" OR inurl:"webadmin" OR inurl:"adminarea" OR inurl:"controlpanel")`
+    id: 'admin-login-asp',
+    category: '👤 Admin Portals',
+    title: 'Admin Login ASP',
+    description: 'ASP.NET admin login',
+    generateDork: (domain) => `site:${domain} inurl:("administrator/login.aspx" OR "admin/login.aspx")`
+  },
+  {
+    id: 'admin-login-php',
+    category: '👤 Admin Portals',
+    title: 'Admin Login PHP',
+    description: 'PHP admin password page',
+    generateDork: (domain) => `site:${domain} inurl:("admin/password.php")`
+  },
+  {
+    id: 'admin-keys',
+    category: '👤 Admin Portals',
+    title: 'Admin Keys',
+    description: 'Admin API keys page',
+    generateDork: (domain) => `site:${domain} inurl:"/admin_keys/"`
+  },
+  {
+    id: 'admin-redis',
+    category: '👤 Admin Portals',
+    title: 'Redis Admin',
+    description: 'Redis administration',
+    generateDork: (domain) => `site:${domain} inurl:"/redis-admin"`
+  },
+  {
+    id: 'admin-postgresql',
+    category: '👤 Admin Portals',
+    title: 'PostgreSQL Admin',
+    description: 'PostgreSQL admin interface',
+    generateDork: (domain) => `site:${domain} inurl:"/php-pg-admin/" "PostgreSQL"`
+  },
+  {
+    id: 'admin-credentials',
+    category: '👤 Admin Portals',
+    title: 'Admin Credentials',
+    description: 'Pages mentioning admin password',
+    generateDork: (domain) => `site:${domain} "admin password"`
   },
   {
     id: 'admin-config',
-    category: '🔐 Admin Portals',
-    title: 'Config & Setup Pages',
-    description: 'Finds configuration and setup pages',
-    generateDork: (domain) => `site:${domain} (intitle:"configuration" OR intitle:"setup" OR inurl:"config" OR inurl:"setup.php" OR inurl:"install.php" OR inurl:"installer")`
-  },
-  
-  // Files
-  {
-    id: 'files-pdf',
-    category: '📁 Files',
-    title: 'PDF Documents',
-    description: 'Finds PDF files',
-    generateDork: (domain) => `site:${domain} (ext:pdf OR filetype:pdf)`
+    category: '👤 Admin Portals',
+    title: 'Admin Config',
+    description: 'Admin configuration setup',
+    generateDork: (domain) => `site:${domain} inurl:"/admin/config" intext:"setup"`
   },
   {
-    id: 'files-docs',
-    category: '📁 Files',
-    title: 'Office Documents',
-    description: 'Finds Word, Excel, PowerPoint files',
-    generateDork: (domain) => `site:${domain} (ext:doc OR ext:docx OR ext:xls OR ext:xlsx OR ext:ppt OR ext:pptx)`
+    id: 'admin-tomcat',
+    category: '👤 Admin Portals',
+    title: 'Tomcat Manager',
+    description: 'Tomcat web application manager',
+    generateDork: (domain) => `site:${domain} inurl:"/manager/html" intitle:"Tomcat Web Application Manager"`
   },
   {
-    id: 'files-text',
-    category: '📁 Files',
-    title: 'Text Files',
-    description: 'Finds text and log files',
-    generateDork: (domain) => `site:${domain} (ext:txt OR ext:log OR ext:cfg OR ext:conf OR ext:ini)`
+    id: 'admin-joomla',
+    category: '👤 Admin Portals',
+    title: 'Joomla Admin',
+    description: 'Joomla CMS admin',
+    generateDork: (domain) => `site:${domain} inurl:"/administrator" intitle:"Joomla"`
   },
   {
-    id: 'files-backup',
-    category: '📁 Files',
-    title: 'Backup Files',
-    description: 'Finds backup and archive files',
-    generateDork: (domain) => `site:${domain} (ext:bak OR ext:backup OR ext:old OR ext:zip OR ext:rar OR ext:tar OR ext:gz OR ext:7z)`
+    id: 'admin-drupal',
+    category: '👤 Admin Portals',
+    title: 'Drupal Admin',
+    description: 'Drupal CMS login',
+    generateDork: (domain) => `site:${domain} inurl:"/user/login" intitle:"Drupal"`
   },
   {
-    id: 'files-sql',
-    category: '📁 Files',
-    title: 'Database Files',
-    description: 'Finds SQL and database files',
-    generateDork: (domain) => `site:${domain} (ext:sql OR ext:db OR ext:sqlite OR ext:mdb OR (filetype:sql "INSERT INTO"))`
+    id: 'admin-magento',
+    category: '👤 Admin Portals',
+    title: 'Magento Admin',
+    description: 'Magento e-commerce admin',
+    generateDork: (domain) => `site:${domain} inurl:"/admin" intitle:"Magento"`
   },
   {
-    id: 'files-images',
-    category: '📁 Files',
-    title: 'Image Files',
-    description: 'Finds image files',
-    generateDork: (domain) => `site:${domain} (ext:jpg OR ext:jpeg OR ext:png OR ext:gif OR ext:bmp OR ext:svg)`
-  },
-  
-  // Sensitive Info
-  {
-    id: 'sensitive-passwords',
-    category: '⚠️ Sensitive Info',
-    title: 'Password Files',
-    description: 'Finds files containing passwords',
-    generateDork: (domain) => `site:${domain} (intext:"password" OR intext:"passwd" OR intext:"pwd") (ext:txt OR ext:log OR ext:cfg OR ext:ini OR ext:env)`
+    id: 'admin-cpanel',
+    category: '👤 Admin Portals',
+    title: 'CPanel Login',
+    description: 'cPanel access',
+    generateDork: (domain) => `site:${domain} inurl:":2082" OR inurl:":2083"`
   },
   {
-    id: 'sensitive-api-keys',
-    category: '⚠️ Sensitive Info',
-    title: 'API Keys & Tokens',
-    description: 'Finds exposed API keys',
-    generateDork: (domain) => `site:${domain} ("api_key" OR "apikey" OR "api-key" OR "access_token" OR "secret_key") (ext:json OR ext:txt OR ext:log OR ext:env OR ext:yml)`
+    id: 'admin-plesk',
+    category: '👤 Admin Portals',
+    title: 'Plesk Panel',
+    description: 'Plesk control panel',
+    generateDork: (domain) => `site:${domain} inurl:":8443" intitle:"Plesk"`
   },
   {
-    id: 'sensitive-env',
-    category: '⚠️ Sensitive Info',
-    title: 'Environment Files',
-    description: 'Finds .env and config files',
-    generateDork: (domain) => `site:${domain} (inurl:".env" OR inurl:"config.php" OR inurl:"configuration.php" OR ext:env OR filetype:env)`
+    id: 'admin-webmin',
+    category: '👤 Admin Portals',
+    title: 'Webmin',
+    description: 'Webmin interface',
+    generateDork: (domain) => `site:${domain} inurl:":10000" intitle:"Webmin"`
   },
-  {
-    id: 'sensitive-credentials',
-    category: '⚠️ Sensitive Info',
-    title: 'Credentials & Secrets',
-    description: 'Finds files with credentials',
-    generateDork: (domain) => `site:${domain} (intext:"username" OR intext:"password" OR intext:"admin" OR intext:"root") (ext:txt OR ext:log OR ext:sql)`
-  },
-  {
-    id: 'sensitive-financial',
-    category: '⚠️ Sensitive Info',
-    title: 'Financial Information',
-    description: 'Finds financial data',
-    generateDork: (domain) => `site:${domain} ("credit card" OR "SSN" OR "social security" OR "bank account" OR "routing number") (ext:xls OR ext:xlsx OR ext:csv)`
-  },
-  {
-    id: 'sensitive-email',
-    category: '⚠️ Sensitive Info',
-    title: 'Email Lists',
-    description: 'Finds email address lists',
-    generateDork: (domain) => `site:${domain} (intext:"@${domain}" OR "email list" OR "mailing list") (ext:xls OR ext:xlsx OR ext:csv OR ext:txt)`
-  },
-  
-  // Vulnerabilities
+
+  // Vulnerabilities (Enhanced)
   {
     id: 'vuln-directory-listing',
     category: '🛡️ Vulnerabilities',
@@ -952,6 +424,34 @@ export const dorkTemplates = [
     generateDork: (domain) => `site:${domain} (inurl:".git" OR intitle:"Index of /.git")`
   },
   {
+    id: 'vuln-git-config',
+    category: '🛡️ Vulnerabilities',
+    title: 'Git Exposed',
+    description: 'Exposed .git directories',
+    generateDork: (domain) => `site:${domain} (inurl:".git" OR intitle:"Index of /.git" OR inurl:"/.git/config")`
+  },
+  {
+    id: 'vuln-svn-exposed',
+    category: '🛡️ Vulnerabilities',
+    title: 'SVN Exposed',
+    description: 'Exposed .svn directories',
+    generateDork: (domain) => `site:${domain} (inurl:".svn" OR intitle:"Index of /.svn")`
+  },
+  {
+    id: 'vuln-ds-store',
+    category: '🛡️ Vulnerabilities',
+    title: 'DS_Store Files',
+    description: 'Exposed macOS metadata files',
+    generateDork: (domain) => `site:${domain} (inurl:".DS_Store" OR intitle:"Index of" ".DS_Store")`
+  },
+  {
+    id: 'vuln-backup-files',
+    category: '🛡️ Vulnerabilities',
+    title: 'Backup Files',
+    description: 'Backup file exposure',
+    generateDork: (domain) => `site:${domain} (ext:bak OR ext:old OR ext:backup OR ext:~ OR ext:swp)`
+  },
+  {
     id: 'vuln-log-files',
     category: '🛡️ Vulnerabilities',
     title: 'Exposed Log Files',
@@ -959,11 +459,25 @@ export const dorkTemplates = [
     generateDork: (domain) => `site:${domain} (ext:log OR filetype:log) (intext:"error" OR intext:"warning" OR intitle:"index of")`
   },
   {
+    id: 'vuln-log-exposed',
+    category: '🛡️ Vulnerabilities',
+    title: 'Log Files Exposed',
+    description: 'Exposed log files',
+    generateDork: (domain) => `site:${domain} (ext:log OR intitle:"Index of" "access.log" OR intitle:"Index of" "error.log")`
+  },
+  {
     id: 'vuln-phpinfo',
     category: '🛡️ Vulnerabilities',
     title: 'PHPInfo Pages',
     description: 'Finds phpinfo() disclosure pages',
     generateDork: (domain) => `site:${domain} (intitle:"phpinfo" OR intext:"PHP Version" OR "PHP Credits")`
+  },
+  {
+    id: 'vuln-phpinfo-disclosure',
+    category: '🛡️ Vulnerabilities',
+    title: 'PHPInfo Disclosure',
+    description: 'PHP information disclosure',
+    generateDork: (domain) => `site:${domain} (inurl:"phpinfo.php" OR intitle:"phpinfo()" OR intext:"PHP Version")`
   },
   {
     id: 'vuln-shell',
@@ -979,7 +493,1058 @@ export const dorkTemplates = [
     description: 'Finds default installation pages',
     generateDork: (domain) => `site:${domain} (intitle:"welcome to" OR intitle:"test page" OR intitle:"it works!" OR intitle:"apache" OR "default page")`
   },
-  
+  {
+    id: 'vuln-open-redirect',
+    category: '🛡️ Vulnerabilities',
+    title: 'Open Redirect',
+    description: 'Open redirect vulnerabilities',
+    generateDork: (domain) => `site:${domain} (inurl:"url=http" OR inurl:"redirect=http" OR inurl:"return=http" OR inurl:"next=http")`
+  },
+  {
+    id: 'vuln-lfi',
+    category: '🛡️ Vulnerabilities',
+    title: 'LFI - Local File Inclusion',
+    description: 'Local file inclusion vectors',
+    generateDork: (domain) => `site:${domain} (inurl:"file=" OR inurl:"page=" OR inurl:"path=" OR inurl:"include=")`
+  },
+  {
+    id: 'vuln-rfi',
+    category: '🛡️ Vulnerabilities',
+    title: 'RFI - Remote File Inclusion',
+    description: 'Remote file inclusion points',
+    generateDork: (domain) => `site:${domain} (inurl:"file=http" OR inurl:"page=http" OR inurl:"include=http")`
+  },
+  {
+    id: 'vuln-path-traversal',
+    category: '🛡️ Vulnerabilities',
+    title: 'Path Traversal',
+    description: 'Directory traversal attempts',
+    generateDork: (domain) => `site:${domain} (inurl:"../" OR inurl:"%2e%2e%2f" OR inurl:"..\\\\")`
+  },
+  {
+    id: 'vuln-command-injection',
+    category: '🛡️ Vulnerabilities',
+    title: 'Command Injection',
+    description: 'OS command injection points',
+    generateDork: (domain) => `site:${domain} (inurl:"cmd=" OR inurl:"exec=" OR inurl:"command=" OR inurl:"execute=")`
+  },
+  {
+    id: 'vuln-xxe',
+    category: '🛡️ Vulnerabilities',
+    title: 'XXE - XML External Entity',
+    description: 'XML external entity risks',
+    generateDork: (domain) => `site:${domain} (inurl:".xml" OR intext:"<?xml" OR intext:"DOCTYPE")`
+  },
+  {
+    id: 'vuln-ssrf',
+    category: '🛡️ Vulnerabilities',
+    title: 'SSRF - Server Side Request Forgery',
+    description: 'SSRF vulnerable parameters',
+    generateDork: (domain) => `site:${domain} (inurl:"url=" OR inurl:"uri=" OR inurl:"path=http" OR inurl:"dest=")`
+  },
+  {
+    id: 'vuln-idor',
+    category: '🛡️ Vulnerabilities',
+    title: 'IDOR - Parameter Tampering',
+    description: 'Insecure direct object references',
+    generateDork: (domain) => `site:${domain} (inurl:"user_id=" OR inurl:"account_id=" OR inurl:"profile_id=")`
+  },
+  {
+    id: 'vuln-cgi-bin',
+    category: '🛡️ Vulnerabilities',
+    title: 'CGI-BIN',
+    description: 'CGI script directories',
+    generateDork: (domain) => `site:${domain} inurl:cgi-bin`
+  },
+  {
+    id: 'vuln-tomcat-manager',
+    category: '🛡️ Vulnerabilities',
+    title: 'Tomcat Manager',
+    description: 'Tomcat manager interfaces',
+    generateDork: (domain) => `site:${domain} (inurl:"/manager/html" OR intitle:"Apache Tomcat")`
+  },
+  {
+    id: 'vuln-jboss-console',
+    category: '🛡️ Vulnerabilities',
+    title: 'JBoss Console',
+    description: 'JBoss management consoles',
+    generateDork: (domain) => `site:${domain} (inurl:"/jmx-console" OR inurl:"/web-console")`
+  },
+  {
+    id: 'vuln-weblogic-console',
+    category: '🛡️ Vulnerabilities',
+    title: 'WebLogic Console',
+    description: 'Oracle WebLogic console',
+    generateDork: (domain) => `site:${domain} inurl:"/console/login"`
+  },
+  {
+    id: 'vuln-jenkins',
+    category: '🛡️ Vulnerabilities',
+    title: 'Jenkins Exposed',
+    description: 'Jenkins CI/CD instances',
+    generateDork: (domain) => `site:${domain} (inurl:"/jenkins" OR intitle:"Dashboard [Jenkins]")`
+  },
+  {
+    id: 'vuln-kibana',
+    category: '🛡️ Vulnerabilities',
+    title: 'Kibana Exposed',
+    description: 'Kibana dashboards',
+    generateDork: (domain) => `site:${domain} (inurl:"/app/kibana" OR intitle:"Kibana")`
+  },
+  {
+    id: 'vuln-grafana',
+    category: '🛡️ Vulnerabilities',
+    title: 'Grafana Exposed',
+    description: 'Grafana monitoring',
+    generateDork: (domain) => `site:${domain} (inurl:"/grafana" OR intitle:"Grafana")`
+  },
+  {
+    id: 'vuln-jupyter',
+    category: '🛡️ Vulnerabilities',
+    title: 'Jupyter Notebooks',
+    description: 'Jupyter notebook instances',
+    generateDork: (domain) => `site:${domain} (inurl:"/notebooks" OR intitle:"Jupyter")`
+  },
+  {
+    id: 'vuln-elasticsearch',
+    category: '🛡️ Vulnerabilities',
+    title: 'Elasticsearch',
+    description: 'Elasticsearch interfaces',
+    generateDork: (domain) => `site:${domain} (inurl:":9200" OR intext:"_cluster/health")`
+  },
+  {
+    id: 'vuln-mongodb',
+    category: '🛡️ Vulnerabilities',
+    title: 'MongoDB Exposed',
+    description: 'MongoDB database ports',
+    generateDork: (domain) => `site:${domain} (inurl:":27017" OR inurl:":28017")`
+  },
+  {
+    id: 'vuln-redis',
+    category: '🛡️ Vulnerabilities',
+    title: 'Redis Exposed',
+    description: 'Redis database instances',
+    generateDork: (domain) => `site:${domain} inurl:":6379"`
+  },
+  {
+    id: 'vuln-docker-api',
+    category: '🛡️ Vulnerabilities',
+    title: 'Docker API',
+    description: 'Docker API endpoints',
+    generateDork: (domain) => `site:${domain} (inurl:":2375" OR inurl:":2376" OR inurl:"/containers/json")`
+  },
+  {
+    id: 'vuln-kubernetes',
+    category: '🛡️ Vulnerabilities',
+    title: 'Kubernetes Dashboard',
+    description: 'Kubernetes management',
+    generateDork: (domain) => `site:${domain} (inurl:"/api/v1" OR intitle:"Kubernetes Dashboard")`
+  },
+  {
+    id: 'vuln-cors',
+    category: '🛡️ Vulnerabilities',
+    title: 'CORS Misconfiguration',
+    description: 'CORS policy issues',
+    generateDork: (domain) => `site:${domain} (intext:"Access-Control-Allow-Origin: *")`
+  },
+  {
+    id: 'vuln-csrf',
+    category: '🛡️ Vulnerabilities',
+    title: 'CSRF Tokens Missing',
+    description: 'Forms without CSRF protection',
+    generateDork: (domain) => `site:${domain} (inurl:"form" -intext:"csrf" -intext:"token")`
+  },
+  {
+    id: 'vuln-default-creds',
+    category: '🛡️ Vulnerabilities',
+    title: 'Default Credentials',
+    description: 'Default credential documentation',
+    generateDork: (domain) => `site:${domain} (intext:"default password" OR intext:"default login")`
+  },
+  {
+    id: 'vuln-struts-rce',
+    category: '🛡️ Vulnerabilities',
+    title: 'Struts RCE',
+    description: 'Apache Struts vulnerabilities',
+    generateDork: (domain) => `site:${domain} (ext:action OR ext:do OR inurl:"struts")`
+  },
+  {
+    id: 'vuln-spring-boot',
+    category: '🛡️ Vulnerabilities',
+    title: 'Spring Boot Actuator',
+    description: 'Spring Boot actuator endpoints',
+    generateDork: (domain) => `site:${domain} (inurl:"/actuator" OR inurl:"/health" OR inurl:"/env" OR inurl:"/trace")`
+  },
+  {
+    id: 'vuln-laravel-debug',
+    category: '🛡️ Vulnerabilities',
+    title: 'Laravel Debug Mode',
+    description: 'Laravel debug mode enabled',
+    generateDork: (domain) => `site:${domain} (intext:"Laravel" AND intext:"Whoops")`
+  },
+  {
+    id: 'vuln-symfony-profiler',
+    category: '🛡️ Vulnerabilities',
+    title: 'Symfony Profiler',
+    description: 'Symfony debug profiler',
+    generateDork: (domain) => `site:${domain} inurl:"/_profiler"`
+  },
+  {
+    id: 'vuln-aspnet-trace',
+    category: '🛡️ Vulnerabilities',
+    title: 'ASP.NET Trace',
+    description: 'ASP.NET trace enabled',
+    generateDork: (domain) => `site:${domain} (inurl:"trace.axd" OR intext:"Trace.axd")`
+  },
+  {
+    id: 'vuln-viewstate',
+    category: '🛡️ Vulnerabilities',
+    title: 'ViewState Without MAC',
+    description: 'Unprotected ViewState',
+    generateDork: (domain) => `site:${domain} (intext:"__VIEWSTATE" -intext:"EnableViewStateMac")`
+  },
+  {
+    id: 'vuln-graphql',
+    category: '🛡️ Vulnerabilities',
+    title: 'GraphQL Introspection',
+    description: 'GraphQL introspection enabled',
+    generateDork: (domain) => `site:${domain} (inurl:"graphql" OR inurl:"graphiql")`
+  },
+  {
+    id: 'vuln-swagger',
+    category: '🛡️ Vulnerabilities',
+    title: 'API Swagger/OpenAPI',
+    description: 'Exposed API documentation',
+    generateDork: (domain) => `site:${domain} (inurl:"/swagger" OR inurl:"/api-docs" OR inurl:"/openapi.json")`
+  },
+  {
+    id: 'vuln-nginx-status',
+    category: '🛡️ Vulnerabilities',
+    title: 'Nginx Status Page',
+    description: 'Nginx status disclosure',
+    generateDork: (domain) => `site:${domain} (inurl:"/nginx_status" OR intitle:"nginx status")`
+  },
+  {
+    id: 'vuln-apache-status',
+    category: '🛡️ Vulnerabilities',
+    title: 'Apache Server Status',
+    description: 'Apache server status page',
+    generateDork: (domain) => `site:${domain} (inurl:"/server-status" OR intitle:"Apache Status")`
+  },
+  {
+    id: 'vuln-clickjacking',
+    category: '🛡️ Vulnerabilities',
+    title: 'Clickjacking Vulnerable',
+    description: 'Missing X-Frame-Options',
+    generateDork: (domain) => `site:${domain} -intext:"X-Frame-Options" (inurl:"login" OR inurl:"admin")`
+  },
+
+  // Sensitive Information
+  {
+    id: 'sensitive-api-keys',
+    category: '🔑 Sensitive Information',
+    title: 'API Keys - Generic',
+    description: 'Generic API key patterns',
+    generateDork: (domain) => `site:${domain} (intext:"api_key" OR intext:"apikey" OR intext:"api-key" OR intext:"apiKey")`
+  },
+  {
+    id: 'sensitive-api-specific',
+    category: '🔑 Sensitive Information',
+    title: 'API Keys - Specific',
+    description: 'Service-specific API keys',
+    generateDork: (domain) => `site:${domain} (intext:"stripe_api_key" OR intext:"twilio" OR intext:"firebase" OR intext:"mailgun")`
+  },
+  {
+    id: 'sensitive-aws-keys',
+    category: '🔑 Sensitive Information',
+    title: 'AWS Keys',
+    description: 'AWS access credentials',
+    generateDork: (domain) => `site:${domain} (intext:"AKIA" OR intext:"aws_access_key_id" OR intext:"aws_secret_access_key")`
+  },
+  {
+    id: 'sensitive-google-keys',
+    category: '🔑 Sensitive Information',
+    title: 'Google Cloud Keys',
+    description: 'Google Cloud credentials',
+    generateDork: (domain) => `site:${domain} (intext:"AIza" OR intext:"GOOGLE_API_KEY" OR intext:"GCP_API_KEY")`
+  },
+  {
+    id: 'sensitive-azure-keys',
+    category: '🔑 Sensitive Information',
+    title: 'Azure Keys',
+    description: 'Microsoft Azure credentials',
+    generateDork: (domain) => `site:${domain} (intext:"AZURE" OR intext:"azure_key" OR intext:"azure_secret")`
+  },
+  {
+    id: 'sensitive-private-keys-rsa',
+    category: '🔑 Sensitive Information',
+    title: 'Private Keys - RSA',
+    description: 'RSA private keys',
+    generateDork: (domain) => `site:${domain} (intext:"BEGIN RSA PRIVATE KEY" OR intext:"BEGIN PRIVATE KEY")`
+  },
+  {
+    id: 'sensitive-private-keys-files',
+    category: '🔑 Sensitive Information',
+    title: 'Private Keys - Files',
+    description: 'Private key files',
+    generateDork: (domain) => `site:${domain} (ext:pem OR ext:key OR ext:ppk)`
+  },
+  {
+    id: 'sensitive-ssh-keys',
+    category: '🔑 Sensitive Information',
+    title: 'SSH Keys',
+    description: 'SSH private keys',
+    generateDork: (domain) => `site:${domain} (filename:id_rsa OR filename:id_dsa OR intext:"ssh-rsa")`
+  },
+  {
+    id: 'sensitive-oauth-tokens',
+    category: '🔑 Sensitive Information',
+    title: 'OAuth Tokens',
+    description: 'OAuth credentials',
+    generateDork: (domain) => `site:${domain} (intext:"oauth_token" OR intext:"oauth_secret" OR intext:"access_token")`
+  },
+  {
+    id: 'sensitive-jwt-tokens',
+    category: '🔑 Sensitive Information',
+    title: 'JWT Tokens',
+    description: 'JSON Web Tokens',
+    generateDork: (domain) => `site:${domain} (intext:"eyJ" OR intext:"jwt" OR intext:"Bearer eyJ")`
+  },
+  {
+    id: 'sensitive-db-passwords',
+    category: '🔑 Sensitive Information',
+    title: 'Database Passwords',
+    description: 'Database credentials',
+    generateDork: (domain) => `site:${domain} (intext:"DB_PASSWORD" OR intext:"DATABASE_PASSWORD" OR intext:"db_pass")`
+  },
+  {
+    id: 'sensitive-connection-strings',
+    category: '🔑 Sensitive Information',
+    title: 'Connection Strings',
+    description: 'Database connection strings',
+    generateDork: (domain) => `site:${domain} (intext:"Server=" OR intext:"jdbc:" OR intext:"mongodb://" OR intext:"mysql://")`
+  },
+  {
+    id: 'sensitive-smtp-creds',
+    category: '🔑 Sensitive Information',
+    title: 'SMTP Credentials',
+    description: 'Email server credentials',
+    generateDork: (domain) => `site:${domain} (intext:"smtp_password" OR intext:"mail_password" OR intext:"email_password")`
+  },
+  {
+    id: 'sensitive-ftp-creds',
+    category: '🔑 Sensitive Information',
+    title: 'FTP Credentials',
+    description: 'FTP server credentials',
+    generateDork: (domain) => `site:${domain} (intext:"ftp_username" OR intext:"ftp_password" OR intext:"ftp://")`
+  },
+  {
+    id: 'sensitive-env-files',
+    category: '🔑 Sensitive Information',
+    title: 'Environment Files',
+    description: '.env configuration files',
+    generateDork: (domain) => `site:${domain} (ext:env OR filename:.env OR filename:.env.local OR filename:.env.production)`
+  },
+  {
+    id: 'sensitive-config-files',
+    category: '🔑 Sensitive Information',
+    title: 'Config Files',
+    description: 'Configuration files',
+    generateDork: (domain) => `site:${domain} (ext:config OR ext:conf OR ext:cfg OR ext:ini)`
+  },
+  {
+    id: 'sensitive-password-url',
+    category: '🔑 Sensitive Information',
+    title: 'Password in URL',
+    description: 'Passwords in URLs',
+    generateDork: (domain) => `site:${domain} inurl:password`
+  },
+  {
+    id: 'sensitive-passwords-generic',
+    category: '🔑 Sensitive Information',
+    title: 'Passwords - Generic',
+    description: 'Generic password patterns',
+    generateDork: (domain) => `site:${domain} (intext:"password =" OR intext:"pwd =" OR intext:"pass =" OR intext:"passwd =")`
+  },
+  {
+    id: 'sensitive-secret-keys',
+    category: '🔑 Sensitive Information',
+    title: 'Secret Keys',
+    description: 'Application secret keys',
+    generateDork: (domain) => `site:${domain} (intext:"secret_key" OR intext:"SECRET_KEY" OR intext:"secret =")`
+  },
+  {
+    id: 'sensitive-encryption-keys',
+    category: '🔑 Sensitive Information',
+    title: 'Encryption Keys',
+    description: 'Encryption keys',
+    generateDork: (domain) => `site:${domain} (intext:"encryption_key" OR intext:"cipher_key" OR intext:"crypto_key")`
+  },
+  {
+    id: 'sensitive-github-tokens',
+    category: '🔑 Sensitive Information',
+    title: 'GitHub Tokens',
+    description: 'GitHub access tokens',
+    generateDork: (domain) => `site:${domain} (intext:"ghp_" OR intext:"github_token" OR intext:"GITHUB_TOKEN")`
+  },
+  {
+    id: 'sensitive-slack-tokens',
+    category: '🔑 Sensitive Information',
+    title: 'Slack Tokens',
+    description: 'Slack API tokens',
+    generateDork: (domain) => `site:${domain} (intext:"xoxb-" OR intext:"xoxp-" OR intext:"SLACK_TOKEN")`
+  },
+  {
+    id: 'sensitive-stripe-keys',
+    category: '🔑 Sensitive Information',
+    title: 'Stripe Keys',
+    description: 'Stripe payment keys',
+    generateDork: (domain) => `site:${domain} (intext:"sk_live_" OR intext:"pk_live_" OR intext:"STRIPE_KEY")`
+  },
+  {
+    id: 'sensitive-twilio-keys',
+    category: '🔑 Sensitive Information',
+    title: 'Twilio Keys',
+    description: 'Twilio API credentials',
+    generateDork: (domain) => `site:${domain} (intext:"AC" AND intext:"twilio" OR intext:"TWILIO_")`
+  },
+  {
+    id: 'sensitive-paypal-creds',
+    category: '🔑 Sensitive Information',
+    title: 'PayPal Credentials',
+    description: 'PayPal API credentials',
+    generateDork: (domain) => `site:${domain} (intext:"paypal" AND intext:"client_id" OR intext:"PAYPAL_")`
+  },
+  {
+    id: 'sensitive-sendgrid-keys',
+    category: '🔑 Sensitive Information',
+    title: 'SendGrid Keys',
+    description: 'SendGrid API keys',
+    generateDork: (domain) => `site:${domain} (intext:"SG." OR intext:"SENDGRID_API_KEY")`
+  },
+  {
+    id: 'sensitive-mailgun-keys',
+    category: '🔑 Sensitive Information',
+    title: 'Mailgun Keys',
+    description: 'Mailgun API keys',
+    generateDork: (domain) => `site:${domain} (intext:"key-" AND intext:"mailgun" OR intext:"MAILGUN_API_KEY")`
+  },
+  {
+    id: 'sensitive-firebase-keys',
+    category: '🔑 Sensitive Information',
+    title: 'Firebase Keys',
+    description: 'Firebase credentials',
+    generateDork: (domain) => `site:${domain} (intext:"firebaseApiKey" OR intext:"FIREBASE_API_KEY")`
+  },
+  {
+    id: 'sensitive-heroku-keys',
+    category: '🔑 Sensitive Information',
+    title: 'Heroku Keys',
+    description: 'Heroku API keys',
+    generateDork: (domain) => `site:${domain} (intext:"heroku" AND intext:"api_key" OR intext:"HEROKU_API_KEY")`
+  },
+  {
+    id: 'sensitive-docker-tokens',
+    category: '🔑 Sensitive Information',
+    title: 'Docker Hub Tokens',
+    description: 'Docker Hub credentials',
+    generateDork: (domain) => `site:${domain} (intext:"dockerhub" OR intext:"DOCKER_PASSWORD")`
+  },
+  {
+    id: 'sensitive-npm-tokens',
+    category: '🔑 Sensitive Information',
+    title: 'NPM Tokens',
+    description: 'NPM registry tokens',
+    generateDork: (domain) => `site:${domain} (intext:"npm_token" OR intext:"NPM_TOKEN" OR intext:"//registry.npmjs.org/:_authToken")`
+  },
+  {
+    id: 'sensitive-mongodb-uris',
+    category: '🔑 Sensitive Information',
+    title: 'MongoDB URIs',
+    description: 'MongoDB connection URIs',
+    generateDork: (domain) => `site:${domain} (intext:"mongodb://" OR intext:"mongodb+srv://")`
+  },
+  {
+    id: 'sensitive-redis-urls',
+    category: '🔑 Sensitive Information',
+    title: 'Redis URLs',
+    description: 'Redis connection URLs',
+    generateDork: (domain) => `site:${domain} (intext:"redis://" OR intext:"REDIS_URL")`
+  },
+
+  // Files
+  {
+    id: 'files-all-documents',
+    category: '📄 Files',
+    title: 'All Documents',
+    description: 'All document types',
+    generateDork: (domain) => `site:${domain} (ext:doc OR ext:docx OR ext:odt OR ext:pdf OR ext:rtf OR ext:txt)`
+  },
+  {
+    id: 'files-all-spreadsheets',
+    category: '📄 Files',
+    title: 'All Spreadsheets',
+    description: 'All spreadsheet formats',
+    generateDork: (domain) => `site:${domain} (ext:xls OR ext:xlsx OR ext:csv OR ext:ods)`
+  },
+  {
+    id: 'files-all-presentations',
+    category: '📄 Files',
+    title: 'All Presentations',
+    description: 'All presentation files',
+    generateDork: (domain) => `site:${domain} (ext:ppt OR ext:pptx OR ext:odp)`
+  },
+  {
+    id: 'files-config',
+    category: '📄 Files',
+    title: 'Configuration Files',
+    description: 'Config and settings files',
+    generateDork: (domain) => `site:${domain} (ext:conf OR ext:config OR ext:cfg OR ext:ini OR ext:env)`
+  },
+  {
+    id: 'files-database',
+    category: '📄 Files',
+    title: 'Database Files',
+    description: 'Database dump files',
+    generateDork: (domain) => `site:${domain} (ext:sql OR ext:db OR ext:sqlite OR ext:mdb OR ext:accdb)`
+  },
+  {
+    id: 'files-backup-archives',
+    category: '📄 Files',
+    title: 'Backup Archives',
+    description: 'Backup file extensions',
+    generateDork: (domain) => `site:${domain} (ext:bak OR ext:backup OR ext:old OR ext:save OR ext:~)`
+  },
+  {
+    id: 'files-compressed',
+    category: '📄 Files',
+    title: 'Compressed Archives',
+    description: 'All archive formats',
+    generateDork: (domain) => `site:${domain} (ext:zip OR ext:rar OR ext:tar OR ext:gz OR ext:7z OR ext:bz2)`
+  },
+  {
+    id: 'files-log',
+    category: '📄 Files',
+    title: 'Log Files',
+    description: 'System and app logs',
+    generateDork: (domain) => `site:${domain} (ext:log OR ext:logs OR ext:out)`
+  },
+  {
+    id: 'files-code-web',
+    category: '📄 Files',
+    title: 'Code - Web',
+    description: 'Web development files',
+    generateDork: (domain) => `site:${domain} (ext:php OR ext:asp OR ext:aspx OR ext:jsp OR ext:js OR ext:html)`
+  },
+  {
+    id: 'files-code-backend',
+    category: '📄 Files',
+    title: 'Code - Backend',
+    description: 'Backend source code',
+    generateDork: (domain) => `site:${domain} (ext:py OR ext:java OR ext:rb OR ext:go OR ext:cs OR ext:cpp)`
+  },
+  {
+    id: 'files-data-formats',
+    category: '📄 Files',
+    title: 'Data Formats',
+    description: 'Structured data files',
+    generateDork: (domain) => `site:${domain} (ext:json OR ext:xml OR ext:yaml OR ext:yml OR ext:toml)`
+  },
+  {
+    id: 'files-shell-scripts',
+    category: '📄 Files',
+    title: 'Shell Scripts',
+    description: 'Executable scripts',
+    generateDork: (domain) => `site:${domain} (ext:sh OR ext:bash OR ext:bat OR ext:cmd OR ext:ps1)`
+  },
+  {
+    id: 'files-key-files',
+    category: '📄 Files',
+    title: 'Key Files',
+    description: 'Certificates and keys',
+    generateDork: (domain) => `site:${domain} (ext:pem OR ext:key OR ext:crt OR ext:cer OR ext:p12 OR ext:pfx)`
+  },
+  {
+    id: 'files-source-control',
+    category: '📄 Files',
+    title: 'Source Control',
+    description: 'Version control files',
+    generateDork: (domain) => `site:${domain} (ext:git OR inurl:.git OR inurl:.svn OR ext:gitignore)`
+  },
+  {
+    id: 'files-credentials',
+    category: '📄 Files',
+    title: 'Credentials Files',
+    description: 'Files with credential names',
+    generateDork: (domain) => `site:${domain} (filename:credentials OR filename:password OR filename:passwords)`
+  },
+  {
+    id: 'files-sensitive-docs',
+    category: '📄 Files',
+    title: 'Sensitive Docs',
+    description: 'Confidential PDF documents',
+    generateDork: (domain) => `site:${domain} ext:pdf (confidential OR internal OR private OR secret)`
+  },
+  {
+    id: 'files-financial-docs',
+    category: '📄 Files',
+    title: 'Financial Docs',
+    description: 'Financial spreadsheets',
+    generateDork: (domain) => `site:${domain} (ext:xls OR ext:xlsx) (invoice OR payment OR salary OR budget)`
+  },
+  {
+    id: 'files-email-archives',
+    category: '📄 Files',
+    title: 'Email Archives',
+    description: 'Email data files',
+    generateDork: (domain) => `site:${domain} (ext:pst OR ext:ost OR ext:mbox OR ext:eml OR ext:msg)`
+  },
+  {
+    id: 'files-docker',
+    category: '📄 Files',
+    title: 'Docker Files',
+    description: 'Docker configuration',
+    generateDork: (domain) => `site:${domain} (filename:dockerfile OR filename:docker-compose)`
+  },
+  {
+    id: 'files-cicd',
+    category: '📄 Files',
+    title: 'CI/CD Configs',
+    description: 'CI/CD pipeline files',
+    generateDork: (domain) => `site:${domain} (filename:.gitlab-ci OR filename:.travis.yml OR filename:jenkinsfile)`
+  },
+  {
+    id: 'files-package-managers',
+    category: '📄 Files',
+    title: 'Package Managers',
+    description: 'Dependency files',
+    generateDork: (domain) => `site:${domain} (filename:package.json OR filename:composer.json OR filename:requirements.txt OR filename:gemfile)`
+  },
+  {
+    id: 'files-ssh-config',
+    category: '📄 Files',
+    title: 'SSH Config',
+    description: 'SSH configuration files',
+    generateDork: (domain) => `site:${domain} (filename:id_rsa OR filename:id_dsa OR filename:authorized_keys OR filename:known_hosts)`
+  },
+  {
+    id: 'files-aws-config',
+    category: '📄 Files',
+    title: 'AWS Config',
+    description: 'AWS credential files',
+    generateDork: (domain) => `site:${domain} (filename:credentials OR filename:config) (aws OR amazon)`
+  },
+  {
+    id: 'files-api-specs',
+    category: '📄 Files',
+    title: 'API Specs',
+    description: 'API documentation files',
+    generateDork: (domain) => `site:${domain} (filename:swagger OR filename:openapi OR ext:wadl OR ext:wsdl)`
+  },
+  {
+    id: 'files-temp',
+    category: '📄 Files',
+    title: 'Temp Files',
+    description: 'Temporary files',
+    generateDork: (domain) => `site:${domain} (ext:tmp OR ext:temp OR ext:swp OR ext:cache)`
+  },
+  {
+    id: 'files-memory-dumps',
+    category: '📄 Files',
+    title: 'Memory Dumps',
+    description: 'Memory dump files',
+    generateDork: (domain) => `site:${domain} (ext:dmp OR ext:dump OR ext:core)`
+  },
+  {
+    id: 'files-password-lists',
+    category: '📄 Files',
+    title: 'Password Lists',
+    description: 'Password list files',
+    generateDork: (domain) => `site:${domain} ext:txt (password OR passwords OR passwd) (list OR dump)`
+  },
+  {
+    id: 'files-kubernetes',
+    category: '📄 Files',
+    title: 'Kubernetes Configs',
+    description: 'Kubernetes configuration',
+    generateDork: (domain) => `site:${domain} (ext:yaml OR ext:yml) (kubernetes OR k8s OR kubectl)`
+  },
+  {
+    id: 'files-terraform',
+    category: '📄 Files',
+    title: 'Terraform Files',
+    description: 'Terraform IaC files',
+    generateDork: (domain) => `site:${domain} (ext:tf OR ext:tfvars OR ext:tfstate)`
+  },
+  {
+    id: 'files-ansible',
+    category: '📄 Files',
+    title: 'Ansible Playbooks',
+    description: 'Ansible automation files',
+    generateDork: (domain) => `site:${domain} (ext:yaml OR ext:yml) (ansible OR playbook)`
+  },
+  {
+    id: 'files-vpn',
+    category: '📄 Files',
+    title: 'VPN Configs',
+    description: 'VPN configuration files',
+    generateDork: (domain) => `site:${domain} (ext:ovpn OR ext:conf) (vpn OR openvpn)`
+  },
+
+  // Cloud Storage
+  {
+    id: 'cloud-s3',
+    category: '☁️ Cloud Storage',
+    title: 'AWS S3 Buckets',
+    description: 'Finds S3 bucket references',
+    generateDork: (domain) => `site:${domain} (inurl:"s3.amazonaws.com" OR intext:"s3.amazonaws.com" OR "s3 bucket")`
+  },
+  {
+    id: 'cloud-s3-generic',
+    category: '☁️ Cloud Storage',
+    title: 'AWS S3 Buckets - Generic',
+    description: 'AWS S3 bucket search',
+    generateDork: (domain) => `site:s3.amazonaws.com "${domain}"`
+  },
+  {
+    id: 'cloud-s3-open',
+    category: '☁️ Cloud Storage',
+    title: 'AWS S3 - Open Buckets',
+    description: 'Open S3 directory listings',
+    generateDork: (domain) => `site:s3.amazonaws.com intitle:"Index of /" "${domain}"`
+  },
+  {
+    id: 'cloud-s3-backups',
+    category: '☁️ Cloud Storage',
+    title: 'AWS S3 - Backup Files',
+    description: 'S3 backup files',
+    generateDork: (domain) => `site:s3.amazonaws.com (backup OR dump OR old) "${domain}"`
+  },
+  {
+    id: 'cloud-s3-credentials',
+    category: '☁️ Cloud Storage',
+    title: 'AWS S3 - Credentials',
+    description: 'S3 credentials exposure',
+    generateDork: (domain) => `site:s3.amazonaws.com (password OR credentials OR secret OR api_key) "${domain}"`
+  },
+  {
+    id: 'cloud-s3-databases',
+    category: '☁️ Cloud Storage',
+    title: 'AWS S3 - Database Dumps',
+    description: 'S3 database files',
+    generateDork: (domain) => `site:s3.amazonaws.com (ext:sql OR ext:db OR ext:sqlite) "${domain}"`
+  },
+  {
+    id: 'cloud-s3-configs',
+    category: '☁️ Cloud Storage',
+    title: 'AWS S3 - Config Files',
+    description: 'S3 configuration files',
+    generateDork: (domain) => `site:s3.amazonaws.com (ext:config OR ext:conf OR ext:env) "${domain}"`
+  },
+  {
+    id: 'cloud-s3-logs',
+    category: '☁️ Cloud Storage',
+    title: 'AWS S3 - Logs',
+    description: 'S3 log files',
+    generateDork: (domain) => `site:s3.amazonaws.com ext:log "${domain}"`
+  },
+  {
+    id: 'cloud-azure',
+    category: '☁️ Cloud Storage',
+    title: 'Azure Blob Storage',
+    description: 'Finds Azure storage references',
+    generateDork: (domain) => `site:${domain} (inurl:"blob.core.windows.net" OR intext:"azure" OR "blob storage")`
+  },
+  {
+    id: 'cloud-azure-generic',
+    category: '☁️ Cloud Storage',
+    title: 'Azure Blob Storage',
+    description: 'Azure Blob storage',
+    generateDork: (domain) => `site:blob.core.windows.net "${domain}"`
+  },
+  {
+    id: 'cloud-azure-open',
+    category: '☁️ Cloud Storage',
+    title: 'Azure - Open Containers',
+    description: 'Open Azure containers',
+    generateDork: (domain) => `site:blob.core.windows.net intitle:"Index of" "${domain}"`
+  },
+  {
+    id: 'cloud-azure-backups',
+    category: '☁️ Cloud Storage',
+    title: 'Azure - Backup Files',
+    description: 'Azure backup files',
+    generateDork: (domain) => `site:blob.core.windows.net (backup OR dump) "${domain}"`
+  },
+  {
+    id: 'cloud-azure-configs',
+    category: '☁️ Cloud Storage',
+    title: 'Azure - Config Files',
+    description: 'Azure config files',
+    generateDork: (domain) => `site:blob.core.windows.net (ext:config OR ext:json OR ext:xml) "${domain}"`
+  },
+  {
+    id: 'cloud-google',
+    category: '☁️ Cloud Storage',
+    title: 'Google Cloud Storage',
+    description: 'Finds GCS bucket references',
+    generateDork: (domain) => `site:${domain} (inurl:"storage.googleapis.com" OR intext:"gcs" OR "google cloud storage")`
+  },
+  {
+    id: 'cloud-gcs-generic',
+    category: '☁️ Cloud Storage',
+    title: 'Google Cloud Storage',
+    description: 'Google Cloud Storage buckets',
+    generateDork: (domain) => `site:storage.googleapis.com "${domain}"`
+  },
+  {
+    id: 'cloud-gcs-open',
+    category: '☁️ Cloud Storage',
+    title: 'GCS - Open Buckets',
+    description: 'Open GCS buckets',
+    generateDork: (domain) => `site:storage.googleapis.com intitle:"Index of" "${domain}"`
+  },
+  {
+    id: 'cloud-gcs-backups',
+    category: '☁️ Cloud Storage',
+    title: 'GCS - Backup Files',
+    description: 'GCS backup files',
+    generateDork: (domain) => `site:storage.googleapis.com (backup OR dump OR archive) "${domain}"`
+  },
+  {
+    id: 'cloud-gcs-credentials',
+    category: '☁️ Cloud Storage',
+    title: 'GCS - Credentials',
+    description: 'GCS credentials',
+    generateDork: (domain) => `site:storage.googleapis.com (password OR credentials OR key) "${domain}"`
+  },
+  {
+    id: 'cloud-dropbox',
+    category: '☁️ Cloud Storage',
+    title: 'Dropbox Shares',
+    description: 'Finds Dropbox shared links',
+    generateDork: (domain) => `site:${domain} (inurl:"dropbox.com/s/" OR intext:"dropbox" OR "shared folder")`
+  },
+  {
+    id: 'cloud-dropbox-public',
+    category: '☁️ Cloud Storage',
+    title: 'Dropbox Public',
+    description: 'Public Dropbox links',
+    generateDork: (domain) => `site:dropbox.com/s/ "${domain}"`
+  },
+  {
+    id: 'cloud-dropbox-shared',
+    category: '☁️ Cloud Storage',
+    title: 'Dropbox - Shared Files',
+    description: 'Dropbox shared files',
+    generateDork: (domain) => `site:dl.dropboxusercontent.com "${domain}"`
+  },
+  {
+    id: 'cloud-digitalocean',
+    category: '☁️ Cloud Storage',
+    title: 'DigitalOcean Spaces',
+    description: 'DigitalOcean Spaces',
+    generateDork: (domain) => `site:digitaloceanspaces.com "${domain}"`
+  },
+  {
+    id: 'cloud-gdrive-public',
+    category: '☁️ Cloud Storage',
+    title: 'Google Drive - Public',
+    description: 'Public Google Drive files',
+    generateDork: (domain) => `site:drive.google.com/file/d/ "${domain}"`
+  },
+  {
+    id: 'cloud-gdrive-folders',
+    category: '☁️ Cloud Storage',
+    title: 'Google Drive - Folders',
+    description: 'Google Drive folders',
+    generateDork: (domain) => `site:drive.google.com/drive/folders "${domain}"`
+  },
+  {
+    id: 'cloud-onedrive-public',
+    category: '☁️ Cloud Storage',
+    title: 'OneDrive - Public',
+    description: 'Public OneDrive links',
+    generateDork: (domain) => `site:1drv.ms "${domain}"`
+  },
+  {
+    id: 'cloud-cloudfront',
+    category: '☁️ Cloud Storage',
+    title: 'AWS CloudFront',
+    description: 'CloudFront distributions',
+    generateDork: (domain) => `site:cloudfront.net "${domain}"`
+  },
+  {
+    id: 'cloud-firebase',
+    category: '☁️ Cloud Storage',
+    title: 'Firebase Storage',
+    description: 'Firebase storage',
+    generateDork: (domain) => `site:firebasestorage.googleapis.com "${domain}"`
+  },
+  {
+    id: 'cloud-pastebin',
+    category: '☁️ Cloud Storage',
+    title: 'Pastebin',
+    description: 'Pastebin entries',
+    generateDork: (domain) => `site:pastebin.com "${domain}"`
+  },
+  {
+    id: 'cloud-github-gists',
+    category: '☁️ Cloud Storage',
+    title: 'GitHub Gists',
+    description: 'GitHub Gist pastes',
+    generateDork: (domain) => `site:gist.github.com "${domain}"`
+  },
+
+  // Code Repositories
+  {
+    id: 'code-github',
+    category: '💻 Code Repositories',
+    title: 'GitHub Repositories',
+    description: 'Finds GitHub repos',
+    generateDork: (domain) => `site:github.com "${domain}"`
+  },
+  {
+    id: 'code-github-code-search',
+    category: '💻 Code Repositories',
+    title: 'GitHub - Search Code',
+    description: 'Search GitHub code',
+    generateDork: (domain) => `site:github.com "${domain}" (language:javascript OR language:python OR language:java)`
+  },
+  {
+    id: 'code-github-api-keys',
+    category: '💻 Code Repositories',
+    title: 'GitHub - API Keys',
+    description: 'GitHub exposed API keys',
+    generateDork: (domain) => `site:github.com "${domain}" (api_key OR apikey OR api-key)`
+  },
+  {
+    id: 'code-github-passwords',
+    category: '💻 Code Repositories',
+    title: 'GitHub - Passwords',
+    description: 'GitHub exposed passwords',
+    generateDork: (domain) => `site:github.com "${domain}" (password OR passwd OR pwd)`
+  },
+  {
+    id: 'code-github-aws-keys',
+    category: '💻 Code Repositories',
+    title: 'GitHub - AWS Keys',
+    description: 'GitHub AWS credentials',
+    generateDork: (domain) => `site:github.com "${domain}" (AKIA OR aws_access_key_id)`
+  },
+  {
+    id: 'code-github-private-keys',
+    category: '💻 Code Repositories',
+    title: 'GitHub - Private Keys',
+    description: 'GitHub private keys',
+    generateDork: (domain) => `site:github.com "${domain}" (BEGIN RSA PRIVATE KEY OR BEGIN PRIVATE KEY)`
+  },
+  {
+    id: 'code-github-db-creds',
+    category: '💻 Code Repositories',
+    title: 'GitHub - Database Creds',
+    description: 'GitHub database credentials',
+    generateDork: (domain) => `site:github.com "${domain}" (DB_PASSWORD OR DATABASE_PASSWORD)`
+  },
+  {
+    id: 'code-github-env',
+    category: '💻 Code Repositories',
+    title: 'GitHub - Env Files',
+    description: 'GitHub .env files',
+    generateDork: (domain) => `site:github.com "${domain}" filename:.env`
+  },
+  {
+    id: 'code-github-config',
+    category: '💻 Code Repositories',
+    title: 'GitHub - Config Files',
+    description: 'GitHub config files',
+    generateDork: (domain) => `site:github.com "${domain}" (filename:config.json OR filename:settings.json)`
+  },
+  {
+    id: 'code-github-ssh',
+    category: '💻 Code Repositories',
+    title: 'GitHub - SSH Keys',
+    description: 'GitHub SSH keys',
+    generateDork: (domain) => `site:github.com "${domain}" (filename:id_rsa OR filename:id_dsa)`
+  },
+  {
+    id: 'code-github-tokens',
+    category: '💻 Code Repositories',
+    title: 'GitHub - Tokens',
+    description: 'GitHub tokens and secrets',
+    generateDork: (domain) => `site:github.com "${domain}" (token OR oauth OR secret)`
+  },
+  {
+    id: 'code-gitlab',
+    category: '💻 Code Repositories',
+    title: 'GitLab Repositories',
+    description: 'Finds GitLab repos',
+    generateDork: (domain) => `site:gitlab.com "${domain}"`
+  },
+  {
+    id: 'code-gitlab-code',
+    category: '💻 Code Repositories',
+    title: 'GitLab - Code Search',
+    description: 'GitLab code search',
+    generateDork: (domain) => `site:gitlab.com "${domain}" (password OR api_key OR secret)`
+  },
+  {
+    id: 'code-gitlab-creds',
+    category: '💻 Code Repositories',
+    title: 'GitLab - Credentials',
+    description: 'GitLab credentials',
+    generateDork: (domain) => `site:gitlab.com "${domain}" (credentials OR auth OR token)`
+  },
+  {
+    id: 'code-bitbucket',
+    category: '💻 Code Repositories',
+    title: 'Bitbucket Repositories',
+    description: 'Finds Bitbucket repos',
+    generateDork: (domain) => `site:bitbucket.org "${domain}"`
+  },
+  {
+    id: 'code-pastebin',
+    category: '💻 Code Repositories',
+    title: 'Pastebin & Code Pastes',
+    description: 'Finds code pastes',
+    generateDork: (domain) => `(site:pastebin.com OR site:paste.ee OR site:ghostbin.com) "${domain}"`
+  },
+  {
+    id: 'code-snippets',
+    category: '💻 Code Repositories',
+    title: 'Code Snippets',
+    description: 'Finds code snippets and gists',
+    generateDork: (domain) => `site:${domain} (inurl:"gist" OR inurl:"snippet" OR intitle:"code" OR ext:js OR ext:py OR ext:java)`
+  },
+  {
+    id: 'code-npm',
+    category: '💻 Code Repositories',
+    title: 'NPM Packages',
+    description: 'NPM package registry',
+    generateDork: (domain) => `site:npmjs.com "${domain}"`
+  },
+  {
+    id: 'code-pypi',
+    category: '💻 Code Repositories',
+    title: 'PyPI Packages',
+    description: 'Python package index',
+    generateDork: (domain) => `site:pypi.org "${domain}"`
+  },
+  {
+    id: 'code-docker-hub',
+    category: '💻 Code Repositories',
+    title: 'Docker Hub',
+    description: 'Docker container images',
+    generateDork: (domain) => `site:hub.docker.com "${domain}"`
+  },
+  {
+    id: 'code-stackoverflow',
+    category: '💻 Code Repositories',
+    title: 'Stack Overflow Code',
+    description: 'Stack Overflow code snippets',
+    generateDork: (domain) => `site:stackoverflow.com "${domain}" (password OR api_key OR credentials)`
+  },
+
   // Company Research
   {
     id: 'company-about',
@@ -1016,7 +1581,126 @@ export const dorkTemplates = [
     description: 'Finds company presentations',
     generateDork: (domain) => `site:${domain} (ext:ppt OR ext:pptx OR filetype:ppt) (intitle:"presentation" OR intitle:"slides")`
   },
-  
+  {
+    id: 'company-linkedin',
+    category: '🏢 Company Research',
+    title: 'LinkedIn Company Page',
+    description: 'Official company LinkedIn',
+    generateDork: (domain) => `"${domain}" site:linkedin.com/company`
+  },
+  {
+    id: 'company-linkedin-employees',
+    category: '🏢 Company Research',
+    title: 'LinkedIn Employees',
+    description: 'Find company employees',
+    generateDork: (domain) => `"${domain}" site:linkedin.com (employees OR works at OR currently)`
+  },
+  {
+    id: 'company-executives',
+    category: '🏢 Company Research',
+    title: 'Executive Team',
+    description: 'C-level executives',
+    generateDork: (domain) => `"${domain}" (CEO OR CTO OR CFO OR founder OR executive) site:linkedin.com`
+  },
+  {
+    id: 'company-jobs-all',
+    category: '🏢 Company Research',
+    title: 'Job Postings - All',
+    description: 'All job platforms',
+    generateDork: (domain) => `"${domain}" (site:indeed.com OR site:glassdoor.com OR site:linkedin.com/jobs)`
+  },
+  {
+    id: 'company-reviews',
+    category: '🏢 Company Research',
+    title: 'Company Reviews',
+    description: 'Employee reviews',
+    generateDork: (domain) => `"${domain}" site:glassdoor.com reviews`
+  },
+  {
+    id: 'company-press-releases',
+    category: '🏢 Company Research',
+    title: 'Press Releases',
+    description: 'Company announcements',
+    generateDork: (domain) => `"${domain}" ("press release" OR "announces" OR "launches")`
+  },
+  {
+    id: 'company-news',
+    category: '🏢 Company Research',
+    title: 'News Articles',
+    description: 'Media coverage',
+    generateDork: (domain) => `"${domain}" site:techcrunch.com OR site:bloomberg.com OR site:reuters.com`
+  },
+  {
+    id: 'company-sec',
+    category: '🏢 Company Research',
+    title: 'SEC Filings',
+    description: 'SEC regulatory filings',
+    generateDork: (domain) => `"${domain}" site:sec.gov`
+  },
+  {
+    id: 'company-patents',
+    category: '🏢 Company Research',
+    title: 'Patents',
+    description: 'Patent portfolio',
+    generateDork: (domain) => `"${domain}" site:patents.google.com`
+  },
+  {
+    id: 'company-acquisitions',
+    category: '🏢 Company Research',
+    title: 'Acquisitions',
+    description: 'M&A activity',
+    generateDork: (domain) => `"${domain}" ("acquired" OR "acquisition" OR "acquires" OR "buys")`
+  },
+  {
+    id: 'company-funding',
+    category: '🏢 Company Research',
+    title: 'Funding Rounds',
+    description: 'Venture funding',
+    generateDork: (domain) => `"${domain}" ("series A" OR "series B" OR "series C" OR "funding" OR "investment")`
+  },
+  {
+    id: 'company-tech-stack',
+    category: '🏢 Company Research',
+    title: 'Technology Stack',
+    description: 'Tech stack details',
+    generateDork: (domain) => `"${domain}" site:stackshare.io`
+  },
+  {
+    id: 'company-bug-bounty',
+    category: '🏢 Company Research',
+    title: 'Bug Bounty Program',
+    description: 'Bug bounty info',
+    generateDork: (domain) => `"${domain}" ("bug bounty" OR "security researcher" OR "responsible disclosure")`
+  },
+  {
+    id: 'company-breaches',
+    category: '🏢 Company Research',
+    title: 'Data Breaches',
+    description: 'Security incidents',
+    generateDork: (domain) => `"${domain}" ("data breach" OR "security incident" OR "hacked" OR "compromised")`
+  },
+  {
+    id: 'company-subdomains',
+    category: '🏢 Company Research',
+    title: 'Subdomains',
+    description: 'All subdomains',
+    generateDork: (domain) => `site:*.${domain}`
+  },
+  {
+    id: 'company-social-twitter',
+    category: '🏢 Company Research',
+    title: 'Twitter/X Account',
+    description: 'Social media presence',
+    generateDork: (domain) => `"${domain}" site:twitter.com OR site:x.com`
+  },
+  {
+    id: 'company-reddit',
+    category: '🏢 Company Research',
+    title: 'Reddit Mentions',
+    description: 'Reddit discussions',
+    generateDork: (domain) => `"${domain}" site:reddit.com`
+  },
+
   // IoT & Smart Devices
   {
     id: 'iot-webcams',
@@ -1026,11 +1710,46 @@ export const dorkTemplates = [
     generateDork: (domain) => `site:${domain} (inurl:"view/view.shtml" OR inurl:"ViewerFrame?Mode=" OR intitle:"webcam" OR intitle:"network camera" OR inurl:"axis-cgi")`
   },
   {
+    id: 'iot-webcams-generic',
+    category: '📡 IoT & Smart Devices',
+    title: 'Webcams - Generic',
+    description: 'Generic webcam interfaces',
+    generateDork: (domain) => `site:${domain} (inurl:"/view/index.shtml" OR inurl:"/view.shtml")`
+  },
+  {
+    id: 'iot-webcams-axis',
+    category: '📡 IoT & Smart Devices',
+    title: 'Webcams - Axis',
+    description: 'Axis camera systems',
+    generateDork: (domain) => `site:${domain} (inurl:"/axis-cgi/mjpg" OR intitle:"AXIS")`
+  },
+  {
+    id: 'iot-ip-cameras',
+    category: '📡 IoT & Smart Devices',
+    title: 'IP Cameras - All',
+    description: 'All IP camera systems',
+    generateDork: (domain) => `site:${domain} (intitle:"Network Camera" OR intitle:"IP Camera" OR intitle:"webcam")`
+  },
+  {
     id: 'iot-routers',
     category: '📡 IoT & Smart Devices',
     title: 'Router Admin Panels',
     description: 'Finds router login pages',
     generateDork: (domain) => `site:${domain} (intitle:"router" OR intitle:"gateway" OR inurl:"router-login" OR intitle:"wireless" OR "router configuration")`
+  },
+  {
+    id: 'iot-routers-generic',
+    category: '📡 IoT & Smart Devices',
+    title: 'Routers - Generic',
+    description: 'Generic router interfaces',
+    generateDork: (domain) => `site:${domain} (intitle:"Router" OR inurl:"/cgi-bin/" OR intitle:"Gateway")`
+  },
+  {
+    id: 'iot-routers-cisco',
+    category: '📡 IoT & Smart Devices',
+    title: 'Routers - Cisco',
+    description: 'Cisco router management',
+    generateDork: (domain) => `site:${domain} (intitle:"Cisco" OR inurl:"/level/15/")`
   },
   {
     id: 'iot-printers',
@@ -1040,77 +1759,201 @@ export const dorkTemplates = [
     generateDork: (domain) => `site:${domain} (intitle:"printer" OR inurl:"printer" OR intitle:"hp " OR intitle:"canon" OR intitle:"epson" OR "printer status")`
   },
   {
+    id: 'iot-printers-all',
+    category: '📡 IoT & Smart Devices',
+    title: 'Printers - All',
+    description: 'Network printers',
+    generateDork: (domain) => `site:${domain} (intitle:"Printer" OR inurl:"/printer" OR inurl:"/web/guest")`
+  },
+  {
+    id: 'iot-printers-hp',
+    category: '📡 IoT & Smart Devices',
+    title: 'Printers - HP',
+    description: 'HP network printers',
+    generateDork: (domain) => `site:${domain} (inurl:"/hp/device/" OR intitle:"HP LaserJet" OR intitle:"HP Printer")`
+  },
+  {
     id: 'iot-smart-home',
     category: '📡 IoT & Smart Devices',
     title: 'Smart Home Devices',
     description: 'Finds smart home device interfaces',
     generateDork: (domain) => `site:${domain} (intitle:"smart home" OR inurl:"homeautomation" OR "iot device" OR intitle:"control panel")`
   },
-  
-  // Cloud Storage
   {
-    id: 'cloud-s3',
-    category: '☁️ Cloud Storage',
-    title: 'AWS S3 Buckets',
-    description: 'Finds S3 bucket references',
-    generateDork: (domain) => `site:${domain} (inurl:"s3.amazonaws.com" OR intext:"s3.amazonaws.com" OR "s3 bucket")`
+    id: 'iot-nas-synology',
+    category: '📡 IoT & Smart Devices',
+    title: 'NAS - Synology',
+    description: 'Synology NAS',
+    generateDork: (domain) => `site:${domain} (intitle:"Synology" OR inurl:":5000" OR inurl:":5001")`
   },
   {
-    id: 'cloud-azure',
-    category: '☁️ Cloud Storage',
-    title: 'Azure Blob Storage',
-    description: 'Finds Azure storage references',
-    generateDork: (domain) => `site:${domain} (inurl:"blob.core.windows.net" OR intext:"azure" OR "blob storage")`
+    id: 'iot-scada',
+    category: '📡 IoT & Smart Devices',
+    title: 'Industrial Control',
+    description: 'Industrial control systems',
+    generateDork: (domain) => `site:${domain} (intitle:"SCADA" OR intitle:"HMI" OR intitle:"PLC")`
+  },
+
+  // Website Discovery
+  {
+    id: 'website-site-search',
+    category: '🌐 Website Discovery',
+    title: 'Site Search',
+    description: 'All indexed pages',
+    generateDork: (domain) => `site:${domain}`
   },
   {
-    id: 'cloud-google',
-    category: '☁️ Cloud Storage',
-    title: 'Google Cloud Storage',
-    description: 'Finds GCS bucket references',
-    generateDork: (domain) => `site:${domain} (inurl:"storage.googleapis.com" OR intext:"gcs" OR "google cloud storage")`
+    id: 'website-subdomains',
+    category: '🌐 Website Discovery',
+    title: 'Subdomains',
+    description: 'Find all subdomains',
+    generateDork: (domain) => `site:*.${domain}`
   },
   {
-    id: 'cloud-dropbox',
-    category: '☁️ Cloud Storage',
-    title: 'Dropbox Shares',
-    description: 'Finds Dropbox shared links',
-    generateDork: (domain) => `site:${domain} (inurl:"dropbox.com/s/" OR intext:"dropbox" OR "shared folder")`
-  },
-  
-  // Code Repositories
-  {
-    id: 'code-github',
-    category: '💻 Code Repositories',
-    title: 'GitHub Repositories',
-    description: 'Finds GitHub repos',
-    generateDork: (domain) => `site:github.com "${domain}"`
+    id: 'website-login-pages',
+    category: '🌐 Website Discovery',
+    title: 'Login Pages',
+    description: 'Login and auth pages',
+    generateDork: (domain) => `site:${domain} (inurl:login OR inurl:signin OR inurl:signup OR inurl:register OR inurl:auth)`
   },
   {
-    id: 'code-gitlab',
-    category: '💻 Code Repositories',
-    title: 'GitLab Repositories',
-    description: 'Finds GitLab repos',
-    generateDork: (domain) => `site:gitlab.com "${domain}"`
+    id: 'website-sql-errors',
+    category: '🌐 Website Discovery',
+    title: 'SQL Errors',
+    description: 'Find SQL error messages',
+    generateDork: (domain) => `site:${domain} (intext:"sql syntax near" OR intext:"syntax error" OR intext:"mysql_" OR intext:"Warning: mysql")`
   },
   {
-    id: 'code-bitbucket',
-    category: '💻 Code Repositories',
-    title: 'Bitbucket Repositories',
-    description: 'Finds Bitbucket repos',
-    generateDork: (domain) => `site:bitbucket.org "${domain}"`
+    id: 'website-documents',
+    category: '🌐 Website Discovery',
+    title: 'Documents',
+    description: 'Find document files',
+    generateDork: (domain) => `site:${domain} (ext:doc OR ext:docx OR ext:pdf OR ext:xls OR ext:xlsx OR ext:txt)`
   },
   {
-    id: 'code-pastebin',
-    category: '💻 Code Repositories',
-    title: 'Pastebin & Code Pastes',
-    description: 'Finds code pastes',
-    generateDork: (domain) => `(site:pastebin.com OR site:paste.ee OR site:ghostbin.com) "${domain}"`
+    id: 'website-api-keys',
+    category: '🌐 Website Discovery',
+    title: 'API Keys Exposed',
+    description: 'Search for exposed API keys',
+    generateDork: (domain) => `site:${domain} (intext:"api_key" OR intext:"apiToken" OR intext:"access_token" OR intext:"secret_key")`
   },
   {
-    id: 'code-snippets',
-    category: '💻 Code Repositories',
-    title: 'Code Snippets',
-    description: 'Finds code snippets and gists',
-    generateDork: (domain) => `site:${domain} (inurl:"gist" OR inurl:"snippet" OR intitle:"code" OR ext:js OR ext:py OR ext:java)`
+    id: 'website-config-files',
+    category: '🌐 Website Discovery',
+    title: 'Config Files',
+    description: 'Configuration files',
+    generateDork: (domain) => `site:${domain} (inurl:config OR inurl:configuration OR inurl:settings) (ext:xml OR ext:json OR ext:yaml OR ext:ini)`
+  },
+  {
+    id: 'website-directory-listings',
+    category: '🌐 Website Discovery',
+    title: 'Directory Listings',
+    description: 'Exposed directories',
+    generateDork: (domain) => `site:${domain} (intitle:"index of /" OR intitle:"index of")`
+  },
+  {
+    id: 'website-backup-files',
+    category: '🌐 Website Discovery',
+    title: 'Backup Files',
+    description: 'Find backup files',
+    generateDork: (domain) => `site:${domain} (inurl:backup OR inurl:bak OR inurl:old) (ext:zip OR ext:rar OR ext:tar OR ext:gz OR ext:bak)`
+  },
+  {
+    id: 'website-git-repos',
+    category: '🌐 Website Discovery',
+    title: 'Git Repositories',
+    description: 'Exposed source control',
+    generateDork: (domain) => `site:${domain} (inurl:.git OR inurl:.svn OR inurl:gitlab OR inurl:github)`
+  },
+  {
+    id: 'website-error-messages',
+    category: '🌐 Website Discovery',
+    title: 'Error Messages',
+    description: 'Error and debug info',
+    generateDork: (domain) => `site:${domain} (intext:"error" OR intext:"warning" OR intext:"exception" OR intext:"fatal error")`
+  },
+  {
+    id: 'website-db-admin',
+    category: '🌐 Website Discovery',
+    title: 'Database Admin',
+    description: 'Database interfaces',
+    generateDork: (domain) => `site:${domain} (inurl:phpmyadmin OR inurl:adminer OR inurl:dbadmin OR inurl:database)`
+  },
+  {
+    id: 'website-cloud-storage',
+    category: '🌐 Website Discovery',
+    title: 'Cloud Storage',
+    description: 'Cloud storage buckets',
+    generateDork: (domain) => `site:${domain} (inurl:s3.amazonaws.com OR inurl:storage.googleapis.com OR inurl:azure OR intext:"bucket")`
+  },
+  {
+    id: 'website-upload-forms',
+    category: '🌐 Website Discovery',
+    title: 'Upload Forms',
+    description: 'File upload pages',
+    generateDork: (domain) => `site:${domain} (inurl:upload OR inurl:filemanager OR inurl:uploads)`
+  },
+  {
+    id: 'website-old-deprecated',
+    category: '🌐 Website Discovery',
+    title: 'Old/Deprecated',
+    description: 'Old versions and archives',
+    generateDork: (domain) => `site:${domain} (inurl:old OR inurl:deprecated OR inurl:v1 OR inurl:legacy OR inurl:archive)`
+  },
+  {
+    id: 'website-robots-sitemaps',
+    category: '🌐 Website Discovery',
+    title: 'Robots & Sitemaps',
+    description: 'Robots and sitemap files',
+    generateDork: (domain) => `site:${domain} (inurl:robots.txt OR inurl:sitemap.xml)`
+  },
+  {
+    id: 'website-contact-info',
+    category: '🌐 Website Discovery',
+    title: 'Contact Info',
+    description: 'Contact information',
+    generateDork: (domain) => `site:${domain} (intext:"contact us" OR intext:"support" OR intext:"@${domain}")`
+  },
+  {
+    id: 'website-email-addresses',
+    category: '🌐 Website Discovery',
+    title: 'Email Addresses',
+    description: 'Find email addresses',
+    generateDork: (domain) => `site:${domain} intext:@${domain}`
+  },
+  {
+    id: 'website-api-docs',
+    category: '🌐 Website Discovery',
+    title: 'API Documentation',
+    description: 'API docs and specs',
+    generateDork: (domain) => `site:${domain} (inurl:api OR inurl:swagger OR inurl:openapi)`
+  },
+  {
+    id: 'website-graphql',
+    category: '🌐 Website Discovery',
+    title: 'GraphQL Endpoints',
+    description: 'GraphQL APIs',
+    generateDork: (domain) => `site:${domain} inurl:graphql`
+  },
+  {
+    id: 'website-rest-apis',
+    category: '🌐 Website Discovery',
+    title: 'REST APIs',
+    description: 'REST API endpoints',
+    generateDork: (domain) => `site:${domain} (inurl:/api/v1 OR inurl:/api/v2 OR inurl:/rest)`
+  },
+  {
+    id: 'website-health-check',
+    category: '🌐 Website Discovery',
+    title: 'Health Check',
+    description: 'Health check endpoints',
+    generateDork: (domain) => `site:${domain} (inurl:health OR inurl:status OR inurl:ping)`
+  },
+  {
+    id: 'website-search-pages',
+    category: '🌐 Website Discovery',
+    title: 'Search Pages',
+    description: 'Search functionality',
+    generateDork: (domain) => `site:${domain} (inurl:search OR inurl:find)`
   }
 ];
