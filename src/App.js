@@ -79,7 +79,7 @@ function App() {
                 <div className="flex-1">
                   <Input
                     type="text"
-                    placeholder="Enter website, name or domain ..."
+                    placeholder="Enter Domain or Name  ..."
                     value={domain}
                     onChange={(e) => setDomain(e.target.value)}
                     className="h-12 text-base font-mono"
