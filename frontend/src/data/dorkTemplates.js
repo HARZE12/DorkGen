@@ -60,42 +60,42 @@ export const dorkTemplates = [
   // XSS (Cross-Site Scripting) Targets
   {
     id: 'xss-search',
-    category: 'XSS',
+    category: '⚡ XSS',
     title: 'Search Pages',
     description: 'Finds search pages (XSS target)',
     generateDork: (domain) => `site:${domain} intitle:"search" | intitle:"search.php" | intitle:"search.asp" | intitle:"search.aspx" | inurl:"search=" | inurl:"q=" | inurl:"query="`
   },
   {
     id: 'xss-comment',
-    category: 'XSS',
+    category: '⚡ XSS',
     title: 'Comment Forms',
     description: 'Finds comment submission forms',
     generateDork: (domain) => `site:${domain} inurl:"comment" | inurl:"addcomment" | inurl:"postcomment" | inurl:"comments.php" | inurl:"add_comment" | intitle:"post comment"`
   },
   {
     id: 'xss-feedback',
-    category: 'XSS',
+    category: '⚡ XSS',
     title: 'Feedback Forms',
     description: 'Finds feedback forms for XSS testing',
     generateDork: (domain) => `site:${domain} intitle:"feedback" | intitle:"feedback.php" | intitle:"feedback.asp" | inurl:"feedback" | inurl:"send-feedback" | inurl:"submit-feedback"`
   },
   {
     id: 'xss-message',
-    category: 'XSS',
+    category: '⚡ XSS',
     title: 'Message/Contact Forms',
     description: 'Finds message and contact forms',
     generateDork: (domain) => `site:${domain} intitle:"message" | intitle:"send message" | inurl:"message.php" | inurl:"sendmessage" | inurl:"contactform" ext:php | ext:asp | ext:aspx`
   },
   {
     id: 'xss-guestbook',
-    category: 'XSS',
+    category: '⚡ XSS',
     title: 'Guestbook Pages',
     description: 'Finds guestbook pages',
     generateDork: (domain) => `site:${domain} intitle:"guestbook" | intitle:"guest book" | inurl:"guestbook.php" | inurl:"guest.php" | inurl:"addguest" | inurl:"sign-guestbook"`
   },
   {
     id: 'xss-profile',
-    category: 'XSS',
+    category: '⚡ XSS',
     title: 'Profile Edit Pages',
     description: 'Finds profile editing pages',
     generateDork: (domain) => `site:${domain} intitle:"edit profile" | inurl:"editprofile" | inurl:"profile.php" | inurl:"account.php" | inurl:"myprofile" | inurl:"updateprofile"`
