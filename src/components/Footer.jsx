@@ -27,7 +27,7 @@ export const Footer = () => {
         <div className="mt-8 pt-6 border-t border-border/30">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
             <p className="text-xs text-muted-foreground font-mono">
-              © 2024 DorkGen. Use responsibly.
+              © 2025 DorkGen. Use responsibly.
             </p>
             <div className="flex items-center gap-2">
               <span className="text-xs text-muted-foreground">Powered by</span>
