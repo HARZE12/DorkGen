@@ -1955,5 +1955,701 @@ export const dorkTemplates = [
     title: 'Search Pages',
     description: 'Search functionality',
     generateDork: (domain) => `site:${domain} (inurl:search OR inurl:find)`
+  },
+  {
+    id: 'website-download-pages',
+    category: '🌐 Website Discovery',
+    title: 'Download Pages',
+    description: 'Download sections',
+    generateDork: (domain) => `site:${domain} inurl:download`
+  },
+
+  // Additional IoT & Smart Devices
+  {
+    id: 'iot-smart-refrigerators',
+    category: '📡 IoT & Smart Devices',
+    title: 'Smart Refrigerators',
+    description: 'Smart refrigerators',
+    generateDork: (domain) => `site:${domain} (intitle:"Smart Refrigerator" OR intitle:"Connected Appliance")`
+  },
+  {
+    id: 'iot-medical-devices',
+    category: '📡 IoT & Smart Devices',
+    title: 'Medical Devices',
+    description: 'Medical IoT devices',
+    generateDork: (domain) => `site:${domain} (intitle:"Medical Device" OR intitle:"Patient Monitor")`
+  },
+  {
+    id: 'iot-smart-meters',
+    category: '📡 IoT & Smart Devices',
+    title: 'Smart Meters',
+    description: 'Smart metering systems',
+    generateDork: (domain) => `site:${domain} (intitle:"Smart Meter" OR intitle:"Energy Monitor")`
+  },
+  {
+    id: 'iot-charging-stations',
+    category: '📡 IoT & Smart Devices',
+    title: 'Charging Stations',
+    description: 'EV charging stations',
+    generateDork: (domain) => `site:${domain} (intitle:"EV Charging" OR intitle:"Electric Vehicle")`
+  },
+  {
+    id: 'iot-voip-phones',
+    category: '📡 IoT & Smart Devices',
+    title: 'VoIP Phones',
+    description: 'VoIP phone systems',
+    generateDork: (domain) => `site:${domain} (intitle:"VoIP" OR intitle:"IP Phone" OR intitle:"Cisco SPA")`
+  },
+  {
+    id: 'iot-video-conferencing',
+    category: '📡 IoT & Smart Devices',
+    title: 'Video Conferencing',
+    description: 'Video conferencing systems',
+    generateDork: (domain) => `site:${domain} (intitle:"Video Conference" OR intitle:"Polycom" OR intitle:"Zoom Room")`
+  },
+  {
+    id: 'iot-digital-signage',
+    category: '📡 IoT & Smart Devices',
+    title: 'Digital Signage',
+    description: 'Digital signage displays',
+    generateDork: (domain) => `site:${domain} (intitle:"Digital Signage" OR intitle:"Display System")`
+  },
+
+  // Additional Cloud Storage Providers
+  {
+    id: 'cloud-digitalocean-spaces',
+    category: '☁️ Cloud Storage',
+    title: 'DigitalOcean Spaces',
+    description: 'DigitalOcean Spaces storage',
+    generateDork: (domain) => `site:digitaloceanspaces.com "${domain}"`
+  },
+  {
+    id: 'cloud-digitalocean-open',
+    category: '☁️ Cloud Storage',
+    title: 'DigitalOcean - Open Spaces',
+    description: 'Open DO Spaces',
+    generateDork: (domain) => `site:digitaloceanspaces.com intitle:"Index of" "${domain}"`
+  },
+  {
+    id: 'cloud-wasabi',
+    category: '☁️ Cloud Storage',
+    title: 'Wasabi Storage',
+    description: 'Wasabi cloud storage',
+    generateDork: (domain) => `site:wasabisys.com "${domain}"`
+  },
+  {
+    id: 'cloud-backblaze',
+    category: '☁️ Cloud Storage',
+    title: 'Backblaze B2',
+    description: 'Backblaze B2 storage',
+    generateDork: (domain) => `site:backblazeb2.com "${domain}"`
+  },
+  {
+    id: 'cloud-alibaba',
+    category: '☁️ Cloud Storage',
+    title: 'Alibaba Cloud OSS',
+    description: 'Alibaba Cloud storage',
+    generateDork: (domain) => `site:aliyuncs.com "${domain}"`
+  },
+  {
+    id: 'cloud-wetransfer',
+    category: '☁️ Cloud Storage',
+    title: 'WeTransfer Links',
+    description: 'WeTransfer shared files',
+    generateDork: (domain) => `site:wetransfer.com "${domain}"`
+  },
+  {
+    id: 'cloud-mega',
+    category: '☁️ Cloud Storage',
+    title: 'Mega.nz Shares',
+    description: 'Mega shared files',
+    generateDork: (domain) => `site:mega.nz "${domain}"`
+  },
+  {
+    id: 'cloud-mediafire',
+    category: '☁️ Cloud Storage',
+    title: 'MediaFire Files',
+    description: 'MediaFire uploads',
+    generateDork: (domain) => `site:mediafire.com "${domain}"`
+  },
+
+  // Code Sharing Platforms
+  {
+    id: 'code-pastebin',
+    category: '💻 Code Repositories',
+    title: 'Pastebin',
+    description: 'Pastebin entries',
+    generateDork: (domain) => `site:pastebin.com "${domain}"`
+  },
+  {
+    id: 'code-jsfiddle',
+    category: '💻 Code Repositories',
+    title: 'JSFiddle',
+    description: 'JSFiddle code snippets',
+    generateDork: (domain) => `site:jsfiddle.net "${domain}"`
+  },
+  {
+    id: 'code-codepen',
+    category: '💻 Code Repositories',
+    title: 'CodePen',
+    description: 'CodePen code examples',
+    generateDork: (domain) => `site:codepen.io "${domain}"`
+  },
+  {
+    id: 'code-codeproject',
+    category: '💻 Code Repositories',
+    title: 'CodeProject',
+    description: 'CodeProject articles',
+    generateDork: (domain) => `site:codeproject.com "${domain}"`
+  },
+
+  // Image Hosting
+  {
+    id: 'images-imgur',
+    category: '📄 Files',
+    title: 'Imgur',
+    description: 'Imgur image uploads',
+    generateDork: (domain) => `site:imgur.com "${domain}"`
+  },
+  {
+    id: 'images-flickr',
+    category: '📄 Files',
+    title: 'Flickr',
+    description: 'Flickr image hosting',
+    generateDork: (domain) => `site:flickr.com "${domain}"`
+  },
+  {
+    id: 'images-photobucket',
+    category: '📄 Files',
+    title: 'Photobucket',
+    description: 'Photobucket uploads',
+    generateDork: (domain) => `site:photobucket.com "${domain}"`
+  },
+
+  // Collaboration Tools
+  {
+    id: 'collab-trello',
+    category: '🏢 Company Research',
+    title: 'Trello Boards',
+    description: 'Public Trello boards',
+    generateDork: (domain) => `site:trello.com "${domain}"`
+  },
+  {
+    id: 'collab-notion',
+    category: '🏢 Company Research',
+    title: 'Notion Pages',
+    description: 'Public Notion pages',
+    generateDork: (domain) => `site:notion.site "${domain}"`
+  },
+  {
+    id: 'collab-airtable',
+    category: '🏢 Company Research',
+    title: 'Airtable',
+    description: 'Airtable shared bases',
+    generateDork: (domain) => `site:airtable.com "${domain}"`
+  },
+
+  // Additional Company Research
+  {
+    id: 'company-wayback',
+    category: '🏢 Company Research',
+    title: 'Wayback Machine',
+    description: 'Historical snapshots',
+    generateDork: (domain) => `"${domain}" site:web.archive.org`
+  },
+  {
+    id: 'company-legal-docs',
+    category: '🏢 Company Research',
+    title: 'Legal Documents',
+    description: 'Legal documentation',
+    generateDork: (domain) => `"${domain}" (filetype:pdf OR filetype:doc) (legal OR terms OR privacy OR agreement)`
+  },
+
+  // Additional Vulnerabilities
+  {
+    id: 'vuln-xxe',
+    category: '🛡️ Vulnerabilities',
+    title: 'XXE - XML External Entity',
+    description: 'XML external entity risks',
+    generateDork: (domain) => `site:${domain} (inurl:".xml" OR intext:"<?xml" OR intext:"DOCTYPE")`
+  },
+  {
+    id: 'vuln-idor',
+    category: '🛡️ Vulnerabilities',
+    title: 'IDOR - Parameter Tampering',
+    description: 'Insecure direct object references',
+    generateDork: (domain) => `site:${domain} (inurl:"user_id=" OR inurl:"account_id=" OR inurl:"profile_id=")`
+  },
+  {
+    id: 'vuln-ds-store',
+    category: '🛡️ Vulnerabilities',
+    title: 'DS_Store Files',
+    description: 'Exposed macOS metadata files',
+    generateDork: (domain) => `site:${domain} (inurl:".DS_Store" OR intitle:"Index of" ".DS_Store")`
+  },
+  {
+    id: 'vuln-cors',
+    category: '🛡️ Vulnerabilities',
+    title: 'CORS Misconfiguration',
+    description: 'CORS policy issues',
+    generateDork: (domain) => `site:${domain} (intext:"Access-Control-Allow-Origin: *")`
+  },
+  {
+    id: 'vuln-csrf-missing',
+    category: '🛡️ Vulnerabilities',
+    title: 'CSRF Tokens Missing',
+    description: 'Forms without CSRF protection',
+    generateDork: (domain) => `site:${domain} (inurl:"form" -intext:"csrf" -intext:"token")`
+  },
+  {
+    id: 'vuln-default-creds',
+    category: '🛡️ Vulnerabilities',
+    title: 'Default Credentials',
+    description: 'Default credential documentation',
+    generateDork: (domain) => `site:${domain} (intext:"default password" OR intext:"default login")`
+  },
+  {
+    id: 'vuln-struts',
+    category: '🛡️ Vulnerabilities',
+    title: 'Struts RCE',
+    description: 'Apache Struts vulnerabilities',
+    generateDork: (domain) => `site:${domain} (ext:action OR ext:do OR inurl:"struts")`
+  },
+  {
+    id: 'vuln-laravel-debug',
+    category: '🛡️ Vulnerabilities',
+    title: 'Laravel Debug Mode',
+    description: 'Laravel debug mode enabled',
+    generateDork: (domain) => `site:${domain} (intext:"Laravel" AND intext:"Whoops")`
+  },
+  {
+    id: 'vuln-symfony-profiler',
+    category: '🛡️ Vulnerabilities',
+    title: 'Symfony Profiler',
+    description: 'Symfony debug profiler',
+    generateDork: (domain) => `site:${domain} inurl:"/_profiler"`
+  },
+  {
+    id: 'vuln-aspnet-trace',
+    category: '🛡️ Vulnerabilities',
+    title: 'ASP.NET Trace',
+    description: 'ASP.NET trace enabled',
+    generateDork: (domain) => `site:${domain} (inurl:"trace.axd" OR intext:"Trace.axd")`
+  },
+  {
+    id: 'vuln-viewstate',
+    category: '🛡️ Vulnerabilities',
+    title: 'ViewState Without MAC',
+    description: 'Unprotected ViewState',
+    generateDork: (domain) => `site:${domain} (intext:"__VIEWSTATE" -intext:"EnableViewStateMac")`
+  },
+  {
+    id: 'vuln-nginx-status',
+    category: '🛡️ Vulnerabilities',
+    title: 'Nginx Status Page',
+    description: 'Nginx status disclosure',
+    generateDork: (domain) => `site:${domain} (inurl:"/nginx_status" OR intitle:"nginx status")`
+  },
+  {
+    id: 'vuln-apache-status',
+    category: '🛡️ Vulnerabilities',
+    title: 'Apache Server Status',
+    description: 'Apache server status page',
+    generateDork: (domain) => `site:${domain} (inurl:"/server-status" OR intitle:"Apache Status")`
+  },
+  {
+    id: 'vuln-clickjacking',
+    category: '🛡️ Vulnerabilities',
+    title: 'Clickjacking Vulnerable',
+    description: 'Missing X-Frame-Options',
+    generateDork: (domain) => `site:${domain} -intext:"X-Frame-Options" (inurl:"login" OR inurl:"admin")`
+  },
+
+  // Additional Sensitive Information
+  {
+    id: 'sensitive-jwt-secrets',
+    category: '🔑 Sensitive Information',
+    title: 'JWT Secrets',
+    description: 'JWT secret keys',
+    generateDork: (domain) => `site:${domain} (jwt OR token) (secret OR key OR signing)`
+  },
+  {
+    id: 'sensitive-postman',
+    category: '🔑 Sensitive Information',
+    title: 'Postman Collections',
+    description: 'Postman API collections',
+    generateDork: (domain) => `site:${domain} ext:json (postman OR collection) (api OR endpoint)`
+  },
+  {
+    id: 'sensitive-insomnia',
+    category: '🔑 Sensitive Information',
+    title: 'Insomnia Configs',
+    description: 'Insomnia API workspace',
+    generateDork: (domain) => `site:${domain} (filename:insomnia OR filename:workspace) ext:json`
+  },
+  {
+    id: 'sensitive-core-dumps',
+    category: '🔑 Sensitive Information',
+    title: 'Core Dumps',
+    description: 'Application crash dumps',
+    generateDork: (domain) => `site:${domain} (ext:core OR filename:core.dump OR ext:mdmp)`
+  },
+  {
+    id: 'sensitive-selenium',
+    category: '🔑 Sensitive Information',
+    title: 'Selenium Tests',
+    description: 'Selenium test files',
+    generateDork: (domain) => `site:${domain} (ext:py OR ext:js) (selenium OR webdriver OR test)`
+  },
+  {
+    id: 'sensitive-procfiles',
+    category: '🔑 Sensitive Information',
+    title: 'Procfiles',
+    description: 'Heroku process files',
+    generateDork: (domain) => `site:${domain} (filename:Procfile OR filename:procfile)`
+  },
+  {
+    id: 'sensitive-makefile',
+    category: '🔑 Sensitive Information',
+    title: 'Makefile Configs',
+    description: 'Build automation files',
+    generateDork: (domain) => `site:${domain} (filename:Makefile OR filename:makefile)`
+  },
+
+  // Additional Files
+  {
+    id: 'files-soap-services',
+    category: '📄 Files',
+    title: 'SOAP Services',
+    description: 'SOAP web services',
+    generateDork: (domain) => `site:${domain} ext:wsdl`
+  },
+  {
+    id: 'files-rss-feeds',
+    category: '📄 Files',
+    title: 'RSS Feeds',
+    description: 'RSS/Atom feeds',
+    generateDork: (domain) => `site:${domain} (ext:rss OR ext:atom OR inurl:feed)`
+  },
+  {
+    id: 'files-webhook-urls',
+    category: '📄 Files',
+    title: 'Webhook URLs',
+    description: 'Webhook endpoints',
+    generateDork: (domain) => `site:${domain} inurl:webhook`
+  },
+  {
+    id: 'files-callback-urls',
+    category: '📄 Files',
+    title: 'Callback URLs',
+    description: 'Callback endpoints',
+    generateDork: (domain) => `site:${domain} inurl:callback`
+  },
+  {
+    id: 'files-metrics-stats',
+    category: '📄 Files',
+    title: 'Metrics/Stats',
+    description: 'Metrics pages',
+    generateDork: (domain) => `site:${domain} (inurl:metrics OR inurl:stats OR inurl:statistics)`
+  },
+
+  // Security Research Platforms
+  {
+    id: 'security-exploit-db',
+    category: '🏢 Company Research',
+    title: 'Exploit-DB',
+    description: 'Exploit database',
+    generateDork: (domain) => `site:exploit-db.com "${domain}"`
+  },
+  {
+    id: 'security-packetstorm',
+    category: '🏢 Company Research',
+    title: 'PacketStorm Security',
+    description: 'PacketStorm exploits',
+    generateDork: (domain) => `site:packetstormsecurity.com "${domain}"`
+  },
+  {
+    id: 'security-cve-details',
+    category: '🏢 Company Research',
+    title: 'CVE Details',
+    description: 'CVE vulnerability details',
+    generateDork: (domain) => `site:cvedetails.com "${domain}"`
+  },
+  {
+    id: 'security-nvd',
+    category: '🏢 Company Research',
+    title: 'NVD Database',
+    description: 'National Vulnerability Database',
+    generateDork: (domain) => `site:nvd.nist.gov "${domain}"`
+  },
+  {
+    id: 'security-focus',
+    category: '🏢 Company Research',
+    title: 'Security Focus',
+    description: 'SecurityFocus vulnerabilities',
+    generateDork: (domain) => `site:securityfocus.com "${domain}"`
+  },
+  {
+    id: 'security-github-advisories',
+    category: '🏢 Company Research',
+    title: 'GitHub Security Advisories',
+    description: 'GitHub security advisories',
+    generateDork: (domain) => `site:github.com/advisories "${domain}"`
+  },
+  {
+    id: 'security-snyk',
+    category: '🏢 Company Research',
+    title: 'Snyk Vulnerabilities',
+    description: 'Snyk vulnerability database',
+    generateDork: (domain) => `site:snyk.io/vuln "${domain}"`
+  },
+  {
+    id: 'security-oss-index',
+    category: '🏢 Company Research',
+    title: 'OSS Index',
+    description: 'Open source security index',
+    generateDork: (domain) => `site:ossindex.sonatype.org "${domain}"`
+  },
+
+  // Package Registries
+  {
+    id: 'packages-rubygems',
+    category: '💻 Code Repositories',
+    title: 'RubyGems',
+    description: 'Ruby gem packages',
+    generateDork: (domain) => `site:rubygems.org "${domain}"`
+  },
+  {
+    id: 'packages-nuget',
+    category: '💻 Code Repositories',
+    title: 'NuGet Packages',
+    description: 'NuGet package registry',
+    generateDork: (domain) => `site:nuget.org "${domain}"`
+  },
+  {
+    id: 'packages-maven',
+    category: '💻 Code Repositories',
+    title: 'Maven Central',
+    description: 'Maven package repository',
+    generateDork: (domain) => `site:mvnrepository.com "${domain}"`
+  },
+  {
+    id: 'packages-packagist',
+    category: '💻 Code Repositories',
+    title: 'Packagist - PHP',
+    description: 'PHP package registry',
+    generateDork: (domain) => `site:packagist.org "${domain}"`
+  },
+  {
+    id: 'packages-crates',
+    category: '💻 Code Repositories',
+    title: 'Crates.io - Rust',
+    description: 'Rust package registry',
+    generateDork: (domain) => `site:crates.io "${domain}"`
+  },
+  {
+    id: 'packages-go',
+    category: '💻 Code Repositories',
+    title: 'Go Packages',
+    description: 'Go package index',
+    generateDork: (domain) => `site:pkg.go.dev "${domain}"`
+  },
+
+  // Additional Admin Portals
+  {
+    id: 'admin-admin-keys',
+    category: '👤 Admin Portals',
+    title: 'Admin Keys',
+    description: 'Admin API keys page',
+    generateDork: (domain) => `site:${domain} inurl:"/admin_keys/"`
+  },
+  {
+    id: 'admin-redis',
+    category: '👤 Admin Portals',
+    title: 'Redis Admin',
+    description: 'Redis administration',
+    generateDork: (domain) => `site:${domain} inurl:"/redis-admin"`
+  },
+  {
+    id: 'admin-postgresql',
+    category: '👤 Admin Portals',
+    title: 'PostgreSQL Admin',
+    description: 'PostgreSQL admin interface',
+    generateDork: (domain) => `site:${domain} inurl:"/php-pg-admin/" "PostgreSQL"`
+  },
+  {
+    id: 'admin-credentials',
+    category: '👤 Admin Portals',
+    title: 'Admin Credentials',
+    description: 'Pages mentioning admin password',
+    generateDork: (domain) => `site:${domain} "admin password"`
+  },
+  {
+    id: 'admin-grades',
+    category: '👤 Admin Portals',
+    title: 'Admin Grades',
+    description: 'Educational admin grade access',
+    generateDork: (domain) => `site:${domain} admin grades`
+  },
+  {
+    id: 'admin-http',
+    category: '👤 Admin Portals',
+    title: 'HTTP Admin',
+    description: 'HTTP admin interfaces',
+    generateDork: (domain) => `site:${domain} http intitle: admin`
+  },
+  {
+    id: 'admin-index',
+    category: '👤 Admin Portals',
+    title: 'Admin Index',
+    description: 'Exposed admin directories',
+    generateDork: (domain) => `site:${domain} intitle:"index of" *.admin`
+  },
+  {
+    id: 'admin-config',
+    category: '👤 Admin Portals',
+    title: 'Admin Config',
+    description: 'Admin configuration setup',
+    generateDork: (domain) => `site:${domain} inurl:"/admin/config" intext:"setup"`
+  },
+  {
+    id: 'admin-settings',
+    category: '👤 Admin Portals',
+    title: 'Admin Settings',
+    description: 'Admin settings page',
+    generateDork: (domain) => `site:${domain} inurl:"/admin/settings" "account"`
+  },
+  {
+    id: 'admin-admincp',
+    category: '👤 Admin Portals',
+    title: 'AdminCP',
+    description: 'AdminCP control panel',
+    generateDork: (domain) => `site:${domain} inurl:"admincp" intext:"control panel"`
+  },
+  {
+    id: 'admin-tools',
+    category: '👤 Admin Portals',
+    title: 'Admin Tools',
+    description: 'Admin tools with restricted access',
+    generateDork: (domain) => `site:${domain} inurl:"/admin-tools" intext:"restricted access"`
+  },
+  {
+    id: 'admin-portal',
+    category: '👤 Admin Portals',
+    title: 'Admin Portal',
+    description: 'Admin portal login (excluding docs)',
+    generateDork: (domain) => `site:${domain} intitle:"admin portal" inurl:"login" -guide -help -docs`
+  },
+  {
+    id: 'admin-access',
+    category: '👤 Admin Portals',
+    title: 'Admin Access',
+    description: 'Admin access pages',
+    generateDork: (domain) => `site:${domain} intitle:"admin access" inurl:"/admin"`
+  },
+  {
+    id: 'admin-system',
+    category: '👤 Admin Portals',
+    title: 'Admin System',
+    description: 'System admin console',
+    generateDork: (domain) => `site:${domain} inurl:"/admin-console" intitle:"System Admin"`
+  },
+  {
+    id: 'admin-interface',
+    category: '👤 Admin Portals',
+    title: 'Admin Interface',
+    description: 'Admin login interface',
+    generateDork: (domain) => `site:${domain} intitle:"admin interface" inurl:"/login"`
+  },
+  {
+    id: 'admin-file-manager',
+    category: '👤 Admin Portals',
+    title: 'Admin File Manager',
+    description: 'Admin file managers',
+    generateDork: (domain) => `site:${domain} inurl:"/filemanager" intitle:"admin"`
+  },
+  {
+    id: 'admin-sql',
+    category: '👤 Admin Portals',
+    title: 'Admin SQL',
+    description: 'Admin SQL interfaces',
+    generateDork: (domain) => `site:${domain} inurl:"/admin/sql"`
+  },
+  {
+    id: 'admin-backup',
+    category: '👤 Admin Portals',
+    title: 'Admin Backup',
+    description: 'Admin backup pages',
+    generateDork: (domain) => `site:${domain} inurl:"/admin/backup"`
+  },
+  {
+    id: 'admin-users',
+    category: '👤 Admin Portals',
+    title: 'Admin Users',
+    description: 'Admin user management',
+    generateDork: (domain) => `site:${domain} inurl:"/admin/users"`
+  },
+  {
+    id: 'admin-reports',
+    category: '👤 Admin Portals',
+    title: 'Admin Reports',
+    description: 'Admin reporting',
+    generateDork: (domain) => `site:${domain} inurl:"/admin/reports"`
+  },
+  {
+    id: 'admin-logs',
+    category: '👤 Admin Portals',
+    title: 'Admin Logs',
+    description: 'Admin log viewing',
+    generateDork: (domain) => `site:${domain} inurl:"/admin/logs"`
+  },
+  {
+    id: 'admin-api',
+    category: '👤 Admin Portals',
+    title: 'Admin API',
+    description: 'Admin API endpoints',
+    generateDork: (domain) => `site:${domain} inurl:"/admin/api"`
+  },
+  {
+    id: 'admin-debug',
+    category: '👤 Admin Portals',
+    title: 'Admin Debug',
+    description: 'Admin debug mode',
+    generateDork: (domain) => `site:${domain} inurl:"/admin/debug"`
+  },
+  {
+    id: 'admin-test',
+    category: '👤 Admin Portals',
+    title: 'Admin Test',
+    description: 'Admin test pages',
+    generateDork: (domain) => `site:${domain} inurl:"/admin/test"`
+  },
+  {
+    id: 'admin-install',
+    category: '👤 Admin Portals',
+    title: 'Admin Install',
+    description: 'Admin installation',
+    generateDork: (domain) => `site:${domain} inurl:"/admin/install"`
+  },
+  {
+    id: 'admin-setup',
+    category: '👤 Admin Portals',
+    title: 'Admin Setup',
+    description: 'Admin setup wizard',
+    generateDork: (domain) => `site:${domain} inurl:"/admin/setup"`
+  },
+  {
+    id: 'admin-account',
+    category: '👤 Admin Portals',
+    title: 'Admin Account',
+    description: 'Admin account pages',
+    generateDork: (domain) => `site:${domain} inurl:"/admin/account"`
+  },
+  {
+    id: 'admin-profile',
+    category: '👤 Admin Portals',
+    title: 'Admin Profile',
+    description: 'Admin profile settings',
+    generateDork: (domain) => `site:${domain} inurl:"/admin/profile"`
   }
 ];
