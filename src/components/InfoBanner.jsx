@@ -47,14 +47,14 @@ export const InfoBanner = () => {
                     <li><strong>LFI/RFI:</strong> Pages with file include parameters like ?file=, ?include=, ?path=</li>
                     <li><strong>IDOR:</strong> Invoice, order, and profile pages with IDs to test access controls</li>
                     <li><strong>Open Redirect:</strong> Pages with redirect parameters like ?url=, ?return=</li>
-                    <li><strong>Social Media:</strong> Social Media Accounts, ?return=</li>
-                    <li><strong>Sensetive Information:</strong> Sensetive Information leaks or keys, ?return=</li>
-                    <li><strong>Files:</strong> Leaked Files like pdfs, docs, etc ?return=</li>
-                    <li><strong>Cloud Storage:</strong> S3 buckets , AWS , Azure,  Git keys ?return=</li>
-                    <li><strong>Website Discovery:</strong> Interesting paths or urls ?return=</li>
-                    <li><strong>IoT & Smart devices:</strong> Cameras or Smart devices ?return=</li>
-                    <li><strong>Code Repositories:</strong> Leaked code or hidden API keys ?return=</li>
-                    <li><strong>Company Research:</strong> About the company, news , updates etc ?return=</li>
+                    <li><strong>Social Media:</strong> Social Media Accounts, any contact info </li>
+                    <li><strong>Sensetive Information:</strong> Sensetive Information leaks or keys,</li>
+                    <li><strong>Files:</strong> Leaked Files like pdfs, docs, etc </li>
+                    <li><strong>Cloud Storage:</strong> S3 buckets , AWS , Azure,  Git keys </li>
+                    <li><strong>Website Discovery:</strong> Interesting paths or urls </li>
+                    <li><strong>IoT & Smart devices:</strong> Cameras or Smart devices</li>
+                    <li><strong>Code Repositories:</strong> Leaked code or hidden API keys </li>
+                    <li><strong>Company Research:</strong> About the company, news , updates etc </li>
 
 
 
