@@ -1,1 +1,1 @@
-<h1>[Google Dork Generator](https://dorkgenv2.vercel.app/)</h1>
+<h1><a href="https://dorkgenv2.vercel.app/">Google Dork Generator</a></h1>
