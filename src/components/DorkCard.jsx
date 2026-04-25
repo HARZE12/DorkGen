@@ -1,147 +1,113 @@
 import React, { useState } from 'react';
-import { Card, CardHeader, CardTitle, CardDescription, CardContent } from './ui/card';
-import { Button } from './ui/button';
-import { Badge } from './ui/badge';
 
 export const DorkCard = ({ title, description, generateDork, domain, category }) => {
   const [copied, setCopied] = useState(false);
   const [dorkQuery, setDorkQuery] = useState('');
 
   const handleGenerate = () => {
-    const query = generateDork(domain);
-    setDorkQuery(query);
+    setDorkQuery(generateDork(domain));
   };
 
-  const handleCopy = () => {
-    if (dorkQuery) {
-      // Try modern Clipboard API first
-      if (navigator.clipboard && navigator.clipboard.writeText) {
-        navigator.clipboard.writeText(dorkQuery)
-          .then(() => {
-            setCopied(true);
-            setTimeout(() => setCopied(false), 2000);
-          })
-          .catch(() => {
-            // Fallback to older method
-            copyTextFallback(dorkQuery);
-          });
-      } else {
-        // Use fallback method directly
-        copyTextFallback(dorkQuery);
-      }
+  const copyText = (text) => {
+    if (navigator.clipboard?.writeText) {
+      navigator.clipboard.writeText(text)
+        .then(() => { setCopied(true); setTimeout(() => setCopied(false), 2000); })
+        .catch(() => copyFallback(text));
+    } else {
+      copyFallback(text);
     }
   };
 
-  const copyTextFallback = (text) => {
-    // Create a temporary textarea element
-    const textArea = document.createElement('textarea');
-    textArea.value = text;
-    textArea.style.position = 'fixed';
-    textArea.style.left = '-999999px';
-    textArea.style.top = '-999999px';
-    document.body.appendChild(textArea);
-    textArea.focus();
-    textArea.select();
-    
+  const copyFallback = (text) => {
+    const el = document.createElement('textarea');
+    el.value = text;
+    el.style.position = 'fixed';
+    el.style.left = '-9999px';
+    document.body.appendChild(el);
+    el.focus();
+    el.select();
     try {
-      // Use the older execCommand method
-      const successful = document.execCommand('copy');
-      if (successful) {
-        setCopied(true);
-        setTimeout(() => setCopied(false), 2000);
-      }
-    } catch (err) {
-      console.error('Failed to copy text: ', err);
+      if (document.execCommand('copy')) { setCopied(true); setTimeout(() => setCopied(false), 2000); }
     } finally {
-      document.body.removeChild(textArea);
+      document.body.removeChild(el);
     }
   };
 
   const handleSearchGoogle = () => {
-    if (dorkQuery) {
-      window.open(`https://www.google.com/search?q=${encodeURIComponent(dorkQuery)}`, '_blank');
-    }
+    if (dorkQuery) window.open(`https://www.google.com/search?q=${encodeURIComponent(dorkQuery)}`, '_blank');
   };
 
   return (
-    <Card className="group hover:border-primary/50 transition-all duration-300 bg-card/80 backdrop-blur-sm">
-      <CardHeader>
-        <div className="flex items-start justify-between gap-2">
-          <CardTitle className="text-lg font-semibold text-foreground group-hover:text-primary transition-colors">
+    <div className="border border-border rounded-md bg-card hover:border-primary/40 transition-colors duration-150 flex flex-col">
+      <div className="p-4 flex-1">
+        <div className="flex items-start justify-between gap-2 mb-2">
+          <h3 className="text-sm font-semibold text-foreground leading-snug" style={{ fontFamily: 'Bricolage Grotesque, sans-serif' }}>
             {title}
-          </CardTitle>
-          <Badge variant="cyber" className="shrink-0">{category}</Badge>
+          </h3>
+          <span className="shrink-0 text-xs font-mono text-muted-foreground bg-muted px-1.5 py-0.5 rounded border border-border">
+            {category}
+          </span>
         </div>
-        <CardDescription className="text-muted-foreground mt-2">
-          {description}
-        </CardDescription>
-      </CardHeader>
-      <CardContent className="space-y-3">
+        <p className="text-xs text-muted-foreground leading-relaxed">{description}</p>
+      </div>
+
+      <div className="px-4 pb-4">
         {!dorkQuery ? (
-          <Button 
-            onClick={handleGenerate} 
-            className="w-full"
-            variant="cyber"
+          <button
+            onClick={handleGenerate}
             disabled={!domain}
+            className="w-full h-9 flex items-center justify-center gap-1.5 text-xs font-medium rounded bg-primary text-primary-foreground hover:opacity-90 disabled:opacity-40 disabled:cursor-not-allowed transition-opacity duration-150 cursor-pointer"
           >
-            <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
             </svg>
-            Generate Dork
-          </Button>
+            Generate
+          </button>
         ) : (
           <div className="space-y-2">
-            <div className="relative">
-              <pre className="bg-muted/50 border border-primary/20 rounded-md p-3 text-xs font-mono text-primary overflow-x-auto">
-                {dorkQuery}
-              </pre>
-            </div>
+            <pre className="bg-muted border border-border rounded p-2.5 text-xs font-mono text-foreground overflow-x-auto whitespace-pre-wrap break-all">
+              {dorkQuery}
+            </pre>
             <div className="flex gap-2">
-              <Button 
-                onClick={handleCopy} 
-                variant="outline"
-                className="flex-1"
-                size="sm"
+              <button
+                onClick={() => copyText(dorkQuery)}
+                className="flex-1 h-8 flex items-center justify-center gap-1.5 text-xs font-medium rounded border border-border bg-transparent text-muted-foreground hover:text-foreground hover:border-foreground/30 transition-colors duration-150 cursor-pointer"
               >
                 {copied ? (
                   <>
-                    <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg className="w-3.5 h-3.5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                     </svg>
-                    Copied!
+                    Copied
                   </>
                 ) : (
                   <>
-                    <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
                     </svg>
                     Copy
                   </>
                 )}
-              </Button>
-              <Button 
+              </button>
+              <button
                 onClick={handleSearchGoogle}
-                variant="default"
-                className="flex-1"
-                size="sm"
+                className="flex-1 h-8 flex items-center justify-center gap-1.5 text-xs font-medium rounded bg-primary text-primary-foreground hover:opacity-90 transition-opacity duration-150 cursor-pointer"
               >
-                <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0118 0z" />
                 </svg>
                 Search
-              </Button>
+              </button>
             </div>
-            <Button 
+            <button
               onClick={() => setDorkQuery('')}
-              variant="ghost"
-              className="w-full"
-              size="sm"
+              className="w-full h-7 text-xs text-muted-foreground hover:text-foreground transition-colors duration-150 cursor-pointer"
             >
               Reset
-            </Button>
+            </button>
           </div>
         )}
-      </CardContent>
-    </Card>
+      </div>
+    </div>
   );
 };

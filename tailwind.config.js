@@ -44,22 +44,18 @@ module.exports = {
         sm: 'calc(var(--radius) - 4px)',
       },
       fontFamily: {
-        sans: ['Space Grotesk', 'sans-serif'],
-        mono: ['Azeret Mono', 'monospace'],
+        sans: ['DM Sans', 'sans-serif'],
+        display: ['Bricolage Grotesque', 'sans-serif'],
+        mono: ['JetBrains Mono', 'monospace'],
       },
       keyframes: {
-        'pulse-glow': {
-          '0%, 100%': { boxShadow: '0 0 20px hsl(var(--primary) / 0.3)' },
-          '50%': { boxShadow: '0 0 40px hsl(var(--primary) / 0.6)' },
-        },
         'slide-in': {
-          '0%': { transform: 'translateY(10px)', opacity: '0' },
+          '0%': { transform: 'translateY(6px)', opacity: '0' },
           '100%': { transform: 'translateY(0)', opacity: '1' },
         },
       },
       animation: {
-        'pulse-glow': 'pulse-glow 2s ease-in-out infinite',
-        'slide-in': 'slide-in 0.3s ease-out',
+        'slide-in': 'slide-in 0.2s ease-out',
       },
     },
   },

@@ -1,105 +1,96 @@
 import React, { useState } from 'react';
-import { Card, CardContent } from './ui/card';
-import { Button } from './ui/button';
 
 export const InfoBanner = () => {
   const [isExpanded, setIsExpanded] = useState(false);
 
   return (
-    <Card className="bg-accent/5 border-accent/20 mb-6">
-      <CardContent className="p-4">
-        <div className="flex items-start gap-3">
-          <div className="w-8 h-8 rounded-full bg-accent/20 flex items-center justify-center shrink-0 mt-0.5">
-            <svg className="w-5 h-5 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-            </svg>
-          </div>
-          
-          <div className="flex-1 space-y-2">
-            <div className="flex items-center justify-between">
-              <h3 className="text-sm font-semibold text-accent">How to Use These Dorks for Security Testing</h3>
-              <Button
-                variant="ghost"
-                size="sm"
-                onClick={() => setIsExpanded(!isExpanded)}
-                className="h-auto p-1 text-accent hover:text-accent"
-              >
-                <svg 
-                  className={`w-5 h-5 transition-transform ${isExpanded ? 'rotate-180' : ''}`} 
-                  fill="none" 
-                  stroke="currentColor" 
-                  viewBox="0 0 24 24"
-                >
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                </svg>
-              </Button>
+    <div className="border border-border rounded-md mb-6 bg-card">
+      <button
+        onClick={() => setIsExpanded(!isExpanded)}
+        className="w-full flex items-center justify-between px-4 py-3 text-left hover:bg-muted/50 transition-colors duration-150 cursor-pointer"
+      >
+        <div className="flex items-center gap-2.5">
+          <svg className="w-4 h-4 text-primary shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+          <span className="text-sm font-medium text-foreground">How to use these dorks</span>
+        </div>
+        <svg
+          className={`w-4 h-4 text-muted-foreground transition-transform duration-200 ${isExpanded ? 'rotate-180' : ''}`}
+          fill="none" stroke="currentColor" viewBox="0 0 24 24"
+        >
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+        </svg>
+      </button>
+
+      {isExpanded && (
+        <div className="px-4 pb-4 pt-1 border-t border-border animate-slide-in">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-3">
+            <div>
+              <p className="text-xs font-semibold text-foreground uppercase tracking-wider mb-2">What these dorks find</p>
+              <ul className="space-y-1.5 text-xs text-muted-foreground">
+                {[
+                  ['SQL Injection', 'Parameters like ?id=, ?product=, ?category='],
+                  ['XSS Targets', 'Search forms, comment sections, feedback inputs'],
+                  ['File Upload', 'Upload forms for unrestricted file upload testing'],
+                  ['Authentication', 'Login pages, admin panels, password reset flows'],
+                  ['LFI / RFI', 'Include parameters like ?file=, ?include=, ?path='],
+                  ['IDOR', 'Invoice, order, profile pages with enumerable IDs'],
+                  ['Open Redirect', 'Redirect parameters like ?url=, ?return='],
+                  ['Sensitive Files', 'Leaked PDFs, docs, configuration files'],
+                  ['Cloud Storage', 'S3 buckets, AWS, Azure endpoints, Git keys'],
+                  ['IoT Devices', 'Cameras and connected smart devices'],
+                  ['Code Repositories', 'Exposed source code or API keys'],
+                  ['Company Research', 'News, contact info, social profiles'],
+                ].map(([label, desc]) => (
+                  <li key={label} className="flex gap-2">
+                    <span className="text-primary font-mono shrink-0">—</span>
+                    <span><span className="text-foreground font-medium">{label}:</span> {desc}</span>
+                  </li>
+                ))}
+              </ul>
             </div>
-            
-            {isExpanded && (
-              <div className="text-xs text-muted-foreground space-y-3 pt-2 animate-slide-in">
-                <div>
-                  <p className="font-semibold text-foreground mb-1">✅ What These Dorks Find:</p>
-                  <ul className="space-y-1 ml-4 list-disc">
-                    <li><strong>SQL Injection:</strong> Pages with parameters like ?id=, ?product=, ?category= that may be vulnerable</li>
-                    <li><strong>XSS Targets:</strong> Search forms, comment sections, feedback forms where you can inject scripts</li>
-                    <li><strong>File Upload:</strong> Upload forms to test for unrestricted file upload vulnerabilities</li>
-                    <li><strong>Authentication:</strong> Login pages, admin panels, password reset forms for testing</li>
-                    <li><strong>LFI/RFI:</strong> Pages with file include parameters like ?file=, ?include=, ?path=</li>
-                    <li><strong>IDOR:</strong> Invoice, order, and profile pages with IDs to test access controls</li>
-                    <li><strong>Open Redirect:</strong> Pages with redirect parameters like ?url=, ?return=</li>
-                    <li><strong>Social Media:</strong> Social Media Accounts, any contact info </li>
-                    <li><strong>Sensetive Information:</strong> Sensetive Information leaks or keys,</li>
-                    <li><strong>Files:</strong> Leaked Files like pdfs, docs, etc </li>
-                    <li><strong>Cloud Storage:</strong> S3 buckets , AWS , Azure,  Git keys </li>
-                    <li><strong>Website Discovery:</strong> Interesting paths or urls </li>
-                    <li><strong>IoT & Smart devices:</strong> Cameras or Smart devices</li>
-                    <li><strong>Code Repositories:</strong> Leaked code or hidden API keys </li>
-                    <li><strong>Company Research:</strong> About the company, news , updates etc </li>
 
-
-
-
-
-                  </ul>
-                </div>
-
-                <div className="pt-2 border-t border-accent/20">
-                  <p className="font-semibold text-foreground mb-1">🔧 How to Use:</p>
-                  <ol className="space-y-1 ml-4 list-decimal">
-                    <li>Enter target domain (must have permission to test)</li>
-                    <li>Generate dork queries for specific vulnerability types</li>
-                    <li><strong>Copy the query</strong> and paste it directly into Google search</li>
-                    <li>Browse results to find potential test targets</li>
-                    <li>Test endpoints using Burp Suite, OWASP ZAP, or manual testing</li>
-                  </ol>
-                </div>
-
-                <div className="pt-2 border-t border-accent/20">
-                  <p className="font-semibold text-destructive mb-1">⚠️ Why Direct Search Button May Not Work:</p>
-                  <p className="mb-1">Google blocks automated search requests. To bypass:</p>
-                  <ol className="space-y-1 ml-4 list-decimal">
-                    <li><strong>Use Copy button</strong> instead - paste query into Google manually</li>
-                    <li>Use Google search operators directly in browser</li>
-                    <li>For bulk scanning, use tools like: <code className="bg-muted px-1 py-0.5 rounded text-primary">gau</code>, <code className="bg-muted px-1 py-0.5 rounded text-primary">waybackurls</code>, <code className="bg-muted px-1 py-0.5 rounded text-primary">gospider</code></li>
-                  </ol>
-                </div>
-
-                <div className="pt-2 border-t border-destructive/20 bg-destructive/5 p-2 rounded">
-                  <p className="font-semibold text-destructive mb-1">⚖️ Legal Notice:</p>
-                  <p>Only test systems you own or have explicit written permission to test. Unauthorized testing is illegal and punishable by law. These tools are for educational and authorized security research only.</p>
-                </div>
+            <div className="space-y-5">
+              <div>
+                <p className="text-xs font-semibold text-foreground uppercase tracking-wider mb-2">Steps</p>
+                <ol className="space-y-1.5 text-xs text-muted-foreground">
+                  {[
+                    'Enter a target domain you have permission to test',
+                    'Generate dork queries for the vulnerability type',
+                    'Copy the query and paste it into Google search',
+                    'Browse results to identify potential test targets',
+                    'Test with Burp Suite, OWASP ZAP, or manual methods',
+                  ].map((step, i) => (
+                    <li key={i} className="flex gap-2">
+                      <span className="text-primary font-mono shrink-0">{i + 1}.</span>
+                      <span>{step}</span>
+                    </li>
+                  ))}
+                </ol>
               </div>
-            )}
-            
-            {!isExpanded && (
-              <p className="text-xs text-muted-foreground">
-                Click to learn how to find SQL injection, XSS, file upload, and other vulnerability testing targets. 
-                <span className="text-accent font-semibold"> Why Google blocks automated searches explained inside.</span>
-              </p>
-            )}
+
+              <div className="border-t border-border pt-4">
+                <p className="text-xs font-semibold text-foreground uppercase tracking-wider mb-1.5">Why the search button may not work</p>
+                <p className="text-xs text-muted-foreground">
+                  Google blocks automated requests. Use Copy and paste manually instead.
+                  For bulk scanning:{' '}
+                  <code className="font-mono bg-muted px-1 py-0.5 rounded">gau</code>,{' '}
+                  <code className="font-mono bg-muted px-1 py-0.5 rounded">waybackurls</code>,{' '}
+                  <code className="font-mono bg-muted px-1 py-0.5 rounded">gospider</code>.
+                </p>
+              </div>
+
+              <div className="border border-destructive/30 rounded bg-destructive/5 px-3 py-2.5">
+                <p className="text-xs font-semibold text-destructive mb-1">Legal</p>
+                <p className="text-xs text-muted-foreground">
+                  Only test systems you own or have explicit written permission to test. Unauthorized testing is illegal.
+                </p>
+              </div>
+            </div>
           </div>
         </div>
-      </CardContent>
-    </Card>
+      )}
+    </div>
   );
 };
