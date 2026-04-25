@@ -33,27 +33,27 @@ function App() {
       <Header />
 
       {/* Hero */}
-      <section className="container mx-auto px-4 pt-14 pb-10">
-        <div className="max-w-2xl">
-          <p className="text-xs font-mono text-primary uppercase tracking-widest mb-3">Security Research Tool</p>
+      <section className="container mx-auto px-4 pt-16 pb-12">
+        <div className="max-w-2xl mx-auto text-center">
+          <p className="text-xs font-mono text-primary uppercase tracking-widest mb-4">Security Research Tool</p>
           <h1 className="text-4xl sm:text-5xl font-bold text-foreground leading-tight mb-4" style={{ fontFamily: 'Bricolage Grotesque, sans-serif' }}>
             Google Dork Generator
           </h1>
-          <p className="text-base text-muted-foreground leading-relaxed mb-8 max-w-xl">
+          <p className="text-base text-muted-foreground leading-relaxed mb-8 mx-auto max-w-lg">
             Generate targeted search queries to surface vulnerable endpoints, exposed files, and misconfigured systems. For authorized security research only.
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-2 max-w-xl">
+          <div className="flex flex-col sm:flex-row gap-2 max-w-xl mx-auto">
             <input
               type="text"
               placeholder="Enter domain (e.g. example.com)"
               value={domain}
               onChange={(e) => setDomain(e.target.value)}
-              className="flex-1 h-10 px-3 text-sm font-mono bg-card border border-border rounded outline-none focus:border-primary/60 focus:ring-1 focus:ring-primary/30 transition-colors duration-150 text-foreground placeholder:text-muted-foreground"
+              className="flex-1 h-11 px-4 text-sm font-mono bg-card border border-border rounded outline-none focus:border-primary/60 focus:ring-1 focus:ring-primary/30 transition-colors duration-150 text-foreground placeholder:text-muted-foreground"
             />
             <button
               disabled={!domain}
-              className="h-10 px-5 text-sm font-medium bg-primary text-primary-foreground rounded hover:opacity-90 disabled:opacity-40 disabled:cursor-not-allowed transition-opacity duration-150 cursor-pointer shrink-0"
+              className="h-11 px-6 text-sm font-medium bg-primary text-primary-foreground rounded hover:opacity-90 disabled:opacity-40 disabled:cursor-not-allowed transition-opacity duration-150 cursor-pointer shrink-0"
             >
               Set target
             </button>
