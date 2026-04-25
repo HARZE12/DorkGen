@@ -9,9 +9,18 @@ function App() {
   const [domain, setDomain] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [searchQuery, setSearchQuery] = useState('');
+  const [generateAllTrigger, setGenerateAllTrigger] = useState(0);
 
   const categories = useMemo(() => {
     return ['All', ...new Set(dorkTemplates.map(d => d.category))];
+  }, []);
+
+  const categoryCounts = useMemo(() => {
+    const counts = { All: dorkTemplates.length };
+    dorkTemplates.forEach(d => {
+      counts[d.category] = (counts[d.category] || 0) + 1;
+    });
+    return counts;
   }, []);
 
   const filteredDorks = useMemo(() => {
@@ -33,7 +42,14 @@ function App() {
       <Header />
 
       {/* Hero */}
-      <section className="container mx-auto px-4 pt-16 pb-12">
+      <section
+        className="container mx-auto px-4 pt-16 pb-12"
+        style={{
+          backgroundImage: 'radial-gradient(circle, hsl(0 0% 30% / 0.25) 1px, transparent 1px)',
+          backgroundSize: '24px 24px',
+          backgroundPosition: 'center',
+        }}
+      >
         <div className="max-w-2xl mx-auto text-center">
           <p className="text-xs font-mono text-primary uppercase tracking-widest mb-4">Security Research Tool</p>
           <h1 className="text-4xl sm:text-5xl font-bold text-foreground leading-tight mb-4" style={{ fontFamily: 'Bricolage Grotesque, sans-serif' }}>
@@ -67,8 +83,10 @@ function App() {
         </div>
       </section>
 
+      <div className="border-t border-border" />
+
       {/* Filters */}
-      <section className="container mx-auto px-4 pb-6">
+      <section className="container mx-auto px-4 py-6">
         <InfoBanner />
 
         <div className="flex flex-col lg:flex-row gap-3 items-start lg:items-center justify-between mb-4">
@@ -77,24 +95,37 @@ function App() {
               <button
                 key={cat}
                 onClick={() => setSelectedCategory(cat)}
-                className={`h-7 px-3 text-xs font-medium rounded border transition-colors duration-150 cursor-pointer ${
+                className={`h-7 px-3 text-xs font-medium rounded border transition-colors duration-150 cursor-pointer flex items-center gap-1.5 ${
                   selectedCategory === cat
                     ? 'bg-primary text-primary-foreground border-primary'
                     : 'bg-transparent text-muted-foreground border-border hover:border-foreground/30 hover:text-foreground'
                 }`}
               >
                 {cat}
+                <span className={`font-mono ${selectedCategory === cat ? 'opacity-70' : 'opacity-50'}`}>
+                  {categoryCounts[cat]}
+                </span>
               </button>
             ))}
           </div>
 
-          <input
-            type="text"
-            placeholder="Search templates..."
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full lg:w-56 h-8 px-3 text-xs bg-card border border-border rounded outline-none focus:border-primary/60 focus:ring-1 focus:ring-primary/30 transition-colors duration-150 text-foreground placeholder:text-muted-foreground"
-          />
+          <div className="flex items-center gap-2 w-full lg:w-auto">
+            <input
+              type="text"
+              placeholder="Search templates..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="flex-1 lg:w-56 h-8 px-3 text-xs bg-card border border-border rounded outline-none focus:border-primary/60 focus:ring-1 focus:ring-primary/30 transition-colors duration-150 text-foreground placeholder:text-muted-foreground"
+            />
+            {domain && (
+              <button
+                onClick={() => setGenerateAllTrigger(t => t + 1)}
+                className="shrink-0 h-8 px-3 text-xs font-medium rounded bg-primary/10 border border-primary/30 text-primary hover:bg-primary/20 transition-colors duration-150 cursor-pointer"
+              >
+                Generate all
+              </button>
+            )}
+          </div>
         </div>
 
         <p className="text-xs text-muted-foreground font-mono">
@@ -127,6 +158,7 @@ function App() {
                 generateDork={dork.generateDork}
                 domain={domain}
                 category={dork.category}
+                generateAllTrigger={generateAllTrigger}
               />
             ))}
           </div>

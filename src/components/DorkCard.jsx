@@ -1,12 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
-export const DorkCard = ({ title, description, generateDork, domain, category }) => {
+export const DorkCard = ({ title, description, generateDork, domain, category, generateAllTrigger }) => {
   const [copied, setCopied] = useState(false);
   const [dorkQuery, setDorkQuery] = useState('');
 
   const handleGenerate = () => {
     setDorkQuery(generateDork(domain));
   };
+
+  useEffect(() => {
+    if (generateAllTrigger > 0 && domain) {
+      setDorkQuery(generateDork(domain));
+    }
+  }, [generateAllTrigger]);
 
   const copyText = (text) => {
     if (navigator.clipboard?.writeText) {
@@ -48,7 +54,7 @@ export const DorkCard = ({ title, description, generateDork, domain, category })
             {category}
           </span>
         </div>
-        <p className="text-xs text-muted-foreground leading-relaxed">{description}</p>
+        <p className="text-xs text-muted-foreground leading-relaxed line-clamp-2">{description}</p>
       </div>
 
       <div className="px-4 pb-4">
